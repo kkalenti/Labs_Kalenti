@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include <iostream>
 #include <math.h>
-#include <time.h>
 #include "function.h"
 
 
@@ -92,7 +91,6 @@ int GetPower(int base, int power) {
 }
 
 void GuessNumber() {
-	srand(time(NULL));
 	int random;
 	random = rand() % 10;
 	cout << "Представлена игра, ты должен угадать число от 0 до 9.\nТвой вариант:";
