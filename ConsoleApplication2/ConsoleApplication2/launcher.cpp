@@ -26,6 +26,9 @@ int main() {
 	case 3:
 		lab3();
 		break;
+	default:
+		cout << "Ќе существует такой лабораторной работы";
+		break;
 	}
 		return 0;
 }
