@@ -14,7 +14,7 @@ void MakeArray(double *array, int arrayLenth) {
 }
 
 void Sort(double *array, int arrayLenth) {
-	int temp = 0;
+	double temp = 0;
 	bool exit = false;
 	while (!exit) {
 		exit = true;
