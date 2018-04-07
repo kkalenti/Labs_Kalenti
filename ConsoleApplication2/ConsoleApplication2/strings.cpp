@@ -43,7 +43,7 @@ int LastIndexOf(char* string, char c) {
 }
 
 bool GetSubstring(char*string, char* substring, int startIndex, int substringLength) {
-	if (startIndex + substringLength > GetLength(string) - 1 || GetLength(string) == -1 || GetLength(substring) == -1)
+	if (startIndex + substringLength > GetLength(string) || GetLength(string) == -1 || GetLength(substring) == -1)
 		return false;
 	bool exit = false;
 	int stringCounter = startIndex;
@@ -54,5 +54,39 @@ bool GetSubstring(char*string, char* substring, int startIndex, int substringLen
 		substringCounter++;
 	}
 	substring[substringCounter] = '\0';
+	return true;
+}
+
+bool GetFilenames(char *fullFilename, char *filename) {
+	int firstIndexOfName = LastIndexOf(fullFilename, '/');
+	if (firstIndexOfName == -1)
+		return false;
+	int lastIndexOfName = LastIndexOf(fullFilename, '.');
+	if (lastIndexOfName == -1)
+		return false;
+	if (GetSubstring(fullFilename, filename, firstIndexOfName + 1, lastIndexOfName - firstIndexOfName - 1) == false)
+		return false;
+	return true;
+}
+
+bool GetFileExtension(char* fullFilename, char* fileExtension) {
+	int firstIndexOfName = LastIndexOf(fullFilename, '.');
+	if (firstIndexOfName == -1)
+		return false;
+	int lastIndexOfName = GetLength(fullFilename) - 1;
+	if (lastIndexOfName == -2)
+		return false;
+	if (!GetSubstring(fullFilename, fileExtension, firstIndexOfName + 1, lastIndexOfName - firstIndexOfName))
+		return false;
+	return true;
+}
+
+bool GetFilepath(char* fullFilename, char* filepath) {
+	int firstIndexOfName = 0;
+	int lastIndexOfName = LastIndexOf(fullFilename, '/');
+	if (firstIndexOfName == -1)
+		return false;
+	if (!GetSubstring(fullFilename, filepath, firstIndexOfName, lastIndexOfName - firstIndexOfName))
+		return false;
 	return true;
 }

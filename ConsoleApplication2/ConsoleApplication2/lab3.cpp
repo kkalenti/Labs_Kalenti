@@ -90,6 +90,35 @@ int lab3() {
 		else cout << "Выделить строку не удалось" << endl;
 		cout << "______________________________________________________" << endl;
 	}
+	{
+		char fullFilename[100];
+		char filename[50];
+		char fileExtension[50];
+		char filepath[100];
+		cout << "Введите полный адресс файла:";
+		cin >> fullFilename;
+		if (!GetFilenames(&fullFilename[0], &filename[0])) {
+			filename[0] = '\0';
+			cout << "Невозможно найти данные о файле" << endl;
+			system("pause");
+			return 0;
+		}
+		if (!GetFileExtension(&fullFilename[0], &fileExtension[0])) {
+			fileExtension[0] = '\0';
+			cout << "Невозможно найти данные о файле" << endl;
+			system("pause");
+			return 0;
+		}
+		if (!GetFilepath(&fullFilename[0], &filepath[0])) {
+			filepath[0] = '\0';
+			cout << "Невозможно найти данные о файле" << endl;
+			system("pause");
+			return 0;
+		}
+		cout << "Имя файла:" << filename << endl;
+		cout << "Расширение файла:" << fileExtension << endl;
+		cout << "Путь к файлу:" << filepath << endl;
+	}
 	system("pause");
 	return 0;
 }
