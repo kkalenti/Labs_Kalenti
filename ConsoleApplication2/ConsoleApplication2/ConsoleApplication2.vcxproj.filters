@@ -16,14 +16,14 @@
     <Filter Include="Исходные файлы\Код лаброраторных">
       <UniqueIdentifier>{6943cce8-ca7b-4866-82a2-012fb5d9460d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Исходные файлы\Нужные функции">
-      <UniqueIdentifier>{e00757dd-6cfe-4517-8ce0-cdcaff9c34c9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Файлы заголовков\Лабораторные">
       <UniqueIdentifier>{a379dae5-7dc4-464f-ad3b-f3f84b5de711}</UniqueIdentifier>
     </Filter>
     <Filter Include="Файлы заголовков\Функции">
       <UniqueIdentifier>{d3229806-9bc1-4bb0-a437-c16df988d590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Свои функции">
+      <UniqueIdentifier>{e00757dd-6cfe-4517-8ce0-cdcaff9c34c9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -42,14 +42,14 @@
     <ClInclude Include="arrays.h">
       <Filter>Файлы заголовков\Функции</Filter>
     </ClInclude>
-    <ClInclude Include="function.h">
-      <Filter>Файлы заголовков\Функции</Filter>
-    </ClInclude>
     <ClInclude Include="strings.h">
       <Filter>Файлы заголовков\Функции</Filter>
     </ClInclude>
     <ClInclude Include="lab3.h">
       <Filter>Файлы заголовков\Лабораторные</Filter>
+    </ClInclude>
+    <ClInclude Include="functions.h">
+      <Filter>Файлы заголовков\Функции</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -68,14 +68,14 @@
     <ClCompile Include="lab3.cpp">
       <Filter>Исходные файлы\Код лаброраторных</Filter>
     </ClCompile>
-    <ClCompile Include="function.cpp">
-      <Filter>Исходные файлы\Нужные функции</Filter>
-    </ClCompile>
     <ClCompile Include="arrays.cpp">
-      <Filter>Исходные файлы\Нужные функции</Filter>
+      <Filter>Исходные файлы\Свои функции</Filter>
     </ClCompile>
     <ClCompile Include="strings.cpp">
-      <Filter>Исходные файлы\Нужные функции</Filter>
+      <Filter>Исходные файлы\Свои функции</Filter>
+    </ClCompile>
+    <ClCompile Include="functions.cpp">
+      <Filter>Исходные файлы\Свои функции</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

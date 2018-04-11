@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include <iostream>
 #include <math.h>
-#include "function.h"
+#include "functions.h"
 
 
 using namespace std;
@@ -91,114 +91,122 @@ int GetPower(int base, int power) {
 }
 
 void GuessNumber() {
-	int random;
-	random = rand() % 10;
+	int random = rand() % 10;
 	cout << "Представлена игра, ты должен угадать число от 0 до 9.\nТвой вариант:";
 	int number = 0;
 	int counter = 0;
-	number = CheckingTheLetter(number, "Нужно угадывать числа, а не буквы, попробуй еще раз\n");
+	CheckingOfCorrectInputOfNumber(&number,
+		"Нужно угадывать числа, а не буквы, попробуй еще раз\n");
 	while (number != random) {
 		if (number > random) {
 			counter++;
 			cout << "Ты не угадал, число меньше введенного, попробуй еще...\n";
-			number = CheckingTheLetter(number, "Нужно угадывать числа, а не буквы, попробуй еще раз\n");
+			CheckingOfCorrectInputOfNumber(&number, 
+				"Нужно угадывать числа, а не буквы, попробуй еще раз\n");
 		}
 		if (number < random) {
 			counter++;
 			cout << "Ты не угадал, число больше введенного, попробуй еше раз...\n";
-			number = CheckingTheLetter(number, "Нужно угадывать числа, а не буквы, попробуй еще раз\n");
+			CheckingOfCorrectInputOfNumber(&number,
+				"Нужно угадывать числа, а не буквы, попробуй еще раз\n");
 		}
 	}
 	counter++;
 	cout << "Поздравляю! Ты угадал, количество твоих попыток:" << counter;
 }
 
-int lab2() {
-	//2.3 Вычислить корни
-	{
+	void Lab2_№1(){
 		int coefficientA = 0;
 		int coefficientB = 0;
 		int coefficientC = 0;
 		cout << "Введите стрший коэффициент\n";
-		coefficientA = CheckingTheLetter(coefficientA, "Ошибка ввода! Повторите ввод\n");
+		CheckingOfCorrectInputOfNumber(&coefficientA,
+			"Ошибка ввода! Повторите ввод\n");
 		cout << "Второй коэффициент\n";
-		coefficientB = CheckingTheLetter(coefficientB, "Ошибка ввода! Повторите ввод\n");
+		CheckingOfCorrectInputOfNumber(&coefficientB, 
+			"Ошибка ввода! Повторите ввод\n");
 		cout << "свободный член\n";
-		coefficientC = CheckingTheLetter(coefficientC, "Ошибка ввода! Повторите ввод\n");
+		CheckingOfCorrectInputOfNumber(&coefficientC,
+			"Ошибка ввода! Повторите ввод\n");
 		double *firstRootPointer, *secondRootPointer;
 		double firstRoot, secondRoot;
 		firstRootPointer = &firstRoot;
 		secondRootPointer = &secondRoot;
 		int numberOfRoots;
-		numberOfRoots = GetRoots1(coefficientA, coefficientB, coefficientC, firstRootPointer, secondRootPointer);
+		numberOfRoots = GetRoots1(coefficientA, coefficientB,
+			coefficientC, firstRootPointer, secondRootPointer);
 		switch (numberOfRoots) {
-		case 0:
-			cout << "Нет решений\n";
-			break;
-		case 1:
-			cout << firstRoot << " (Одно решение)\n";
-			break;
-		case 2:
-			cout << firstRoot << " " << secondRoot << "\n";
-			break;
-		default:
-			cout << "Ошибка программы!";
-			break;
+			case 0:
+				cout << "Нет решений\n";
+				break;
+			case 1:
+				cout << firstRoot << " (Одно решение)\n";
+				break;
+			case 2:
+				cout << firstRoot << " " << secondRoot << "\n";
+				break;
+			default:
+				cout << "Ошибка программы!";
+				break;
 		}
 		system("pause");
 		cout << "-------------------------------------------------------------------\n";
 	}
-	//2.4 Вычислить корни
-	{
+
+	void Lab2_№2(){
 		int coefficientA = 0;
 		int coefficientB = 0;
 		int coefficientC = 0;
 		cout << "Введите стрший коэффициент\n";
-		coefficientA = CheckingTheLetter(coefficientA, "Ошибка ввода! Повторите ввод\n");
+		CheckingOfCorrectInputOfNumber(&coefficientA,
+			"Ошибка ввода! Повторите ввод\n");
 		cout << "Второй коэффициент\n";
-		coefficientB = CheckingTheLetter(coefficientB, "Ошибка ввода! Повторите ввод\n");
+		CheckingOfCorrectInputOfNumber(&coefficientB,
+			"Ошибка ввода! Повторите ввод\n");
 		cout << "свободный член\n";
-		coefficientC = CheckingTheLetter(coefficientC, "Ошибка ввода! Повторите ввод\n");
+		CheckingOfCorrectInputOfNumber(&coefficientC, 
+			"Ошибка ввода! Повторите ввод\n");
 		double firstRoot;
 		double secondRoot;
 		double &firstRootLink = firstRoot;
 		double &secondRootLink = secondRoot;
 		int numberOfRoots;
-		numberOfRoots = GetRoots2(coefficientA, coefficientB, coefficientC, firstRoot, secondRoot);
+		numberOfRoots = GetRoots2(coefficientA, coefficientB,
+			coefficientC, firstRoot, secondRoot);
 		switch (numberOfRoots) {
-		case 0:
-			cout << "Нет решений\n";
-			break;
-		case 1:
-			cout << firstRoot << " (Одно решение)\n";
-			break;
-		case 2:
-			cout << firstRoot << " " << secondRoot << "\n";
-			break;
-		default:
-			cout << "Ошибка программы!";
-			break;
+			case 0:
+				cout << "Нет решений\n";
+				break;
+			case 1:
+				cout << firstRoot << " (Одно решение)\n";
+				break;
+			case 2:
+				cout << firstRoot << " " << secondRoot << "\n";
+				break;
+			default:
+				cout << "Ошибка программы!";
+				break;
 		}
 		system("pause");
 		cout << "-------------------------------------------------------------------\n";
 	}
-	//2.7 Степень числа
-	{
+
+	void Lab2_№3(){
 		int base = 0;
 		int power = 0;
 		cout << "Введите основание\n";
-		base = CheckingTheLetter(base, "Ошибка ввода! Повторите ввод\n");
+		CheckingOfCorrectInputOfNumber(&base, 
+			"Ошибка ввода! Повторите ввод\n");
 		cout << "Введите степень\n";
-		power = CheckingTheLetter(power, "Ошибка ввода! Повторите ввод\n");
+		CheckingOfCorrectInputOfNumber(&power, 
+			"Ошибка ввода! Повторите ввод\n");
 		base = GetPower(base, power);
 		cout << "Результат:" << base << "\n";
 		system("pause");
 		cout << "-------------------------------------------------------------------\n";
 	}
-	//2.9 Угадай число
-	{
+
+	void Lab2_№4(){
 		GuessNumber();
 		system("pause");
-		return 0;
 	}
-}

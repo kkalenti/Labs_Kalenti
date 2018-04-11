@@ -149,7 +149,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="arrays.h" />
-    <ClInclude Include="function.h" />
+    <ClInclude Include="functions.h" />
     <ClInclude Include="lab3.h" />
     <ClInclude Include="strings.h" />
     <ClInclude Include="lab2.h" />
@@ -160,7 +160,7 @@
   <ItemGroup>
     <ClCompile Include="arrays.cpp" />
     <ClCompile Include="lab 1.cpp" />
-    <ClCompile Include="function.cpp" />
+    <ClCompile Include="functions.cpp" />
     <ClCompile Include="lab3.cpp" />
     <ClCompile Include="launcher.cpp" />
     <ClCompile Include="lab2.cpp" />
