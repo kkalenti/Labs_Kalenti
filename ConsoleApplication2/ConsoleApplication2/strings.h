@@ -1,10 +1,10 @@
 #pragma once
 
-int GetLength(char *string);//TODO:
-int IndexOf(char* string, char c);
-int LastIndexOf(char* string, char c);
-bool GetSubstring(char*string, char* substring, int startIndex, int substringLength);
-bool GetFilenames(char *fullFilename, char *filename);
-bool GetFileExtension(char* fullFilename, char* fileExtension);
-bool GetFilepath(char* fullFilename, char* filepath);
+int GetLength(char *string);
+int IndexOf(char* string, char cymbol);
+int LastIndexOf(char* string, char cymbol);
+bool GetSubstring(char*string, char* substring, int start_index, int substring_length);
+bool GetFilenames(char *full_filename, char *filename);
+bool GetFileExtension(char* full_filename, char* file_extension);
+bool GetFilepath(char* full_filename, char* filepath);
 void InvalidFilenames(char *string);

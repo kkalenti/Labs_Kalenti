@@ -4,32 +4,32 @@
 
 using namespace std;
 
-void MakeArray(double *array, int arrayLenth) {
-	cout << "Массив из " << arrayLenth << " элементов:";
-	for (int arrayCounter = 0; arrayCounter < arrayLenth; arrayCounter++) {
-		array[arrayCounter] = rand() % 50;
-		cout << array[arrayCounter] << setw(3);
+void MakeArray(double *array, int array_lenth) {
+	cout << "Массив из " << array_lenth << " элементов:";
+	for (int array_counter = 0; array_counter < array_lenth; array_counter++) {
+		array[array_counter] = rand() % 50;
+		cout << array[array_counter] << setw(3);
 	}
 	cout << endl;
 }
 
-void Sort(double *array, int arrayLenth) {
+void Sort(double *array, int array_lenth) {
 	double temp = 0;
 	bool exit = false;
 	while (!exit) {
 		exit = true;
-		for (int arrayCounter = 0; arrayCounter < arrayLenth-1; arrayCounter++) {
-			if (array[arrayCounter] > array[arrayCounter + 1]) {
-				temp = array[arrayCounter];
-				array[arrayCounter] = array[arrayCounter + 1];
-				array[arrayCounter + 1] = temp;
+		for (int array_counter = 0; array_counter < array_lenth-1; array_counter++) {
+			if (array[array_counter] > array[array_counter + 1]) {
+				temp = array[array_counter];
+				array[array_counter] = array[array_counter + 1];
+				array[array_counter + 1] = temp;
 				exit = false;
 			}
 		}
 	}
 	cout << "Отсортированный массив:";
-	for (int arrayCounter = 0; arrayCounter < arrayLenth; arrayCounter++) {
-		cout << array[arrayCounter] << setw(3);
+	for (int array_counter = 0; array_counter < array_lenth; array_counter++) {
+		cout << array[array_counter] << setw(3);
 	}
 	cout << endl;
 }
@@ -37,13 +37,13 @@ void Sort(double *array, int arrayLenth) {
 void MakeMatrix(int** matrix, int rows, int cols) {
 	cout << "Матрица из " << rows << "*" << cols << " элементов:" << endl;
 	cout.setf(ios::left);
-	for (int matrixCounterOfRows = 0; matrixCounterOfRows < rows; 
-		matrixCounterOfRows++) {
-		for (int matrixCounterOfCols = 0; matrixCounterOfCols < cols;
-			matrixCounterOfCols++){
+	for (int matrix_counter_of_rows = 0; matrix_counter_of_rows < rows; 
+		matrix_counter_of_rows++) {
+		for (int matrix_counter_of_cols = 0; matrix_counter_of_cols < cols;
+			matrix_counter_of_cols++){
 			cout.width(3);
-			matrix[matrixCounterOfRows][matrixCounterOfCols] = rand() % 50;
-			cout << matrix[matrixCounterOfRows][matrixCounterOfCols];
+			matrix[matrix_counter_of_rows][matrix_counter_of_cols] = rand() % 50;
+			cout << matrix[matrix_counter_of_rows][matrix_counter_of_cols];
 		}
 		cout << endl;
 	}
@@ -51,40 +51,41 @@ void MakeMatrix(int** matrix, int rows, int cols) {
 
 void ShowMatrix(int **matrix, int rows, int cols) {
 	cout.setf(ios::left);
-	for (int matrixCounterOfRows = 0; matrixCounterOfRows < rows; 
-		matrixCounterOfRows++) {
-		for (int matrixCounterOfCols = 0; matrixCounterOfCols < cols;
-			matrixCounterOfCols++) {
+	for (int matrix_counter_of_rows = 0; matrix_counter_of_rows < rows; 
+		matrix_counter_of_rows++) {
+		for (int matrix_counter_of_cols = 0; matrix_counter_of_cols < cols;
+			matrix_counter_of_cols++) {
 			cout.width(5);
-			cout << matrix[matrixCounterOfRows][matrixCounterOfCols] << ' ';
+			cout << matrix[matrix_counter_of_rows][matrix_counter_of_cols] << ' ';
 		}
 		cout << endl;
 	}
 }
 
 
-bool MultiplyMatrices(int **matrixA, int aRows, int aCols, int **matrixB,
-	int bRows, int bCols, int **resultMatrix) {
+bool MultiplyMatrices(int **matrix_a, int a_rows, int a_cols, int **matrix_b,
+	int b_rows, int b_cols, int **result_matrix) {
 	int summ = 0;
-	switch (aCols == bRows) {
+	switch (a_cols == b_rows) {
 	case 1: {
-		for (int multiplyRowsOfMatrixA = 0; multiplyRowsOfMatrixA < aRows;
-			multiplyRowsOfMatrixA++) {
-			for (int multiplyColsOfMatrixB = 0; multiplyColsOfMatrixB < bCols;
-				multiplyColsOfMatrixB++) {
+		for (int multiply_rows_of_matrix_a = 0; multiply_rows_of_matrix_a < a_rows;
+			multiply_rows_of_matrix_a++) {
+			for (int multiply_cols_of_matrix_b = 0; multiply_cols_of_matrix_b < b_cols;
+				multiply_cols_of_matrix_b++) {
 				summ = 0;
-				for (int colsOfMatrixAAndRowsOfMatrixB = 0; 
-					colsOfMatrixAAndRowsOfMatrixB < aCols; colsOfMatrixAAndRowsOfMatrixB++) {
-					summ += matrixA[multiplyRowsOfMatrixA][colsOfMatrixAAndRowsOfMatrixB] *
-						matrixB[colsOfMatrixAAndRowsOfMatrixB][multiplyColsOfMatrixB];
+				for (int cols_of_matrixa_a_and_rows_of_matrix_b = 0; 
+					cols_of_matrixa_a_and_rows_of_matrix_b < a_cols; 
+					cols_of_matrixa_a_and_rows_of_matrix_b++) {
+					summ += matrix_a[multiply_rows_of_matrix_a][cols_of_matrixa_a_and_rows_of_matrix_b]*
+						matrix_b[cols_of_matrixa_a_and_rows_of_matrix_b][multiply_cols_of_matrix_b];
 				}
-				resultMatrix[multiplyRowsOfMatrixA][multiplyColsOfMatrixB] = summ;
+				result_matrix[multiply_rows_of_matrix_a][multiply_cols_of_matrix_b] = summ;
 			}
 		}
 		cout << "Итоговая матрица:" << endl;
-		int resultRows = aRows;
-		int resultCols = bCols;
-		ShowMatrix(resultMatrix, resultRows, resultCols);
+		int result_rows = a_rows;
+		int result_cols = b_cols;
+		ShowMatrix(result_matrix, result_rows, result_cols);
 		return 1;
 		break;
 	}
@@ -97,7 +98,7 @@ bool MultiplyMatrices(int **matrixA, int aRows, int aCols, int **matrixB,
 }
 
 void InitializationOfMatrix(int **matrix, int rows, int cols) {
-	for (int rowCounter = 0; rowCounter < rows; rowCounter++) {
-		matrix[rowCounter] = new int[cols];
+	for (int row_counter = 0; row_counter < rows; row_counter++) {
+		matrix[row_counter] = new int[cols];
 	}
 }

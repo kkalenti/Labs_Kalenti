@@ -6,43 +6,43 @@ using namespace std;
 
 int GetLength(char *string) {
 	if (string == NULL) return -1;
-	int stringCounter = 0;
-	while (string[stringCounter] != '\0') {
-		stringCounter++;
+	int string_counter = 0;
+	while (string[string_counter] != '\0') {
+		string_counter++;
 	}
-	if (stringCounter == 0) {
+	if (string_counter == 0) {
 		return -1;
 	} else {
-		return stringCounter;
+		return string_counter;
 	}
 }
 
 int IndexOf(char* string, char cymbol) {
 	if (string == NULL) return -1;
-	int stringCounter = 0;
+	int string_counter = 0;
 	int index = -1;
 	do {
-		stringCounter++;
-		if (string[stringCounter] == cymbol) {
-			index = stringCounter;
+		string_counter++;
+		if (string[string_counter] == cymbol) {
+			index = string_counter;
 		}
-	} while ((string[stringCounter] != '\0') && index == -1);
-	if (stringCounter == -1) {
+	} while ((string[string_counter] != '\0') && index == -1);
+	if (string_counter == -1) {
 		return -1;
 	} else {
-		return stringCounter;
+		return string_counter;
 	}
 }
 
 int LastIndexOf(char* string, char cymbol) {
 	if (string == NULL) return -1;
-	int stringCounter = 0;
+	int string_counter = 0;
 	int index=-1;
-	while ((string[stringCounter] != '\0')){
-		if (string[stringCounter] == cymbol) {
-			index = stringCounter;
+	while ((string[string_counter] != '\0')){
+		if (string[string_counter] == cymbol) {
+			index = string_counter;
 		}
-		stringCounter++;
+		string_counter++;
 	}
 	if (index == -1)
 		return -1;
@@ -50,53 +50,53 @@ int LastIndexOf(char* string, char cymbol) {
 		return index;
 }
 
-bool GetSubstring(char*string, char* substring, int startIndex, int substringLength) {
+bool GetSubstring(char*string, char* substring, int start_index, int substring_length) {
 	if (string == NULL || substring == NULL) return false;
-	if (startIndex + substringLength > GetLength(string)
+	if (start_index + substring_length > GetLength(string)
 		|| GetLength(string) == -1
 		|| GetLength(substring) == -1)	return false;
 
-	int stringCounter = startIndex;
-	int substringCounter = 0;
-	while (string[stringCounter] != '\0' && substringCounter < substringLength) {
-		substring[substringCounter] = string[stringCounter];
-		stringCounter++;
-		substringCounter++;
+	int string_counter = start_index;
+	int substring_counter = 0;
+	while (string[string_counter] != '\0' && substring_counter < substring_length) {
+		substring[substring_counter] = string[string_counter];
+		string_counter++;
+		substring_counter++;
 	}
-	substring[substringCounter] = '\0';
+	substring[substring_counter] = '\0';
 	return true;
 }
 
 bool GetFilenames(char *fullFilename, char *filename) {
 	if (fullFilename == NULL || filename == NULL) return false;
-	int firstIndexOfName = LastIndexOf(fullFilename, '\\');
-	if (firstIndexOfName == -1)	return false;
+	int first_index_of_name = LastIndexOf(fullFilename, '\\');
+	if (first_index_of_name == -1)	return false;
 
-	int lastIndexOfName = LastIndexOf(fullFilename, '.');
-	if (lastIndexOfName == -1) return false;
-	if (!GetSubstring(fullFilename, filename, firstIndexOfName + 1,
-		lastIndexOfName - firstIndexOfName - 1)) return false;
+	int last_index_of_name = LastIndexOf(fullFilename, '.');
+	if (last_index_of_name == -1) return false;
+	if (!GetSubstring(fullFilename, filename, first_index_of_name + 1,
+		last_index_of_name - first_index_of_name - 1)) return false;
 	return true;
 }
 
-bool GetFileExtension(char* fullFilename, char* fileExtension) {
-	if (fullFilename == NULL || fileExtension == NULL) return false;
-	int firstIndexOfName = LastIndexOf(fullFilename, '.');
-	if (firstIndexOfName == -1) return false;
-	int lastIndexOfName = GetLength(fullFilename) - 1;
-	if (lastIndexOfName == -2) return false;
-	if (!GetSubstring(fullFilename, fileExtension, firstIndexOfName + 1,
-		lastIndexOfName - firstIndexOfName)) return false;
+bool GetFileExtension(char* full_filename, char* file_extension) {
+	if (full_filename == NULL || file_extension == NULL) return false;
+	int first_index_of_name = LastIndexOf(full_filename, '.');
+	if (first_index_of_name == -1) return false;
+	int last_index_of_name = GetLength(full_filename) - 1;
+	if (last_index_of_name == -2) return false;
+	if (!GetSubstring(full_filename, file_extension, first_index_of_name + 1,
+		last_index_of_name - first_index_of_name)) return false;
 	return true;
 }
 
-bool GetFilepath(char* fullFilename, char* filepath) {
-	if (fullFilename == NULL || filepath == NULL) return false;
-	int firstIndexOfName = 0;
-	int lastIndexOfName = LastIndexOf(fullFilename, '\\');
-	if (firstIndexOfName == -1) return false;
-	if (!GetSubstring(fullFilename, filepath, firstIndexOfName,
-		lastIndexOfName - firstIndexOfName)) return false;
+bool GetFilepath(char* full_filename, char* filepath) {
+	if (full_filename == NULL || filepath == NULL) return false;
+	int first_index_of_name = 0;
+	int last_index_of_name = LastIndexOf(full_filename, '\\');
+	if (first_index_of_name == -1) return false;
+	if (!GetSubstring(full_filename, filepath, first_index_of_name,
+		last_index_of_name - first_index_of_name)) return false;
 	return true;
 }
 

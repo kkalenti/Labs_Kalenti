@@ -112,83 +112,82 @@ void GuessNumber() {
 		}
 	}
 	counter++;
-	cout << "Поздравляю! Ты угадал, количество твоих попыток:" << counter;
+	cout << "Поздравляю! Ты угадал, количество твоих попыток:" << counter << endl;
+	system("pause");
 }
 
 	void Lab2_№1(){
-		int coefficientA = 0;
-		int coefficientB = 0;
-		int coefficientC = 0;
+		int coefficient_a = 0;
+		int coefficient_b = 0;
+		int coefficient_c = 0;
 		cout << "Введите стрший коэффициент\n";
-		CheckingOfCorrectInputOfNumber(&coefficientA,
+		CheckingOfCorrectInputOfNumber(&coefficient_a,
 			"Ошибка ввода! Повторите ввод\n");
 		cout << "Второй коэффициент\n";
-		CheckingOfCorrectInputOfNumber(&coefficientB, 
+		CheckingOfCorrectInputOfNumber(&coefficient_b, 
 			"Ошибка ввода! Повторите ввод\n");
 		cout << "свободный член\n";
-		CheckingOfCorrectInputOfNumber(&coefficientC,
+		CheckingOfCorrectInputOfNumber(&coefficient_c,
 			"Ошибка ввода! Повторите ввод\n");
-		double *firstRootPointer, *secondRootPointer;
-		double firstRoot, secondRoot;
-		firstRootPointer = &firstRoot;
-		secondRootPointer = &secondRoot;
-		int numberOfRoots;
-		numberOfRoots = GetRoots1(coefficientA, coefficientB,
-			coefficientC, firstRootPointer, secondRootPointer);
-		switch (numberOfRoots) {
+		double *first_root_pointer, *second_root_pointer;
+		double first_root, second_root;
+		first_root_pointer = &first_root;
+		second_root_pointer = &second_root;
+		int number_of_roots;
+		number_of_roots = GetRoots1(coefficient_a, coefficient_b,
+			coefficient_c, first_root_pointer, second_root_pointer);
+		switch (number_of_roots) {
 			case 0:
 				cout << "Нет решений\n";
 				break;
 			case 1:
-				cout << firstRoot << " (Одно решение)\n";
+				cout << first_root << " (Одно решение)\n";
 				break;
 			case 2:
-				cout << firstRoot << " " << secondRoot << "\n";
+				cout << first_root << " " << second_root << "\n";
 				break;
 			default:
 				cout << "Ошибка программы!";
 				break;
 		}
 		system("pause");
-		cout << "-------------------------------------------------------------------\n";
 	}
 
 	void Lab2_№2(){
-		int coefficientA = 0;
-		int coefficientB = 0;
-		int coefficientC = 0;
+		int coefficient_a = 0;
+		int coefficient_b = 0;
+		int coefficient_c = 0;
 		cout << "Введите стрший коэффициент\n";
-		CheckingOfCorrectInputOfNumber(&coefficientA,
+		CheckingOfCorrectInputOfNumber(&coefficient_a,
 			"Ошибка ввода! Повторите ввод\n");
 		cout << "Второй коэффициент\n";
-		CheckingOfCorrectInputOfNumber(&coefficientB,
+		CheckingOfCorrectInputOfNumber(&coefficient_b,
 			"Ошибка ввода! Повторите ввод\n");
 		cout << "свободный член\n";
-		CheckingOfCorrectInputOfNumber(&coefficientC, 
+		CheckingOfCorrectInputOfNumber(&coefficient_c, 
 			"Ошибка ввода! Повторите ввод\n");
-		double firstRoot;
-		double secondRoot;
-		double &firstRootLink = firstRoot;
-		double &secondRootLink = secondRoot;
-		int numberOfRoots;
-		numberOfRoots = GetRoots2(coefficientA, coefficientB,
-			coefficientC, firstRoot, secondRoot);
-		switch (numberOfRoots) {
+		double first_root;
+		double second_root;
+		double &first_root_link = first_root;
+		double &second_root_link = second_root;
+		int number_of_roots;
+		number_of_roots = GetRoots2(coefficient_a, coefficient_b,
+			coefficient_c, first_root, second_root);
+		switch (number_of_roots) {
 			case 0:
 				cout << "Нет решений\n";
 				break;
 			case 1:
-				cout << firstRoot << " (Одно решение)\n";
+				cout << first_root << " (Одно решение)\n";
 				break;
 			case 2:
-				cout << firstRoot << " " << secondRoot << "\n";
+				cout << first_root << " " << second_root << "\n";
 				break;
 			default:
 				cout << "Ошибка программы!";
 				break;
 		}
 		system("pause");
-		cout << "-------------------------------------------------------------------\n";
 	}
 
 	void Lab2_№3(){
@@ -203,7 +202,6 @@ void GuessNumber() {
 		base = GetPower(base, power);
 		cout << "Результат:" << base << "\n";
 		system("pause");
-		cout << "-------------------------------------------------------------------\n";
 	}
 
 	void Lab2_№4(){

@@ -13,17 +13,53 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Исходные файлы\Код лаброраторных">
-      <UniqueIdentifier>{6943cce8-ca7b-4866-82a2-012fb5d9460d}</UniqueIdentifier>
+    <Filter Include="Исходные файлы\Свои функции">
+      <UniqueIdentifier>{e00757dd-6cfe-4517-8ce0-cdcaff9c34c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Перечисления">
+      <UniqueIdentifier>{2ac465f9-4229-415e-b7be-11e847593f5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Лабораторные">
+      <UniqueIdentifier>{0e30b5be-8f9c-4cea-a2a2-fbfc925db9cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Лабораторные\Четвертая лабораторная">
+      <UniqueIdentifier>{f5d33cc6-064c-4d9a-9e33-53b125bbc477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Лабораторные\Четвертая лабораторная\Функции">
+      <UniqueIdentifier>{32f3393e-7b90-4a6b-941e-fc9db5900eb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Лабораторные\Третья лабораторная">
+      <UniqueIdentifier>{bf30040d-0522-4725-a2a7-979b97b7cd3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Лабораторные\Третья лабораторная\Функции">
+      <UniqueIdentifier>{b851a929-40a1-4d33-b26f-ad470ec7376e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Лабораторные\Вторая лабораторная">
+      <UniqueIdentifier>{986a22b7-7e63-43a3-a712-ded928406c36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Лабораторные\Первая лабораторная">
+      <UniqueIdentifier>{30fc2a8b-977a-4407-8176-44059a014ff6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Файлы заголовков\Лабораторные">
       <UniqueIdentifier>{a379dae5-7dc4-464f-ad3b-f3f84b5de711}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\Функции">
+    <Filter Include="Файлы заголовков\Лабораторные\Четвертая лабораторная">
+      <UniqueIdentifier>{abce64ee-cccd-4c01-9ec0-bf9d8d3f23e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Лабораторные\Третья лабораторная">
+      <UniqueIdentifier>{96642205-fa61-4b22-a5f4-d8356b16c233}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Лабораторные\Вторая лабораторная">
+      <UniqueIdentifier>{d9dd80a3-b186-4fe2-86ba-a10648719aa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Лабораторные\Первая лабораторная">
+      <UniqueIdentifier>{9a0b4eef-dba2-481e-9729-f62673f1f4eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Лабораторные\Третья лабораторная\Функции">
       <UniqueIdentifier>{d3229806-9bc1-4bb0-a437-c16df988d590}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Исходные файлы\Свои функции">
-      <UniqueIdentifier>{e00757dd-6cfe-4517-8ce0-cdcaff9c34c9}</UniqueIdentifier>
+    <Filter Include="Файлы заголовков\Лабораторные\Четвертая лабораторная\Функции">
+      <UniqueIdentifier>{017a6a47-774a-4905-80df-e4ae5b74dc19}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -33,23 +69,44 @@
     <ClInclude Include="targetver.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lab1.h">
-      <Filter>Файлы заголовков\Лабораторные</Filter>
-    </ClInclude>
-    <ClInclude Include="lab2.h">
-      <Filter>Файлы заголовков\Лабораторные</Filter>
-    </ClInclude>
     <ClInclude Include="arrays.h">
-      <Filter>Файлы заголовков\Функции</Filter>
+      <Filter>Файлы заголовков\Лабораторные\Третья лабораторная\Функции</Filter>
     </ClInclude>
     <ClInclude Include="strings.h">
-      <Filter>Файлы заголовков\Функции</Filter>
-    </ClInclude>
-    <ClInclude Include="lab3.h">
-      <Filter>Файлы заголовков\Лабораторные</Filter>
+      <Filter>Файлы заголовков\Лабораторные\Третья лабораторная\Функции</Filter>
     </ClInclude>
     <ClInclude Include="functions.h">
-      <Filter>Файлы заголовков\Функции</Filter>
+      <Filter>Файлы заголовков\Лабораторные\Третья лабораторная\Функции</Filter>
+    </ClInclude>
+    <ClInclude Include="weekday_enumeration.h">
+      <Filter>Файлы заголовков\Перечисления</Filter>
+    </ClInclude>
+    <ClInclude Include="color_enumeration.h">
+      <Filter>Файлы заголовков\Перечисления</Filter>
+    </ClInclude>
+    <ClInclude Include="month_enumeration.h">
+      <Filter>Файлы заголовков\Перечисления</Filter>
+    </ClInclude>
+    <ClInclude Include="lab1.h">
+      <Filter>Файлы заголовков\Лабораторные\Первая лабораторная</Filter>
+    </ClInclude>
+    <ClInclude Include="lab2.h">
+      <Filter>Файлы заголовков\Лабораторные\Вторая лабораторная</Filter>
+    </ClInclude>
+    <ClInclude Include="lab4.h">
+      <Filter>Файлы заголовков\Лабораторные\Четвертая лабораторная</Filter>
+    </ClInclude>
+    <ClInclude Include="lab3.h">
+      <Filter>Файлы заголовков\Лабораторные\Третья лабораторная</Filter>
+    </ClInclude>
+    <ClInclude Include="sex_enumeration.h">
+      <Filter>Файлы заголовков\Перечисления</Filter>
+    </ClInclude>
+    <ClInclude Include="enumeration.h">
+      <Filter>Файлы заголовков\Лабораторные\Четвертая лабораторная\Функции</Filter>
+    </ClInclude>
+    <ClInclude Include="console_colors.h">
+      <Filter>Файлы заголовков\Перечисления</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -59,23 +116,29 @@
     <ClCompile Include="launcher.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="lab 1.cpp">
-      <Filter>Исходные файлы\Код лаброраторных</Filter>
-    </ClCompile>
-    <ClCompile Include="lab2.cpp">
-      <Filter>Исходные файлы\Код лаброраторных</Filter>
-    </ClCompile>
-    <ClCompile Include="lab3.cpp">
-      <Filter>Исходные файлы\Код лаброраторных</Filter>
-    </ClCompile>
-    <ClCompile Include="arrays.cpp">
-      <Filter>Исходные файлы\Свои функции</Filter>
-    </ClCompile>
-    <ClCompile Include="strings.cpp">
-      <Filter>Исходные файлы\Свои функции</Filter>
-    </ClCompile>
     <ClCompile Include="functions.cpp">
       <Filter>Исходные файлы\Свои функции</Filter>
+    </ClCompile>
+    <ClCompile Include="lab 1.cpp">
+      <Filter>Исходные файлы\Лабораторные\Первая лабораторная</Filter>
+    </ClCompile>
+    <ClCompile Include="lab2.cpp">
+      <Filter>Исходные файлы\Лабораторные\Вторая лабораторная</Filter>
+    </ClCompile>
+    <ClCompile Include="lab3.cpp">
+      <Filter>Исходные файлы\Лабораторные\Третья лабораторная</Filter>
+    </ClCompile>
+    <ClCompile Include="lab4.cpp">
+      <Filter>Исходные файлы\Лабораторные\Четвертая лабораторная</Filter>
+    </ClCompile>
+    <ClCompile Include="arrays.cpp">
+      <Filter>Исходные файлы\Лабораторные\Третья лабораторная\Функции</Filter>
+    </ClCompile>
+    <ClCompile Include="strings.cpp">
+      <Filter>Исходные файлы\Лабораторные\Третья лабораторная\Функции</Filter>
+    </ClCompile>
+    <ClCompile Include="enumeration.cpp">
+      <Filter>Исходные файлы\Лабораторные\Четвертая лабораторная\Функции</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

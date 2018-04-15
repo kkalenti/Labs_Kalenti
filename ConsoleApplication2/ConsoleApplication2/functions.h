@@ -1,6 +1,6 @@
 #pragma once
 
 void CheckingOfCorrectInputOfNumber(int *input,
-	const char invalidMessage[]);
+	const char kInvalidMessage[]);
 void CheckingForPositive(int *input);
 void CheckingForPositiveNumberAndNull(int *input);
