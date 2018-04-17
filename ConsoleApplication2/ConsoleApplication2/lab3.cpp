@@ -98,6 +98,8 @@ using namespace std;
 	}
 
 	int Lab3_№5() {
+		//TODO: Сломал работу введя C:\Program Files (x86)\Apple Software Update\
+		
 		char full_filename[300];
 		char filename[150];
 		char file_extension[150];

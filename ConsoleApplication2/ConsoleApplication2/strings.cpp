@@ -5,6 +5,7 @@
 using namespace std;
 
 int GetLength(char *string) {
+	//TODO: Вместо NULL лучше использовать nullptr - а почему - расскажешь мне при сдаче!
 	if (string == NULL) return -1;
 	int string_counter = 0;
 	while (string[string_counter] != '\0') {
@@ -80,6 +81,7 @@ bool GetFilenames(char *fullFilename, char *filename) {
 }
 
 bool GetFileExtension(char* full_filename, char* file_extension) {
+	//TODO: Без пустых строк нихера не понятно. Складывается ощущение, что тут куча года под if-ами, а это не так.
 	if (full_filename == NULL || file_extension == NULL) return false;
 	int first_index_of_name = LastIndexOf(full_filename, '.');
 	if (first_index_of_name == -1) return false;

@@ -6,6 +6,7 @@ using namespace std;
 
 void MakeArray(double *array, int array_lenth) {
 	cout << "Массив из " << array_lenth << " элементов:";
+	//TODO: Вот в for-ах лучше использовать короткие i,j иначе получается многобукаф ни о чём.
 	for (int array_counter = 0; array_counter < array_lenth; array_counter++) {
 		array[array_counter] = rand() % 50;
 		cout << array[array_counter] << setw(3);
@@ -15,6 +16,7 @@ void MakeArray(double *array, int array_lenth) {
 
 void Sort(double *array, int array_lenth) {
 	double temp = 0;
+	//TODO: Були лучше называть начиная с is, типа isExit - будет корректнее читаться.
 	bool exit = false;
 	while (!exit) {
 		exit = true;
@@ -33,7 +35,7 @@ void Sort(double *array, int array_lenth) {
 	}
 	cout << endl;
 }
-
+//TODO: Название... Можно подумать, что ты в ручную задаёшь. А ты задаёшь рандомно, пусть это и будет в названии.
 void MakeMatrix(int** matrix, int rows, int cols) {
 	cout << "Матрица из " << rows << "*" << cols << " элементов:" << endl;
 	cout.setf(ios::left);
@@ -73,6 +75,7 @@ bool MultiplyMatrices(int **matrix_a, int a_rows, int a_cols, int **matrix_b,
 			for (int multiply_cols_of_matrix_b = 0; multiply_cols_of_matrix_b < b_cols;
 				multiply_cols_of_matrix_b++) {
 				summ = 0;
+				//TODO: Ёбни себе в глаз за такое название итератора
 				for (int cols_of_matrixa_a_and_rows_of_matrix_b = 0; 
 					cols_of_matrixa_a_and_rows_of_matrix_b < a_cols; 
 					cols_of_matrixa_a_and_rows_of_matrix_b++) {
@@ -96,7 +99,7 @@ bool MultiplyMatrices(int **matrix_a, int a_rows, int a_cols, int **matrix_b,
 	}
 
 }
-
+//TODO: Название - можно без Of, будет читабельнее.
 void InitializationOfMatrix(int **matrix, int rows, int cols) {
 	for (int row_counter = 0; row_counter < rows; row_counter++) {
 		matrix[row_counter] = new int[cols];
