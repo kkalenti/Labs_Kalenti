@@ -61,6 +61,9 @@
     <Filter Include="Файлы заголовков\Лабораторные\Четвертая лабораторная\Функции">
       <UniqueIdentifier>{017a6a47-774a-4905-80df-e4ae5b74dc19}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Структуры">
+      <UniqueIdentifier>{8b8de08d-e617-4e0c-8f9b-2326a35d94fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -108,6 +111,15 @@
     <ClInclude Include="console_colors.h">
       <Filter>Файлы заголовков\Перечисления</Filter>
     </ClInclude>
+    <ClInclude Include="person_structure.h">
+      <Filter>Файлы заголовков\Структуры</Filter>
+    </ClInclude>
+    <ClInclude Include="structure.h">
+      <Filter>Файлы заголовков\Лабораторные\Четвертая лабораторная\Функции</Filter>
+    </ClInclude>
+    <ClInclude Include="checking_input_for_person.h">
+      <Filter>Файлы заголовков\Лабораторные\Четвертая лабораторная\Функции</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -138,6 +150,12 @@
       <Filter>Исходные файлы\Лабораторные\Третья лабораторная\Функции</Filter>
     </ClCompile>
     <ClCompile Include="enumeration.cpp">
+      <Filter>Исходные файлы\Лабораторные\Четвертая лабораторная\Функции</Filter>
+    </ClCompile>
+    <ClCompile Include="structure.cpp">
+      <Filter>Исходные файлы\Лабораторные\Четвертая лабораторная\Функции</Filter>
+    </ClCompile>
+    <ClCompile Include="checking_input_for_peson.cpp">
       <Filter>Исходные файлы\Лабораторные\Четвертая лабораторная\Функции</Filter>
     </ClCompile>
   </ItemGroup>

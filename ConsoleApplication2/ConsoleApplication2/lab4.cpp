@@ -3,7 +3,10 @@
 #include <conio.h>
 #include "functions.h"
 #include "enumeration.h"
+#include "structure.h"
 #include "color_enumeration.h"
+#include "person_structure.h"
+#include "sex_enumeration.h"
 
 using namespace std;
 
@@ -75,5 +78,45 @@ void lab4_№3() {
 			}
 
 	} while (exit_color == true);
-	system("color 0F");
+	system("color 07");
+}
+
+void lab4_№4() {
+	Person first_person;
+	strcpy_s(first_person.firstname, "Калентьев");
+	strcpy_s(first_person.lastname, "Костя");
+	first_person.age = 18;
+	strcpy_s(first_person.sex, "муж");
+
+	Person second_person;
+	strcpy_s(second_person.firstname, "Калентьев");
+	strcpy_s(second_person.lastname, "Алексей");
+	second_person.age = 28;
+	strcpy_s(second_person.sex, "муж");
+
+	cout << "Фамилия и имя первого человека:" << first_person.firstname <<
+		" " << first_person.lastname << endl << endl;
+
+	strcpy_s(first_person.firstname, "Котов");
+	strcpy_s(first_person.lastname, "Влад");
+	cout << "Фамилия и имя первого человека, введенные повторно:" << first_person.firstname <<
+		" " << first_person.lastname << endl << endl;
+
+	Person *first_person_pointer = &first_person;
+	cout << "Адрес:" << first_person_pointer << endl;
+	cout << "Фамилия, выведенная через указатель:" << first_person_pointer->firstname << endl << endl;
+
+	Person *second_person_pointer = &second_person;
+	strcpy_s(second_person_pointer->lastname, "Костя");
+	second_person_pointer->age = 18;
+
+	cout << "Функция для вывода информации из структуры" << endl;
+	PrintPerson(first_person);
+
+	cout << "Функция для вводы информации в функцию" << endl;
+	Person third_person;
+	Person *third_person_pointer = &third_person;
+	ReadPerson(third_person_pointer);
+	PrintPerson(third_person);
+	system("pause");
 }

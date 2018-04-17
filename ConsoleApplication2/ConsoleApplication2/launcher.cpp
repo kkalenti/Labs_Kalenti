@@ -4,6 +4,7 @@
 #include <locale.h>
 #include <time.h>
 #include <conio.h>
+#include <Windows.h>
 #include "lab1.h"
 #include "lab2.h"
 #include "lab3.h"
@@ -15,6 +16,8 @@ using namespace std;
 int main() {
 	setlocale(LC_ALL, "Rus");
 	srand(time(NULL));
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
 	char key_of_task;
 	char key_of_lab;
 	bool exit_labs = true;
@@ -132,6 +135,7 @@ int main() {
 					"1.Выбор дня недели" << endl << 
 					"2.Выбор месяца" << endl <<
 					"3.Работа с цветом" << endl <<
+					"4.Работа со структурами" << endl <<
 					"Backspace. Перейти к выбору лабораторных" << endl << endl;
 				key_of_task = _getch();
 				system("cls");
@@ -146,6 +150,10 @@ int main() {
 					}
 					case 51: {	//третье задание четвертой лабы
 						lab4_№3();
+						break;
+					}
+					case 52: { //четвертое задание четвертой лабы
+						lab4_№4();
 						break;
 					}
 					case 8: {
