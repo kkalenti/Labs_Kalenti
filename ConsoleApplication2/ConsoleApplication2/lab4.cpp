@@ -5,6 +5,7 @@
 #include "enumeration.h"
 #include "structure.h"
 #include "color_enumeration.h"
+#include "num_enumeration.h"
 #include "person_structure.h"
 #include "sex_enumeration.h"
 
@@ -68,7 +69,7 @@ void lab4_¹3() {
 				system("color 05");
 				break;
 			}
-			case 8: {
+			case backspace: {
 				exit_color = false;
 				break;
 			}

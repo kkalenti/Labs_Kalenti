@@ -6,7 +6,8 @@ using namespace std;
 
 int GetLength(char *string) {
 	//TODO: Вместо NULL лучше использовать nullptr - а почему - расскажешь мне при сдаче!
-	if (string == NULL) return -1;
+	if (string == nullptr) return -1;
+
 	int string_counter = 0;
 	while (string[string_counter] != '\0') {
 		string_counter++;
@@ -19,7 +20,7 @@ int GetLength(char *string) {
 }
 
 int IndexOf(char* string, char cymbol) {
-	if (string == NULL) return -1;
+	if (string == nullptr) return -1;
 	int string_counter = 0;
 	int index = -1;
 	do {
@@ -36,7 +37,7 @@ int IndexOf(char* string, char cymbol) {
 }
 
 int LastIndexOf(char* string, char cymbol) {
-	if (string == NULL) return -1;
+	if (string == nullptr) return -1;
 	int string_counter = 0;
 	int index=-1;
 	while ((string[string_counter] != '\0')){
@@ -52,7 +53,8 @@ int LastIndexOf(char* string, char cymbol) {
 }
 
 bool GetSubstring(char*string, char* substring, int start_index, int substring_length) {
-	if (string == NULL || substring == NULL) return false;
+	if (string == nullptr || substring == nullptr) return false;
+
 	if (start_index + substring_length > GetLength(string)
 		|| GetLength(string) == -1
 		|| GetLength(substring) == -1)	return false;
@@ -69,36 +71,46 @@ bool GetSubstring(char*string, char* substring, int start_index, int substring_l
 }
 
 bool GetFilenames(char *fullFilename, char *filename) {
-	if (fullFilename == NULL || filename == NULL) return false;
+	if (fullFilename == nullptr || filename == nullptr) return false;
+
 	int first_index_of_name = LastIndexOf(fullFilename, '\\');
 	if (first_index_of_name == -1)	return false;
 
 	int last_index_of_name = LastIndexOf(fullFilename, '.');
 	if (last_index_of_name == -1) return false;
+
 	if (!GetSubstring(fullFilename, filename, first_index_of_name + 1,
 		last_index_of_name - first_index_of_name - 1)) return false;
+
 	return true;
 }
 
 bool GetFileExtension(char* full_filename, char* file_extension) {
 	//TODO: Без пустых строк нихера не понятно. Складывается ощущение, что тут куча года под if-ами, а это не так.
-	if (full_filename == NULL || file_extension == NULL) return false;
+	if (full_filename == nullptr || file_extension == nullptr) return false;
+
 	int first_index_of_name = LastIndexOf(full_filename, '.');
 	if (first_index_of_name == -1) return false;
+
 	int last_index_of_name = GetLength(full_filename) - 1;
 	if (last_index_of_name == -2) return false;
+
 	if (!GetSubstring(full_filename, file_extension, first_index_of_name + 1,
 		last_index_of_name - first_index_of_name)) return false;
+
 	return true;
 }
 
 bool GetFilepath(char* full_filename, char* filepath) {
-	if (full_filename == NULL || filepath == NULL) return false;
+	if (full_filename == nullptr || filepath == nullptr) return false;
+
 	int first_index_of_name = 0;
 	int last_index_of_name = LastIndexOf(full_filename, '\\');
 	if (first_index_of_name == -1) return false;
+
 	if (!GetSubstring(full_filename, filepath, first_index_of_name,
 		last_index_of_name - first_index_of_name)) return false;
+
 	return true;
 }
 

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include <iostream>
+#include <string>
 #include "arrays.h"
 #include "functions.h"
 #include "strings.h"
@@ -36,17 +37,17 @@ using namespace std;
 		cout << "¬ведите количество столбцов второй матрицы (∆елательно не более 100 чисел):";
 		CheckingForPositive(&b_cols);
 		int **matrix_a = new int *[a_rows];
-		InitializationOfMatrix(matrix_a, a_rows, a_cols);
+		InitializationMatrix(matrix_a, a_rows, a_cols);
 		int **matrix_b = new int *[b_rows];
-		InitializationOfMatrix(matrix_b, b_rows, b_cols);
+		InitializationMatrix(matrix_b, b_rows, b_cols);
 		int result_rows = a_rows;
 		int result_cols = b_cols;
 		int **result_matrix = new int *[result_rows];
 		for (int row_counter = 0; row_counter < result_rows; row_counter++) {
 			result_matrix[row_counter] = new int[result_cols];
 		}
-		MakeMatrix(matrix_a, a_rows, a_cols);
-		MakeMatrix(matrix_b, b_rows, b_cols);
+		MakeRandomMatrix(matrix_a, a_rows, a_cols);
+		MakeRandomMatrix(matrix_b, b_rows, b_cols);
 		MultiplyMatrices(matrix_a, a_rows, a_cols, matrix_b, b_rows, b_cols, result_matrix);
 		system("pause");
 	}
@@ -105,17 +106,17 @@ using namespace std;
 		char file_extension[150];
 		char filepath[300];
 		cout << "¬ведите полный адресс файла (не более 200 символов):";
-		cin >> full_filename;
+		cin.getline(full_filename,300);
 		if (GetFilenames(&full_filename[0], &filename[0]) == false) {
-			void InvalidFilenames(char &filename);
+			InvalidFilenames(&filename[0]);
 			return 0;
 		}
 		if (!GetFileExtension(&full_filename[0], &file_extension[0])) {
-			void InvalidFilenames(char &fileExtantion);
+			InvalidFilenames(&file_extension[0]);
 			return 0;
 		}
 		if (!GetFilepath(&full_filename[0], &filepath[0])) {
-			void InvalidFilenames(char &filepath);
+			InvalidFilenames(&filepath[0]);
 			return 0;
 		}
 		cout << "»м€ файла:" << filename << endl;

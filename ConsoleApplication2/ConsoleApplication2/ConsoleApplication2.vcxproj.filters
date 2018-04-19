@@ -64,6 +64,9 @@
     <Filter Include="Файлы заголовков\Структуры">
       <UniqueIdentifier>{8b8de08d-e617-4e0c-8f9b-2326a35d94fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Свои функции">
+      <UniqueIdentifier>{ba8be509-55ce-4268-ae47-ea9d644f242b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -76,9 +79,6 @@
       <Filter>Файлы заголовков\Лабораторные\Третья лабораторная\Функции</Filter>
     </ClInclude>
     <ClInclude Include="strings.h">
-      <Filter>Файлы заголовков\Лабораторные\Третья лабораторная\Функции</Filter>
-    </ClInclude>
-    <ClInclude Include="functions.h">
       <Filter>Файлы заголовков\Лабораторные\Третья лабораторная\Функции</Filter>
     </ClInclude>
     <ClInclude Include="weekday_enumeration.h">
@@ -120,6 +120,15 @@
     <ClInclude Include="checking_input_for_person.h">
       <Filter>Файлы заголовков\Лабораторные\Четвертая лабораторная\Функции</Filter>
     </ClInclude>
+    <ClInclude Include="num_enumeration.h">
+      <Filter>Файлы заголовков\Перечисления</Filter>
+    </ClInclude>
+    <ClInclude Include="functions.h">
+      <Filter>Файлы заголовков\Свои функции</Filter>
+    </ClInclude>
+    <ClInclude Include="menus.h">
+      <Filter>Файлы заголовков\Свои функции</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -157,6 +166,9 @@
     </ClCompile>
     <ClCompile Include="checking_input_for_peson.cpp">
       <Filter>Исходные файлы\Лабораторные\Четвертая лабораторная\Функции</Filter>
+    </ClCompile>
+    <ClCompile Include="menus.cpp">
+      <Filter>Исходные файлы\Свои функции</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
