@@ -143,6 +143,14 @@ int main() {
 						lab4_№4();
 						break;
 					}
+					case num_5: { //пятое задание четвертой лабы
+						lab4_№5();
+						break;
+					}
+					case num_6: {
+						lab4_№6();
+						break;
+					}
 					case backspace: {
 						is_exit_lab_four = false;
 						break;

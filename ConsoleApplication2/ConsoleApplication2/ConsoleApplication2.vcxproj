@@ -153,8 +153,10 @@
     <ClInclude Include="console_colors.h" />
     <ClInclude Include="enumeration.h" />
     <ClInclude Include="checking_input_for_person.h" />
+    <ClInclude Include="for_list.h" />
     <ClInclude Include="menus.h" />
     <ClInclude Include="num_enumeration.h" />
+    <ClInclude Include="person_list.h" />
     <ClInclude Include="person_structure.h" />
     <ClInclude Include="sex_enumeration.h" />
     <ClInclude Include="functions.h" />
@@ -173,6 +175,7 @@
     <ClCompile Include="arrays.cpp" />
     <ClCompile Include="checking_input_for_peson.cpp" />
     <ClCompile Include="enumeration.cpp" />
+    <ClCompile Include="for_list.cpp" />
     <ClCompile Include="lab 1.cpp" />
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="lab3.cpp" />

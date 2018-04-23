@@ -67,6 +67,9 @@
     <Filter Include="Файлы заголовков\Свои функции">
       <UniqueIdentifier>{ba8be509-55ce-4268-ae47-ea9d644f242b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Списки">
+      <UniqueIdentifier>{d2fa962d-fb4b-41be-85c6-c243d640b690}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -129,6 +132,12 @@
     <ClInclude Include="menus.h">
       <Filter>Файлы заголовков\Свои функции</Filter>
     </ClInclude>
+    <ClInclude Include="person_list.h">
+      <Filter>Файлы заголовков\Списки</Filter>
+    </ClInclude>
+    <ClInclude Include="for_list.h">
+      <Filter>Файлы заголовков\Лабораторные\Четвертая лабораторная\Функции</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -169,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="menus.cpp">
       <Filter>Исходные файлы\Свои функции</Filter>
+    </ClCompile>
+    <ClCompile Include="for_list.cpp">
+      <Filter>Исходные файлы\Лабораторные\Четвертая лабораторная\Функции</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

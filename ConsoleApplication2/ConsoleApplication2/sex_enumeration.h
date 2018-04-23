@@ -1,6 +1,6 @@
 #pragma once
 
 enum Sex {
-	Male,
-	Female
+	ћуж,
+	∆ен
 };
