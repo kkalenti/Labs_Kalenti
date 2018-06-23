@@ -25,13 +25,11 @@ int main() {
 	bool is_exit_labs = true;
 	do {
 		system("cls");
-		key_of_lab = NULL;
+		key_of_lab = 0;
 		GeneralMenu();
 		key_of_lab = _getch();
-		//TODO: Сами менюшки можно было бы прям в лабы перенести, так было бы правильнее, чтобы не захламлять общий лаунчер.
 		switch (key_of_lab) {
-			//TODO: Алярм, бл..., что за 49? Ты там совсем охуел?!) Всё должно быть понятно, какого хера я должен вспоминать ASCII, проверяя твою лабу?
-			case num_1: {	//первая лаба
+			case '1': {	//первая лаба
 				system("cls");
 				lab1();
 				break;
@@ -122,7 +120,7 @@ int main() {
 				bool is_exit_lab_four = true;
 				do {
 					system("cls");
-					key_of_task = NULL;
+					key_of_task = 0;
 					FourthLabMenu();
 					key_of_task = _getch();
 					system("cls");

@@ -215,14 +215,17 @@ void lab4_№6() {
 		person_list_tail = AddToEndOfAPersonList(person_list_head);
 		system("cls");
 	}
-	PersonListItem* curent_item = person_list_head;
 	cout << "Выведен введенный список" << endl << endl;
 	PrintPersonList(person_list_head);
 
 	DeleteElementOfAPersonList(person_list_head, person_list_tail, 3);
 	cout << "Выведен список с удаленным третьим элементом" << endl;
 	PrintPersonList(person_list_head);
-
+	while (person_list_head->next != nullptr) {
+		person_list_head = person_list_head->next;
+		delete person_list_head->prev;
+	}
+	delete person_list_head;
 	system("pause");
 	system("cls");
 }

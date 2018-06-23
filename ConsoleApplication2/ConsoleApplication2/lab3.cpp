@@ -37,9 +37,9 @@ using namespace std;
 		cout << "Введите количество столбцов второй матрицы (Желательно не более 100 чисел):";
 		CheckingForPositive(&b_cols);
 		int **matrix_a = new int *[a_rows];
-		InitializationMatrix(matrix_a, a_rows, a_cols);
+		MatrixInitialization(matrix_a, a_rows, a_cols);
 		int **matrix_b = new int *[b_rows];
-		InitializationMatrix(matrix_b, b_rows, b_cols);
+		MatrixInitialization(matrix_b, b_rows, b_cols);
 		int result_rows = a_rows;
 		int result_cols = b_cols;
 		int **result_matrix = new int *[result_rows];
@@ -99,8 +99,7 @@ using namespace std;
 	}
 
 	int Lab3_№5() {
-		//TODO: Сломал работу введя C:\Program Files (x86)\Apple Software Update\
-		
+				
 		char full_filename[300];
 		char filename[150];
 		char file_extension[150];
