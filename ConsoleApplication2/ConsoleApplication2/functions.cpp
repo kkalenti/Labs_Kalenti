@@ -3,11 +3,11 @@
 
 using namespace std;
 
-void CheckingOfCorrectInputOfNumber(int *input, const char invalidMessage[]) {
+void CheckingOfCorrectInputOfNumber(int *input, const char kInvalidMessage[]) {
 	while (!(cin >> *input) || (cin.peek() != '\n')) {
 		cin.clear();
 		while (cin.get() != '\n');
-		cout << invalidMessage;
+		cout << kInvalidMessage;
 	}
 }
 

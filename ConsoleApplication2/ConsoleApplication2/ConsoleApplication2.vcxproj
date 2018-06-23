@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -149,21 +149,40 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="arrays.h" />
+    <ClInclude Include="color_enumeration.h" />
+    <ClInclude Include="console_colors.h" />
+    <ClInclude Include="enumeration.h" />
+    <ClInclude Include="checking_input_for_person.h" />
+    <ClInclude Include="for_list.h" />
+    <ClInclude Include="menus.h" />
+    <ClInclude Include="num_enumeration.h" />
+    <ClInclude Include="person_list.h" />
+    <ClInclude Include="person_structure.h" />
+    <ClInclude Include="sex_enumeration.h" />
     <ClInclude Include="functions.h" />
     <ClInclude Include="lab3.h" />
+    <ClInclude Include="lab4.h" />
+    <ClInclude Include="month_enumeration.h" />
     <ClInclude Include="strings.h" />
     <ClInclude Include="lab2.h" />
     <ClInclude Include="lab1.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="structure.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="weekday_enumeration.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="arrays.cpp" />
+    <ClCompile Include="checking_input_for_peson.cpp" />
+    <ClCompile Include="enumeration.cpp" />
+    <ClCompile Include="for_list.cpp" />
     <ClCompile Include="lab 1.cpp" />
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="lab3.cpp" />
+    <ClCompile Include="menus.cpp" />
     <ClCompile Include="launcher.cpp" />
     <ClCompile Include="lab2.cpp" />
+    <ClCompile Include="lab4.cpp" />
     <ClCompile Include="strings.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -171,6 +190,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="structure.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

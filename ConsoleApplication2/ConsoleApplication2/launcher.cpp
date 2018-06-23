@@ -4,9 +4,13 @@
 #include <locale.h>
 #include <time.h>
 #include <conio.h>
+#include <Windows.h>
 #include "lab1.h"
 #include "lab2.h"
 #include "lab3.h"
+#include "lab4.h"
+#include "menus.h"
+#include "num_enumeration.h"
 
 
 using namespace std;
@@ -14,111 +18,162 @@ using namespace std;
 int main() {
 	setlocale(LC_ALL, "Rus");
 	srand(time(NULL));
-	char keyOfTask;
-	char keyOfLab;
-	int numberOfLab;
-	int numberOfTask;
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	char key_of_task;
+	char key_of_lab;
+	bool is_exit_labs = true;
 	do {
-		keyOfLab == NULL;
-		numberOfLab == NULL;
-		cout << "Выберите лабораторную работу:\n"
-			"1.Основные элементы языка Си++\n"
-			"2.Функции, указатели и адресная арифметика\n"
-			"3.Массивы и строки\n\n";
-		cin >> numberOfLab;
-		switch (numberOfLab) {
-		case 1: {
-			lab1();
-			break;
-		}
-		case 2: {
+		system("cls");
+		key_of_lab = 0;
+		GeneralMenu();
+		key_of_lab = _getch();
+		switch (key_of_lab) {
+			case '1': {	//первая лаба
+				system("cls");
+				lab1();
+				break;
+			}
+			case num_2: { //вторая лаба
+			bool is_exit_lab_two = true;
 			do {
-				keyOfTask == NULL;
-				numberOfTask == NULL;
-				cout << "Выберите номер задания:\n"
-					"1.Расчет квадратных уравнений\n"
-					"2.Расчет квадратных уравнений2\n"
-					"3.Возведение в степень\n"
-					"4.Угадать число\n\n";
-				cin >> numberOfTask;
-				switch (numberOfTask) {
-				case 1: {
-					Lab2_№1();
-					break;
-				}
-				case 2: {
-					Lab2_№2();
-					break;
-				}
-				case 3: {
-					Lab2_№3();
-					break;
-				}
-				case 4: {
-					Lab2_№4();
-					break;
-				}
-				default: {
-					cout << "Такого задания не существует";
-					break;
-				}
-				}
-				cout << "Если хотите продолжить выбор заданий, нажмите Enter,"
-					"если хотите вернуться обратно, Backspace\n\n";
-				keyOfTask = _getch();
-			} while (keyOfTask != 8);
-			break;
-		}
-		case 3: {
-			do {
-				keyOfTask == NULL;
-				numberOfTask == NULL;
-				cout << "Выберите номер задания:\n"
-					"1.Сортировка массива\n"
-					"2.Перемножение двух матриц\n"
-					"3.Вычисление длины строки и вхождение в нее определенного символа\n"
-					"4.Создание подстроки из введенной строки\n"
-					"5.Работа с путем файла\n\n";
-				cin >> numberOfTask;
-				switch (numberOfTask) {
-					case 1: {
-						Lab3_№1();
+				system("cls");
+				key_of_task = NULL;
+				SecondLabMenu();
+				key_of_task = _getch();
+				system("cls");
+				switch (key_of_task) {
+					case num_1: {	//первое задание второй лабы
+						Lab2_№1();
 						break;
 					}
-					case 2: {
-						Lab3_№2();
+					case num_2: {	//второе задание второй лабы
+						Lab2_№2();
 						break;
 					}
-					case 3: {
-						Lab3_№3();
+					case num_3: {	//третье задание второй лабы
+						Lab2_№3();
 						break;
 					}
-					case 4: {
-						Lab3_№4();
+					case num_4: {	//четвертое задание второй лабы
+						Lab2_№4();
 						break;
 					}
-					case 5: {
-						Lab3_№5();
+					case backspace: {	//выход из лабы
+						is_exit_lab_two = false;
 						break;
 					}
 					default: {
-						cout << "Такого задания не существует";				
+						system("cls");
+						cout << "Не правильно введен номер задания" << endl;
+						system("pause");
 						break;
 					}
 				}
-				cout << "Если хотите продолжить выбор заданий, нажмите Enter," 
-					"если хотите вернуться обратно, Backspace\n\n";
-				keyOfTask = _getch();
-			} while (keyOfTask != 8);
+			} while (is_exit_lab_two == true);
 			break;
 		}
-		default:
-			cout << "Не существует такой лабораторной работы\n";
+			case num_3: { // третья лаба
+			bool is_exit_lab_three = true;
+			do {
+				system("cls");
+				key_of_task = NULL;
+				ThirdLabMenu();
+				key_of_task = _getch();
+				system("cls");
+				switch (key_of_task) {
+					case num_1: {	 //первое задание третьей лабы
+						Lab3_№1();
+						break;
+					}
+					case num_2: {	//второе задание третьей лабы
+						Lab3_№2();
+						break;
+					}
+					case num_3: {	//третье задание третьей лабы
+						Lab3_№3();
+						break;
+					}
+					case num_4: {	//четвертое задание третьей лабы
+						Lab3_№4();
+						break;
+					}
+					case num_5: {	//пятое задание третьей лабы
+						Lab3_№5();
+						break;
+					}
+					case backspace: {	//выход из лабы
+						is_exit_lab_three = false;
+						break;
+					}
+					default: {
+						system("cls");
+						cout << "Не правильно введен номер задания" << endl;
+						system("pause");
+						break;
+					}
+				}
+			} while (is_exit_lab_three == true);
 			break;
 		}
-		cout << "Если хотите продолжить работу с лабораторными, нажмите Enter. "
-			"В обратном случае, нажмите Backspace";
-		keyOfLab = _getch();
-	} while (keyOfLab != 8);
+			case num_4: { // четвертая лаба
+				bool is_exit_lab_four = true;
+				do {
+					system("cls");
+					key_of_task = 0;
+					FourthLabMenu();
+					key_of_task = _getch();
+					system("cls");
+					switch (key_of_task) {
+					case num_1: {	//первое задание четвертой лабы
+						lab4_№1();
+						break;
+					}
+					case num_2: {	 //второе задание четверотй лабы
+						lab4_№2();
+						break;
+					}
+					case num_3: {	//третье задание четвертой лабы
+						lab4_№3();
+						break;
+					}
+					case num_4: { //четвертое задание четвертой лабы
+						lab4_№4();
+						break;
+					}
+					case num_5: { //пятое задание четвертой лабы
+						lab4_№5();
+						break;
+					}
+					case num_6: {
+						lab4_№6();
+						break;
+					}
+					case backspace: {
+						is_exit_lab_four = false;
+						break;
+					}
+					default: {
+						system("cls");
+						cout << "Не правильно введен номер задания" << endl;
+						system("pause");
+						break;
+					}
+					}
+				} while (is_exit_lab_four == true);
+				break;
+			}
+			case backspace: {
+				is_exit_labs = false;
+				break;
+			}
+			default: {
+				system("cls");
+				cout << "Не правильно введен номер лаборатоорной" << endl;
+				system("pause");
+				break;
+			}
+			}
+		} while (is_exit_labs == true);
 	return 0;
 }
