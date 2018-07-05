@@ -1,7 +1,7 @@
 #pragma once
 #include "sex_enumeration.h"
 
-struct Person {
+struct PersonStr {
 	char surname[50];
 	char firstname[50];
 	int age;

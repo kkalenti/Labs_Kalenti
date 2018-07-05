@@ -7,8 +7,6 @@
 
 using namespace std;
 
-
-
 	//1 ןנמדנאללא
 	void Lab3_¹1(){
 		int array_lenth;

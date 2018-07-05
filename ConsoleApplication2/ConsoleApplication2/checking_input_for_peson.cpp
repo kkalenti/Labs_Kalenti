@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void CheckingOfCorrectInputOfNumberForPerson(Person *person, const char kInvalidMessage[]) {
+void CheckingOfCorrectInputOfNumberForPerson(PersonStr *person, const char kInvalidMessage[]) {
 	while (!(cin >> person->age) || (cin.peek() != '\n')) {
 		cin.clear();
 		while (cin.get() != '\n');
@@ -12,7 +12,7 @@ void CheckingOfCorrectInputOfNumberForPerson(Person *person, const char kInvalid
 	}
 }
 
-void CheckingForPositiveForPerson(Person *person) {
+void CheckingForPositiveForPerson(PersonStr *person) {
 	do {
 		CheckingOfCorrectInputOfNumberForPerson(person, "Введено не число! Повторите ввод:");
 		if (person->age <= 0) {
@@ -21,7 +21,7 @@ void CheckingForPositiveForPerson(Person *person) {
 	} while (person->age <= 0);
 }
 
-void CheckingOfCorrectInputOfNumberForPerson(Person &person, const char kInvalidMessage[]) {
+void CheckingOfCorrectInputOfNumberForPerson(PersonStr &person, const char kInvalidMessage[]) {
 	while (!(cin >> person.age) || (cin.peek() != '\n')) {
 		cin.clear();
 		while (cin.get() != '\n');
@@ -29,7 +29,7 @@ void CheckingOfCorrectInputOfNumberForPerson(Person &person, const char kInvalid
 	}
 }
 
-void CheckingForPositiveForPerson(Person &person) {
+void CheckingForPositiveForPerson(PersonStr &person) {
 	do {
 		CheckingOfCorrectInputOfNumberForPerson(person, "Введено не число! Повторите ввод:");
 		if (person.age <= 0) {

@@ -1,9 +1,8 @@
 #pragma once
-
 #include "person_structure.h"
 
 struct PersonListItem{
-	Person Person;
+	PersonStr Person;
 	PersonListItem *next;
 	PersonListItem *prev;
 };
