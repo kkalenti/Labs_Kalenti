@@ -87,13 +87,13 @@ void lab4_№3() {
 }
 
 void lab4_№4() {
-	Person first_person;
+	PersonStr first_person;
 	strcpy_s(first_person.surname, "Калентьев");
 	strcpy_s(first_person.firstname, "Костя");
 	first_person.age = 18;
 	strcpy_s(first_person.sex, "муж");
 
-	Person second_person;
+	PersonStr second_person;
 	strcpy_s(second_person.surname, "Калентьев");
 	strcpy_s(second_person.firstname, "Алексей");
 	second_person.age = 28;
@@ -107,11 +107,11 @@ void lab4_№4() {
 	cout << "Фамилия и имя первого человека, введенные повторно:" << first_person.surname <<
 		" " << first_person.firstname << endl << endl;
 
-	Person *first_person_pointer = &first_person;
+	PersonStr *first_person_pointer = &first_person;
 	cout << "Адрес:" << first_person_pointer << endl;
 	cout << "Фамилия, выведенная через указатель:" << first_person_pointer->surname << endl << endl;
 
-	Person *second_person_pointer = &second_person;
+	PersonStr *second_person_pointer = &second_person;
 	strcpy_s(second_person_pointer->firstname, "Костя");
 	second_person_pointer->age = 18;
 
@@ -119,7 +119,7 @@ void lab4_№4() {
 	PrintForLinkOfPerson(first_person);
 
 	cout << "Функция для вводы информации в функцию" << endl;
-	Person *third_person_pointer = new Person;
+	PersonStr *third_person_pointer = new PersonStr;
 	ReadPersonForPoint(third_person_pointer);
 	PrintForPointOfPerson(third_person_pointer);
 	cout << endl;
@@ -127,7 +127,7 @@ void lab4_№4() {
 	system("pause");
 	system("cls");
 
-	Person *person_massive = new Person[5];
+	PersonStr *person_massive = new PersonStr[5];
 	int sex_key;
 	char temp[50];
 	strcpy_s(temp, "");
@@ -177,7 +177,7 @@ void lab4_№4() {
 		system("cls");
 	}
 	for (int i = 0; i < 5; i++) {
-		cout << i+1 << "." << person_massive[i].surname << "\t" << person_massive[i].firstname 
+		cout << i+1 << "." << person_massive[i].surname << "\t" << person_massive[i].firstname
 			<< "\t" << "Возраст: " << person_massive[i].age << "\t" 
 			<< "Пол:" << person_massive[i].sex << endl;
 	}

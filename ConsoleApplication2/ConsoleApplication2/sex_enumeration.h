@@ -1,6 +1,6 @@
 #pragma once
 
 enum Sex {
-	ћуж,
+	ћуж = 1,
 	∆ен
 };

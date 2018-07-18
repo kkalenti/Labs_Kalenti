@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include <iostream>
-#include "person_list.h"
 #include "structure.h"
+#include "person_list.h"
 
 using namespace std;
 

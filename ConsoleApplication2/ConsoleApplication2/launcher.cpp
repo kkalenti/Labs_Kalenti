@@ -9,6 +9,7 @@
 #include "lab2.h"
 #include "lab3.h"
 #include "lab4.h"
+#include "lab5.h"
 #include "menus.h"
 #include "num_enumeration.h"
 
@@ -72,7 +73,7 @@ int main() {
 				}
 			} while (is_exit_lab_two == true);
 			break;
-		}
+			}
 			case num_3: { // третья лаба
 			bool is_exit_lab_three = true;
 			do {
@@ -115,7 +116,7 @@ int main() {
 				}
 			} while (is_exit_lab_three == true);
 			break;
-		}
+			}
 			case num_4: { // четвертая лаба
 				bool is_exit_lab_four = true;
 				do {
@@ -147,6 +148,33 @@ int main() {
 					}
 					case num_6: {
 						lab4_№6();
+						break;
+					}
+					case backspace: {
+						is_exit_lab_four = false;
+						break;
+					}
+					default: {
+						system("cls");
+						cout << "Не правильно введен номер задания" << endl;
+						system("pause");
+						break;
+					}
+					}
+				} while (is_exit_lab_four == true);
+				break;
+			}
+			case num_5: { //пятая лаба
+				bool is_exit_lab_four = true;
+				do {
+					system("cls");
+					key_of_task = 0;
+					FifthLabMenu();
+					key_of_task = _getch();
+					system("cls");
+					switch (key_of_task) {
+					case num_1: {
+						lab5();
 						break;
 					}
 					case backspace: {

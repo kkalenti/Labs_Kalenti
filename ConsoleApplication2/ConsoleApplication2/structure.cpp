@@ -9,19 +9,19 @@
 
 using namespace std;
 
-void PrintForLinkOfPerson(Person& person) {
+void PrintForLinkOfPerson(PersonStr& person) {
 	cout << setw(20) << left << person.surname << setw(20) << left << person.firstname
 		<< setw(8) << left << "Возраст: " << setw(10) << left << person.age
 		<< setw(4) << left << "Пол:" << setw(10) << left << person.sex << endl;
 }
 
-void PrintForPointOfPerson(Person* person) {
+void PrintForPointOfPerson(PersonStr* person) {
 	cout << setw(20) << left << person->surname << setw(20) << left << person->firstname
 		<< setw(8) << left << "Возраст: " << setw(10) << left << person->age
 		<< setw(4) << left << "Пол:" << setw(10) << left << person->sex << endl;
 }
 
-void ReadPersonForPoint(Person* person) {
+void ReadPersonForPoint(PersonStr* person) {
 	int sex_key;
 	char temp[50];
 	strcpy_s(temp, "");
@@ -66,7 +66,7 @@ void ReadPersonForPoint(Person* person) {
 
 }
 
-void ReadPersonForLink(Person& person) {
+void ReadPersonForLink(PersonStr& person) {
 	int sex_key;
 	char temp[50];
 	strcpy_s(temp, "");
