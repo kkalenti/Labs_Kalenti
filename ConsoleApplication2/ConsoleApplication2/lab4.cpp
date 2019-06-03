@@ -90,13 +90,13 @@ void lab4_№4() {
 	PersonStr first_person;
 	strcpy_s(first_person.surname, "Калентьев");
 	strcpy_s(first_person.firstname, "Костя");
-	first_person.age = 18;
+	first_person._age = 18;
 	strcpy_s(first_person.sex, "муж");
 
 	PersonStr second_person;
 	strcpy_s(second_person.surname, "Калентьев");
 	strcpy_s(second_person.firstname, "Алексей");
-	second_person.age = 28;
+	second_person._age = 28;
 	strcpy_s(second_person.sex, "муж");
 
 	cout << "Фамилия и имя первого человека:" << first_person.surname <<
@@ -113,7 +113,7 @@ void lab4_№4() {
 
 	PersonStr *second_person_pointer = &second_person;
 	strcpy_s(second_person_pointer->firstname, "Костя");
-	second_person_pointer->age = 18;
+	second_person_pointer->_age = 18;
 
 	cout << "Функция для вывода информации из структуры" << endl;
 	PrintForLinkOfPerson(first_person);
@@ -178,7 +178,7 @@ void lab4_№4() {
 	}
 	for (int i = 0; i < 5; i++) {
 		cout << i+1 << "." << person_massive[i].surname << "\t" << person_massive[i].firstname
-			<< "\t" << "Возраст: " << person_massive[i].age << "\t" 
+			<< "\t" << "Возраст: " << person_massive[i]._age << "\t" 
 			<< "Пол:" << person_massive[i].sex << endl;
 	}
 	delete [5] person_massive;
@@ -205,7 +205,7 @@ void lab4_№5() {
 void lab4_№6() {
 	PersonListItem *person_list_head = new PersonListItem;
 	cout << "1.";
-	ReadPersonForLink(person_list_head->Person);
+	ReadPersonForLink(person_list_head->person);
 	person_list_head->next = nullptr;
 	person_list_head->prev = nullptr;
 	system("cls");

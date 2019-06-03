@@ -5,3 +5,4 @@ void SecondLabMenu();
 void ThirdLabMenu();
 void FourthLabMenu();
 void FifthLabMenu();
+void SixthLabMenu();

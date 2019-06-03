@@ -79,11 +79,29 @@
     <Filter Include="Файлы заголовков\Лабораторные\Пятая лаба">
       <UniqueIdentifier>{13af1c79-d367-4df9-bfe8-683229b82eaf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\Классы">
-      <UniqueIdentifier>{240fcd6c-d7b8-40c9-a240-33047f82b0ed}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Файлы заголовков\Лабораторные\Пятая лаба\Функции">
       <UniqueIdentifier>{fb6fcb92-001a-4c3d-b08e-aa44a958a3ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Лабораторные\Шестая лабораторная">
+      <UniqueIdentifier>{7ddc2fc7-bffa-4f06-a338-a4f583dda9bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Лабораторные\Шестая лабораторная\Функции">
+      <UniqueIdentifier>{7cfc7525-6997-442f-9b1a-dbdab668ca17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Лабораторные\Шестая лабораторная">
+      <UniqueIdentifier>{04b043cd-2d80-49a1-843f-3507d08c8ffd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Лабораторные\Пятая лаба\Классы">
+      <UniqueIdentifier>{240fcd6c-d7b8-40c9-a240-33047f82b0ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Лабораторные\Шестая лабораторная\Классы">
+      <UniqueIdentifier>{7a6d0129-fc98-43e5-b0e9-07064841bb30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Лабораторные\Шестая лабораторная\Реализация классов">
+      <UniqueIdentifier>{fce3e0c5-451d-40c7-8aaa-3862719f1537}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Лабораторные\Пятая лаба\Перечисления">
+      <UniqueIdentifier>{df60d1d9-a208-48c2-a9e0-590ba829029d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -154,19 +172,40 @@
       <Filter>Файлы заголовков\Лабораторные\Четвертая лабораторная\Функции</Filter>
     </ClInclude>
     <ClInclude Include="Person.h">
-      <Filter>Файлы заголовков\Классы</Filter>
+      <Filter>Файлы заголовков\Лабораторные\Пятая лаба\Классы</Filter>
     </ClInclude>
     <ClInclude Include="PersonList.h">
-      <Filter>Файлы заголовков\Классы</Filter>
+      <Filter>Файлы заголовков\Лабораторные\Пятая лаба\Классы</Filter>
     </ClInclude>
     <ClInclude Include="PersonalListItem.h">
-      <Filter>Файлы заголовков\Классы</Filter>
+      <Filter>Файлы заголовков\Лабораторные\Пятая лаба\Классы</Filter>
     </ClInclude>
     <ClInclude Include="lab5.h">
       <Filter>Файлы заголовков\Лабораторные\Пятая лаба</Filter>
     </ClInclude>
-    <ClInclude Include="class_functions.h">
+    <ClInclude Include="lab6.h">
+      <Filter>Файлы заголовков\Лабораторные\Шестая лабораторная</Filter>
+    </ClInclude>
+    <ClInclude Include="Child.h">
+      <Filter>Файлы заголовков\Лабораторные\Шестая лабораторная\Классы</Filter>
+    </ClInclude>
+    <ClInclude Include="Adult.h">
+      <Filter>Файлы заголовков\Лабораторные\Шестая лабораторная\Классы</Filter>
+    </ClInclude>
+    <ClInclude Include="lab_five_functions.h">
       <Filter>Файлы заголовков\Лабораторные\Пятая лаба\Функции</Filter>
+    </ClInclude>
+    <ClInclude Include="male_name_enumeration.h">
+      <Filter>Файлы заголовков\Лабораторные\Пятая лаба\Перечисления</Filter>
+    </ClInclude>
+    <ClInclude Include="female_name_enumeration.h">
+      <Filter>Файлы заголовков\Лабораторные\Пятая лаба\Перечисления</Filter>
+    </ClInclude>
+    <ClInclude Include="male_surname_enumerations.h">
+      <Filter>Файлы заголовков\Лабораторные\Пятая лаба\Перечисления</Filter>
+    </ClInclude>
+    <ClInclude Include="female_surname_enumeration.h">
+      <Filter>Файлы заголовков\Лабораторные\Пятая лаба\Перечисления</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -221,7 +260,16 @@
     <ClCompile Include="PersonList.cpp">
       <Filter>Исходные файлы\Лабораторные\Пятая лабораторная\Функции</Filter>
     </ClCompile>
-    <ClCompile Include="class_functions.cpp">
+    <ClCompile Include="lab6.cpp">
+      <Filter>Исходные файлы\Лабораторные\Шестая лабораторная</Filter>
+    </ClCompile>
+    <ClCompile Include="Child.cpp">
+      <Filter>Исходные файлы\Лабораторные\Шестая лабораторная\Реализация классов</Filter>
+    </ClCompile>
+    <ClCompile Include="Adult.cpp">
+      <Filter>Исходные файлы\Лабораторные\Шестая лабораторная\Реализация классов</Filter>
+    </ClCompile>
+    <ClCompile Include="lab_five_functions.cpp">
       <Filter>Исходные файлы\Лабораторные\Пятая лабораторная\Функции</Filter>
     </ClCompile>
   </ItemGroup>

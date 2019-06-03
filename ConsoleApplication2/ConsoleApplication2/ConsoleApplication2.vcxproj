@@ -148,14 +148,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Adult.h" />
     <ClInclude Include="arrays.h" />
+    <ClInclude Include="Child.h" />
     <ClInclude Include="color_enumeration.h" />
     <ClInclude Include="console_colors.h" />
     <ClInclude Include="enumeration.h" />
     <ClInclude Include="checking_input_for_person.h" />
-    <ClInclude Include="class_functions.h" />
+    <ClInclude Include="female_name_enumeration.h" />
+    <ClInclude Include="female_surname_enumeration.h" />
+    <ClInclude Include="lab_five_functions.h" />
     <ClInclude Include="for_list.h" />
     <ClInclude Include="lab5.h" />
+    <ClInclude Include="lab6.h" />
+    <ClInclude Include="male_name_enumeration.h" />
+    <ClInclude Include="male_surname_enumerations.h" />
     <ClInclude Include="menus.h" />
     <ClInclude Include="num_enumeration.h" />
     <ClInclude Include="PersonalListItem.h" />
@@ -177,11 +184,14 @@
     <ClInclude Include="weekday_enumeration.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Adult.cpp" />
     <ClCompile Include="arrays.cpp" />
     <ClCompile Include="checking_input_for_peson.cpp" />
+    <ClCompile Include="Child.cpp" />
     <ClCompile Include="enumeration.cpp" />
-    <ClCompile Include="class_functions.cpp" />
+    <ClCompile Include="lab_five_functions.cpp" />
     <ClCompile Include="for_list.cpp" />
+    <ClCompile Include="lab6.cpp" />
     <ClCompile Include="Person.cpp" />
     <ClCompile Include="lab 1.cpp" />
     <ClCompile Include="functions.cpp" />

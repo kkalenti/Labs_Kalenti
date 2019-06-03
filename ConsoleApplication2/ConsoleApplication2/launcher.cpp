@@ -10,6 +10,7 @@
 #include "lab3.h"
 #include "lab4.h"
 #include "lab5.h"
+#include "lab6.h"
 #include "menus.h"
 #include "num_enumeration.h"
 
@@ -28,7 +29,9 @@ int main() {
 		system("cls");
 		key_of_lab = 0;
 		GeneralMenu();
+		while (key_of_lab == 0) {
 		key_of_lab = _getch();
+		}
 		switch (key_of_lab) {
 			case '1': {	//первая лаба
 				system("cls");
@@ -41,6 +44,7 @@ int main() {
 				system("cls");
 				key_of_task = NULL;
 				SecondLabMenu();
+
 				key_of_task = _getch();
 				system("cls");
 				switch (key_of_task) {
@@ -80,6 +84,7 @@ int main() {
 				system("cls");
 				key_of_task = NULL;
 				ThirdLabMenu();
+
 				key_of_task = _getch();
 				system("cls");
 				switch (key_of_task) {
@@ -123,6 +128,7 @@ int main() {
 					system("cls");
 					key_of_task = 0;
 					FourthLabMenu();
+
 					key_of_task = _getch();
 					system("cls");
 					switch (key_of_task) {
@@ -170,11 +176,42 @@ int main() {
 					system("cls");
 					key_of_task = 0;
 					FifthLabMenu();
-					key_of_task = _getch();
+					while (key_of_task == 0) {
+						key_of_task = _getch();
+					}
 					system("cls");
 					switch (key_of_task) {
 					case num_1: {
 						lab5();
+						break;
+					}
+					case backspace: {
+						is_exit_lab_four = false;
+						break;
+					}
+					default: {
+						system("cls");
+						cout << "Не правильно введен номер задания" << endl;
+						system("pause");
+						break;
+					}
+					}
+				} while (is_exit_lab_four == true);
+				break;
+			}
+			case num_6: { //шестая лаба
+				bool is_exit_lab_four = true;
+				do {
+					system("cls");
+					key_of_task = 0;
+					SixthLabMenu(); 
+					while (key_of_task == 0) {
+						key_of_task = _getch();
+					}
+					system("cls");
+					switch (key_of_task) {
+					case num_1: {
+						lab6();
 						break;
 					}
 					case backspace: {

@@ -2,7 +2,7 @@
 #include "person_structure.h"
 
 struct PersonListItem{
-	PersonStr Person;
+	PersonStr person;
 	PersonListItem *next;
 	PersonListItem *prev;
 };

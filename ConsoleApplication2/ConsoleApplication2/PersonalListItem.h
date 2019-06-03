@@ -3,7 +3,7 @@
 
 class PersonListItem {
 public:
-	Person Person;
+	Person person;
 	PersonListItem *next;
 	PersonListItem *prev;
 };

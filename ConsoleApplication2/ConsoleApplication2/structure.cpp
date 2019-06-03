@@ -11,13 +11,13 @@ using namespace std;
 
 void PrintForLinkOfPerson(PersonStr& person) {
 	cout << setw(20) << left << person.surname << setw(20) << left << person.firstname
-		<< setw(8) << left << "Возраст: " << setw(10) << left << person.age
+		<< setw(8) << left << "Возраст: " << setw(10) << left << person._age
 		<< setw(4) << left << "Пол:" << setw(10) << left << person.sex << endl;
 }
 
 void PrintForPointOfPerson(PersonStr* person) {
 	cout << setw(20) << left << person->surname << setw(20) << left << person->firstname
-		<< setw(8) << left << "Возраст: " << setw(10) << left << person->age
+		<< setw(8) << left << "Возраст: " << setw(10) << left << person->_age
 		<< setw(4) << left << "Пол:" << setw(10) << left << person->sex << endl;
 }
 

@@ -4,6 +4,6 @@
 struct PersonStr {
 	char surname[50];
 	char firstname[50];
-	int age;
+	int _age;
 	char sex[5];
 };

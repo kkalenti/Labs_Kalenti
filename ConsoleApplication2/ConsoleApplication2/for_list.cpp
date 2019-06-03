@@ -11,7 +11,7 @@ PersonListItem* AddToEndOfAPersonList(PersonListItem* person_list_head) {
 	while (curent_item->next != nullptr) {
 		curent_item = curent_item->next;
 	}
-	ReadPersonForLink(person_list_tail->Person);
+	ReadPersonForLink(person_list_tail->person);
 	person_list_tail->next = nullptr;
 	person_list_tail->prev = curent_item;
 	curent_item->next = person_list_tail;
@@ -39,9 +39,9 @@ void DeleteElementOfAPersonList(PersonListItem* person_list_head, PersonListItem
 
 void PrintPersonList(PersonListItem* person_list_head) {
 	PersonListItem* curent_item = person_list_head;
-	PrintForLinkOfPerson(curent_item->Person);
+	PrintForLinkOfPerson(curent_item->person);
 	while (curent_item->next != nullptr) {
 		curent_item = curent_item->next;
-		PrintForLinkOfPerson(curent_item->Person);
+		PrintForLinkOfPerson(curent_item->person);
 	}
 }
