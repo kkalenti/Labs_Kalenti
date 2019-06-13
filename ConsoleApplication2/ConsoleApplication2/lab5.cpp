@@ -8,6 +8,7 @@
 using namespace std; 
 
 void lab5() {
+	//TODO: Шозах..ня?
 	/*cout << "Введите размер списка персон:";
 	int size_person;
 	CheckingForPositive(&size_person);
@@ -48,10 +49,12 @@ void lab5() {
 	// Разделение на функции
 	system("pause");*/
 	Person rand_person;
+	//TODO: дубль
 	PersonList list_1(nullptr, 3);
 	for (int i = 0; i < 3; i++) {
 		list_1.Add(rand_person.GetRandomPerson());
 	}
+	//TODO: дубль
 	PersonList list_2(nullptr, 3);
 	for (int i = 0; i < 3; i++) {
 		list_2.Add(rand_person.GetRandomPerson());
@@ -60,6 +63,7 @@ void lab5() {
 	bool key = _getch();
 	system("cls");
 
+	//TODO: дубль
 	cout << "Первый список:" << endl;
 	list_1.Print();
 	cout << endl;
@@ -71,6 +75,7 @@ void lab5() {
 
 	cout << "Введите данные нового пользователя:" << endl;
 	list_1.Add(rand_person.Read());
+	//TODO: дубль
 	cout << "Первый список:" << endl;
 	list_1.Print();
 	cout << endl;
@@ -81,6 +86,7 @@ void lab5() {
 	system("cls");
 
 	list_2.Add(list_1.Find(2));
+	//TODO: дубль
 	cout << "Первый список:" << endl;
 	list_1.Print();
 	cout << endl;
@@ -91,6 +97,7 @@ void lab5() {
 	system("cls");
 
 	list_1.RemoveAt(2);
+	//TODO: дубль
 	cout << "Первый список:" << endl;
 	list_1.Print();
 	cout << endl;
@@ -101,6 +108,7 @@ void lab5() {
 	system("cls");
 
 	list_2.Clear();
+	//TODO: дубль
 	cout << "Первый список:" << endl;
 	list_1.Print();
 	cout << endl;

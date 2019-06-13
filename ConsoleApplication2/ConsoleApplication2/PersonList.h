@@ -8,6 +8,7 @@ private:
 	PersonListItem* _head; //указатель на голову списка
 	int _count; //количество элементов в списке
 public:
+	//TODO: Нахер count передаёшь в конструктор?
 	PersonList(PersonListItem* _head, int _count); //конструктор класса
 	void Add(Person* person); //добавить человека в список
 	void Print();

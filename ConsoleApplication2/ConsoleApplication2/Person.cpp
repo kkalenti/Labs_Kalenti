@@ -14,6 +14,7 @@ Person::Person() {
 
 Person* Person::GetRandomPerson() {
 	char temp[5];
+	//TODO: Ниже дубли и куча магических чисел.
 	temp[0] = 65 + rand() % 25;
 	for (int i = 1; i < 5; i++) {
 		temp[i] = 97 + rand() % 25;
@@ -42,8 +43,10 @@ Person* Person::Read() {
 	Person* person = new Person;
 	int sex_key;
 	int key = 0;
+	//TODO: 50 повторяется
 	char temp[50];
 	strcpy_s(temp, "");
+	//TODO: два дубля ниже
 	while (strcmp(temp, "") == NULL) {
 		while (key == 0) {
 			cout << "Введите имя:";

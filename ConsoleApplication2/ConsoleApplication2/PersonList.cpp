@@ -63,6 +63,7 @@ int PersonList::IndexOf(Person* person) {
 	PersonListItem* curent_item = _head;
 	int count = 1;
 	while (curent_item->next != nullptr && curent_item != nullptr){
+		//TODO: Длинные строки
 		if (person->Age == curent_item->Person.Age && strcmp(person->Name,curent_item->Person.Name) == 0 &&
 			strcmp(person->Surname,curent_item->Person.Surname) == 0 && person->Sex == curent_item->Person.Sex) {
 			return count;
@@ -70,10 +71,12 @@ int PersonList::IndexOf(Person* person) {
 		curent_item = curent_item->next;
 		count++;
 	}
+	//TODO: Неправильно возвращать 0
 	return 0;
 }
 
 void PersonList::Remove(Person* person) {
+	//TODO: найтм такую же персону в списке
 	//Не понимаю смысл действия
 }
 
@@ -116,6 +119,7 @@ void PersonList::Clear() {
 }
 
 int PersonList::GetCount() {
+	//TODO: Не оч. подход. Лучше считать в процессе работы класса.
 	PersonListItem* curent_item = _head;
 	int count = 0;
 	while (curent_item->next != nullptr) {

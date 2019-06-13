@@ -27,6 +27,7 @@ void CheckingForPositiveForPerson(Person *person) {
 bool CheckingText(char *string) {
 	int i = 1;
 	bool key = 1;
+	//TODO: ниже какой-то пиздецкий пиздец!!! Обсудим лично.
 	if ((string[0] >= 65 && string[0] <= 90 ) || (string[0] >= -64 && string[0] <= -33)) {
 		
 	} else if (string[0] == 32 || string[0] == 45) {
