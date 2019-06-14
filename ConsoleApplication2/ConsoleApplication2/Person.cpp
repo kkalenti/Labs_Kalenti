@@ -13,17 +13,62 @@ Person::Person() {
 
 }
 
+Person::Person(bool flag) {
+	int sex_key = 1 + rand() % 2;
+	if (sex_key == 1) {
+		sex = Муж;
+	}
+	else {
+		sex = Жен;
+	}
+
+	MakeName(this);
+
+	MakeSurname(this);
+
+	_age = 1 + rand() % 100;
+}
+
 int Person::GetAge() {
 	return _age;
 }
 
 void Person::SetAge(int age) {
-	PersonPositiveCorrection(&age);
+	PersonPositiveCorrection(age);
 	_age = age;
 }
 
+char* Person::GetName() {
+	return name;
+}
+
+void Person::SetName(char* _name) {
+	bool key = CheckingText(_name);
+	if (key == true) {
+		strcpy_s(name, _name);
+	}
+}
+
+char* Person::GetSurname() {
+	return surname;
+}
+
+void Person::SetSurname(char* _surname) {
+	bool key = CheckingText(_surname);
+	if (key == true) {
+		strcpy_s(surname, _surname);
+	}
+}
+
+Sex Person::GetSex() {
+	return sex;
+}
+
+void Person::SetSex(Sex sex) {
+	sex = sex;
+}
+
 Person* Person::GetRandomPerson() {
-	char temp[5];
 	Person* person = new Person;
 
 	int sex_key = 1 + rand() % 2;
@@ -33,7 +78,7 @@ Person* Person::GetRandomPerson() {
 	else {
 		person->sex = Жен;
 	}
-
+	//TODO: Ниже дубли и куча магических чисел.
 	MakeName(person);
 	
 	MakeSurname(person);
@@ -43,31 +88,14 @@ Person* Person::GetRandomPerson() {
 }
 
 Person* Person::Read() {
+	const int kTempSize = 50;
 	Person* person = new Person;
 	int sex_key = 0;
 	int key = 0;
-	char temp[50];
-	strcpy_s(temp, "");
-	while (strcmp(temp, "") == NULL) {
-		while (key == 0) {
-			cout << "Введите имя:";
-			cin.getline(temp, 50);
-			key = CheckingText(temp);
-		}
-		strcpy_s(person->name, temp);
-	}
-	strcpy_s(temp, "");
-	key = 0;
 
-	while (strcmp(temp, "") == NULL) {
-		while (key == 0) {
-			cout << "Введите фамилию:";
-			cin.getline(temp, 50);
-			key = CheckingText(temp);
-		}
-		strcpy_s(person->surname, temp);
-	}
-	strcpy_s(temp, "");
+	strcpy_s(person->name, NameInput("Введите имя:"));
+
+	strcpy_s(person->surname, NameInput("Введите фамилию:"));
 	cout << "Введите пол (1-муж/2-жен):" << endl;
 	bool is_exit;
 	do {
@@ -100,7 +128,7 @@ Person* Person::Read() {
 
 void Person::Show() {
 	cout << setw(20) << left << surname << setw(20) << left << name
-		<< setw(8) << left << "Возраст: " << setw(10) << left << age
+		<< setw(8) << left << "Возраст: " << setw(10) << left << _age
 		<< setw(4) << left << "Пол:" << setw(10) << left;
 	if (sex == Муж) {
 		cout << "Мужской" << endl;

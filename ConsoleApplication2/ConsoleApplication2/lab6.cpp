@@ -8,7 +8,7 @@
 using namespace std;
 
 void lab6() {
-	PersonList new_list(nullptr, 7);
+	PersonList new_list(nullptr);
 	Person *rand_child;
 	Person *rand_adult;
 	for (int count = 0; count < 3; count++) {
@@ -18,6 +18,7 @@ void lab6() {
 		new_list.Add(Child::GetRandomPerson());
 	}
 	new_list.Print();
+
 	cout << endl;
 	char temp[200];
 	rand_child = Child::GetRandomPerson();

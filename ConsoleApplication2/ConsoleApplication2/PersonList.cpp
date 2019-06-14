@@ -13,10 +13,11 @@
 
 using namespace std;
 
-PersonList::PersonList(PersonListItem* head, int count) {
+PersonList::PersonList(PersonListItem* head) {
 	_head = head;
-	_count = count;
+	_count = 0;
 }
+
 
 void PersonList::Add(Person* person) {
 	if (_head == nullptr) {
@@ -25,6 +26,7 @@ void PersonList::Add(Person* person) {
 		head_item->next = nullptr;
 		head_item->prev = nullptr;
 		head_item->person = person;
+		_count++;
 		return;
 	}
 	PersonListItem* tail_item = new PersonListItem;
@@ -36,12 +38,13 @@ void PersonList::Add(Person* person) {
 	tail_item->next = nullptr;
 	tail_item->prev = curent_item;
 	curent_item->next = tail_item;
+	_count++;
 	return;
 }
 
 void PersonList::Print() {
 	PersonListItem* curent_item = _head;
-	char temp[100];
+	char temp[150];
 	strcpy_s(temp,curent_item->person->GetDiscription());
 	cout << temp << endl;
 	while (curent_item->next != nullptr) {
@@ -68,19 +71,23 @@ int PersonList::IndexOf(Person* person) {
 	PersonListItem* curent_item = _head;
 	int count = 1;
 	while (curent_item->next != nullptr && curent_item != nullptr){
-		if (person->age == curent_item->person->age && strcmp(person->name,curent_item->person->name) == 0 &&
-			strcmp(person->surname,curent_item->person->surname) == 0 && person->sex == curent_item->person->sex) {
+		//TODO: Длинные строки
+		if (person->GetAge() == curent_item->person->GetAge() && 
+			strcmp(person->GetName(),curent_item->person->GetName()) == 0 &&
+			strcmp(person->GetSurname(),curent_item->person->GetSurname()) == 0 &&
+			person->GetSex() == curent_item->person->GetSex()) {
 			return count;
 		}
 		curent_item = curent_item->next;
 		count++;
 	}
-	return 0;
+	//TODO: Неправильно возвращать 0
+	return -1;
 }
 
 void PersonList::Remove(Person* person) {
 	int index = IndexOf(person);
-	//TODO:Я по индексу ищу персону в след. функции надо сделать то же самое?
+	RemoveAt(index);
 }
 
 void PersonList::RemoveAt(int index) {
@@ -96,16 +103,19 @@ void PersonList::RemoveAt(int index) {
 		curent_item->next->prev = nullptr;
 		_head = curent_item->next;
 		delete curent_item;
+		_count--;
 		return;
 	}
 	if (index == _count) {
 		curent_item->prev->next = nullptr;
 		delete curent_item;
+		_count--;
 		return;
 	}
 	curent_item->prev->next = curent_item->next;
 	curent_item->next->prev = curent_item->prev;
 	delete curent_item;
+	_count--;
 	return;
 }
 
@@ -122,6 +132,8 @@ void PersonList::Clear() {
 }
 
 int PersonList::GetCount() {
+	//TODO: Не оч. подход. Лучше считать в процессе работы класса.
+	//Делается в процессе,но функцию оставил)
 	PersonListItem* curent_item = _head;
 	int count = 0;
 	while (curent_item->next != nullptr) {

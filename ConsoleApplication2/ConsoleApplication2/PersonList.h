@@ -15,8 +15,10 @@ private:
 
 	PersonListItem* _head; 
 	int _count; 
-public:
-	PersonList(PersonListItem* _head, int _count);
+public:	
+	//TODO: Нахер count передаёшь в конструктор?
+	//Больше не передаю
+	PersonList(PersonListItem* _head);
 	void Add(Person* person); 
 	void Print();
 	Person* Find(int index); 

@@ -51,27 +51,27 @@ char* Child::GetDiscription() {
 	else {
 		strcat_s(inform, "женщина, ");
 	}
-	if (mother_ != nullptr && father_ != nullptr) {
+	if (mother_ != nullptr && father_ != nullptr) { //TODO: Спросить здесь
 		strcat_s(inform, "Родители: ");
-		strcat_s(inform, mother_->surname);
+		strcat_s(inform, mother_->GetSurname());
 		strcat_s(inform, " ");
-		strcat_s(inform, mother_->name);
+		strcat_s(inform, mother_->GetName());
 		strcat_s(inform, " и ");
-		strcat_s(inform, father_->surname);
+		strcat_s(inform, father_->GetSurname());
 		strcat_s(inform, " ");
-		strcat_s(inform, father_->name);
+		strcat_s(inform, father_->GetName());
 	}
 	else if (mother_ == nullptr && father_ != nullptr) {
 		strcat_s(inform, "Отец");
-		strcat_s(inform, father_->surname);
+		strcat_s(inform, father_->GetSurname());
 		strcat_s(inform, " ");
-		strcat_s(inform, father_->name);
+		strcat_s(inform, father_->GetName());
 	}
 	else if (mother_ != nullptr && father_ == nullptr) {
 		strcat_s(inform, "Мать");
-		strcat_s(inform, mother_->surname);
+		strcat_s(inform, mother_->GetSurname());
 		strcat_s(inform, " ");
-		strcat_s(inform, mother_->name);
+		strcat_s(inform, mother_->GetName());
 	} else {
 		strcat_s(inform, "нет родителей");
 	}
@@ -101,7 +101,7 @@ Child* Child::GetRandomPerson() {
 
 	
 	child->SetMother(Adult::GetRandomPerson());
-	if (child->mother_->sex == Жен) {
+	if (child->mother_->GetSex() == Жен) {
 		child->SetFather(child->mother_->GetMarriedOn());
 	} else {
 		child->SetFather(child->mother_);

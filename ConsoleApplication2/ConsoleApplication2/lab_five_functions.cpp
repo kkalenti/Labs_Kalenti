@@ -20,19 +20,19 @@ void PersonAgeCorrectionInput(int &age, const char kInvalidMessage[]) {
 	}
 }
 
-void PersonPositiveCorrection(int *age) {
+void PersonPositiveCorrection(int &age) {
 	do {
-		PersonAgeCorrectionInput(*age, "Введено не число! Повторите ввод:");
-		if (age <= 0) {
-			cout << "Число не соответствует условию (Индекс <= 0)! Повторите ввод:";
+		PersonAgeCorrectionInput(age, "Введено не число! Повторите ввод:");
+		if (age <= 0 || age > 120) {
+			cout << "Число введено не верно! Повторите ввод:";
 		}
-	} while (age <= 0);
+	} while (age <= 0 || age > 120);
 }
 
 bool CheckingText(char *string) {
 	int i = 1;
 	bool key = 1;
-	//TODO:
+	//TODO: ниже какой-то пиздецкий пиздец!!! Обсудим лично.
 	if ((string[0] >= 'A' && string[0] <= 'Z') || (string[0] >= 'А' && string[0] <= 'Я')) {
 		
 	} else if (string[0] == ' ' || string[0] == '-') {
@@ -94,9 +94,9 @@ bool CheckingText(char *string) {
 }
 
 PersonList MakeList(int count) {
-	PersonList list(nullptr, count);
+	PersonList list(nullptr);
 	for (int i = 0; i < count; i++) {
-		list.Add(Person::GetRandomPerson());
+		list.Add(new Person(true));
 	}
 	return list;
 }
@@ -116,58 +116,72 @@ void ListsPrint(PersonList list_1, PersonList list_2, bool key) {
 }
 
 void MakeName(Person* person) {
-	if (person->sex == Муж) {
+	char temp[20];
+	if (person->GetSex() == Муж) {
 		switch (Константин + rand() % 12){
 			case(Константин):{
-				strncpy_s(person->name, "Константин", 10);
+				strncpy_s(temp, "Константин", 10);
+				person->SetName(temp);
 				break;
 			}
 			case(Алексей): {
-				strncpy_s(person->name, "Алексей", 7);
+				strncpy_s(temp, "Алексей", 7);
+				person->SetName(temp);
 				break;
 			}
 			case(Владислав): {
-				strncpy_s(person->name, "Владислав", 9);
+				strncpy_s(temp, "Владислав", 9);
+				person->SetName(temp);
 				break;
 			}
 			case(Антон): {
-				strncpy_s(person->name, "Антон", 5);
+				strncpy_s(temp, "Антон", 5);
+				person->SetName(temp);
 				break;
 			}
 			case(Вячеслав): {
-				strncpy_s(person->name, "Вячеслав", 8);
+				strncpy_s(temp, "Вячеслав", 8);
+				person->SetName(temp);
 				break;
 			}
 			case(Стас): {
-				strncpy_s(person->name, "Стас", 4);
+				strncpy_s(temp, "Стас", 4);
+				person->SetName(temp);
 				break;
 			}
 			case(Иван): {
-				strncpy_s(person->name, "Иван", 4);
+				strncpy_s(temp, "Иван", 4);
+				person->SetName(temp);
 				break;
 			}
 			case(Генадий): {
-				strncpy_s(person->name, "Генадий", 7);
+				strncpy_s(temp, "Генадий", 7);
+				person->SetName(temp);
 				break;
 			}
 			case(Владимир): {
-				strncpy_s(person->name, "Владимир", 8);
+				strncpy_s(temp, "Владимир", 8);
+				person->SetName(temp);
 				break;
 			}
 			case(Филипп): {
-				strncpy_s(person->name, "Филипп", 6);
+				strncpy_s(temp, "Филипп", 6);
+				person->SetName(temp);
 				break;
 			}
 			case(Николай): {
-				strncpy_s(person->name, "Николай", 7);
+				strncpy_s(temp, "Николай", 7);
+				person->SetName(temp);
 				break;
 			}
 			case(Дмитрий): {
-				strncpy_s(person->name, "Дмитрий", 7);
+				strncpy_s(temp, "Дмитрий", 7);
+				person->SetName(temp);
 				break;
 			}
 			case(Александр): {
-				strncpy_s(person->name, "Александр", 9);
+				strncpy_s(temp, "Александр", 9);
+				person->SetName(temp);
 				break;
 			}
 			default:
@@ -176,47 +190,58 @@ void MakeName(Person* person) {
 	} else {
 		switch (Валерия + rand() % 10) {
 			case(Валерия): {
-				strncpy_s(person->name, "Валерия", 7);
+				strncpy_s(temp, "Валерия", 7);
+				person->SetName(temp);
 				break;
 			}
 			case(Екатерина): {
-				strncpy_s(person->name, "Екатерина", 9);
+				strncpy_s(temp, "Екатерина", 9);
+				person->SetName(temp);
 				break;
 			}
 			case(Елена): {
-				strncpy_s(person->name, "Елена", 5);
+				strncpy_s(temp, "Елена", 5);
+				person->SetName(temp);
 				break;
 			}
 			case(Ирина): {
-				strncpy_s(person->name, "Ирина", 5);
+				strncpy_s(temp, "Ирина", 5);
+				person->SetName(temp);
 				break;
 			}
 			case(Полина): {
-				strncpy_s(person->name, "Полина", 6);
+				strncpy_s(temp, "Полина", 6);
+				person->SetName(temp);
 				break;
 			}
 			case(Маргарита): {
-				strncpy_s(person->name, "Маргарита", 9);
+				strncpy_s(temp, "Маргарита", 9);
+				person->SetName(temp);
 				break;
 			}
 			case(Александра): {
-				strncpy_s(person->name, "Александра", 10);
+				strncpy_s(temp, "Александра", 10);
+				person->SetName(temp);
 				break;
 			}
 			case(Мария): {
-				strncpy_s(person->name, "Мария", 5);
+				strncpy_s(temp, "Мария", 5);
+				person->SetName(temp);
 				break;
 			}
 			case(Наталья): {
-				strncpy_s(person->name, "Наталья", 7);
+				strncpy_s(temp, "Наталья", 7);
+				person->SetName(temp);
 				break;
 			}
 			case(Алина): {
-				strncpy_s(person->name, "Алина", 5);
+				strncpy_s(temp, "Алина", 5);
+				person->SetName(temp);
 				break;
 			}
 			case(Марина): {
-				strncpy_s(person->name, "Марина", 6);
+				strncpy_s(temp, "Марина", 6);
+				person->SetName(temp);
 				break;
 			}
 			default:
@@ -226,54 +251,67 @@ void MakeName(Person* person) {
 }
 
 void MakeSurname(Person* person) {
-	if (person->sex == Муж) {
+	char temp[20];
+	if (person->GetSex() == Муж) {
 		switch (Иванов + rand() % 11) {
 		case(Иванов): {
-			strncpy_s(person->surname, "Иванов", 6);
+			strncpy_s(temp, "Иванов", 6);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Смирнов): {
-			strncpy_s(person->surname, "Смирнов", 7);
+			strncpy_s(temp, "Смирнов", 7);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Кузнецов): {
-			strncpy_s(person->surname, "Кузнецов", 8);
+			strncpy_s(temp, "Кузнецов", 8);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Попов): {
-			strncpy_s(person->surname, "Попов", 5);
+			strncpy_s(temp, "Попов", 5);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Васильев): {
-			strncpy_s(person->surname, "Васильев", 8);
+			strncpy_s(temp, "Васильев", 8);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Петров): {
-			strncpy_s(person->surname, "Петров", 6);
+			strncpy_s(temp, "Петров", 6);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Соколов): {
-			strncpy_s(person->surname, "Соколов", 7);
+			strncpy_s(temp, "Соколов", 7);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Михайлов): {
-			strncpy_s(person->surname, "Михайлов", 8);
+			strncpy_s(temp, "Михайлов", 8);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Новиков): {
-			strncpy_s(person->surname, "Новиков", 7);
+			strncpy_s(temp, "Новиков", 7);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Федоров): {
-			strncpy_s(person->surname, "Федоров", 7);
+			strncpy_s(temp, "Федоров", 7);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Морозов): {
-			strncpy_s(person->surname, "Морозов", 7);
+			strncpy_s(temp, "Морозов", 7);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Волков): {
-			strncpy_s(person->surname, "Волков", 6);
+			strncpy_s(temp, "Волков", 6);
+			person->SetSurname(temp);
 			break;
 		}
 		default:
@@ -283,51 +321,63 @@ void MakeSurname(Person* person) {
 	else {
 		switch (Орлова + rand() % 11) {
 		case(Орлова): {
-			strncpy_s(person->surname, "Орлова", 6);
+			strncpy_s(temp, "Орлова", 6);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Андреева): {
-			strncpy_s(person->surname, "Андреева", 8);
+			strncpy_s(temp, "Андреева", 8);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Федотова): {
-			strncpy_s(person->surname, "Федотова", 8);
+			strncpy_s(temp, "Федотова", 8);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Федорова): {
-			strncpy_s(person->surname, "Федорова", 8);
+			strncpy_s(temp, "Федорова", 8);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Яковлева): {
-			strncpy_s(person->surname, "Яковлева", 8);
+			strncpy_s(temp, "Яковлева", 8);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Романова): {
-			strncpy_s(person->surname, "Романова", 8);
+			strncpy_s(temp, "Романова", 8);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Воробьева): {
-			strncpy_s(person->surname, "Воробьева", 9);
+			strncpy_s(temp, "Воробьева", 9);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Сергеева): {
-			strncpy_s(person->surname, "Сергеева", 8);
+			strncpy_s(temp, "Сергеева", 8);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Фролова): {
-			strncpy_s(person->surname, "Фролова", 7);
+			strncpy_s(temp, "Фролова", 7);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Королева): {
-			strncpy_s(person->surname, "Королева", 8);
+			strncpy_s(temp, "Королева", 8);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Гусева): {
-			strncpy_s(person->surname, "Гусева", 6);
+			strncpy_s(temp, "Гусева", 6);
+			person->SetSurname(temp);
 			break;
 		}
 		case(Киселева): {
-			strncpy_s(person->surname, "Киселева", 8);
+			strncpy_s(temp, "Киселева", 8);
+			person->SetSurname(temp);
 			break;
 		}
 		default:
@@ -335,3 +385,19 @@ void MakeSurname(Person* person) {
 		}
 	}
 }
+
+char* NameInput(const char* text) {
+	const char kTempSize = 50;
+	char temp[kTempSize];
+	int key = 0;
+	strcpy_s(temp, "");
+	while (strcmp(temp, "") == NULL) {
+		while (key == 0) {
+			cout << text;
+			cin.getline(temp, kTempSize);
+			key = CheckingText(temp);
+		}
+	}
+	return temp;
+}
+
