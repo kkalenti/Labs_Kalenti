@@ -10,10 +10,11 @@
 using namespace std;
 
 Person::Person() {
-
+	//TODO: зачем оставил?
 }
 
 Person::Person(bool flag) {
+	//TODO: дублируется с рандомной персоной.
 	int sex_key = 1 + rand() % 2;
 	if (sex_key == 1) {
 		sex = Муж;
@@ -78,7 +79,6 @@ Person* Person::GetRandomPerson() {
 	else {
 		person->sex = Жен;
 	}
-	//TODO: Ниже дубли и куча магических чисел.
 	MakeName(person);
 	
 	MakeSurname(person);

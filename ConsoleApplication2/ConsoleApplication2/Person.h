@@ -2,10 +2,8 @@
 #include "sex_enumeration.h"
 
 class Person {
-	//TODO: Инкапсулируй поля с данными.
-	//TODO: Где нормальный конструктор?
-	//TODO: GetRandomPerson должден быть static
 protected: int _age;
+		   //TODO: должны быть динамические строки, а не предзаданные
 		char name[50];
 		char surname[50];
 		Sex sex;

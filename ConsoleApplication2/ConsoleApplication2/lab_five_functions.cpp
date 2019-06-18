@@ -33,8 +33,9 @@ bool CheckingText(char *string) {
 	int i = 1;
 	bool key = 1;
 	//TODO: ниже какой-то пиздецкий пиздец!!! Обсудим лично.
+	//TODO: все диапазонные сравнения можно вынести в метод IsBetween(char checked, char lower, char upper)
 	if ((string[0] >= 'A' && string[0] <= 'Z') || (string[0] >= 'А' && string[0] <= 'Я')) {
-		
+		//TODO: Где код?
 	} else if (string[0] == ' ' || string[0] == '-') {
 		int j = 1;
 		while (string[j] != '\0') {
@@ -42,6 +43,7 @@ bool CheckingText(char *string) {
 			j++;
 		}
 		string[j - 1] = '\0';
+		//TODO: ниже дубли!
 	} else if (string[0] >= 'a' && string[0] <= 'z') {
 		string[0] = (int)string[0] - 32;
 	} else if (string[0] >= 'а' && string[0] <= 'я') {
@@ -53,8 +55,9 @@ bool CheckingText(char *string) {
 	while (string[i] != '\0' && key == 1) {
 		if ((string[i - 2] == ' ') || (string[i - 2] == '-')) {
 			if (string[i - 1] >= 'A' && string[i - 1] <= 'Z' || string[i - 1] >= 'A' && string[i - 1] <= 'Я') {
-
+				//TODO: Где код?
 			}
+			//TODO: ниже дубли!
 			else if (string[i + 1] >= 'a' && string[i + 1] <= 'z') {
 				string[i - 1] = (int)string[i - 1] - 32;
 			}
@@ -67,7 +70,8 @@ bool CheckingText(char *string) {
 			}
 		}
 		if (string[i] >= 'a' && string[i] <= 'z' || string[i] >= 'а' && string[i] <= 'я') {
-
+			//TODO: Где код?
+			//TODO: ниже дубли!
 		} else if (string[i] >= 'A' && string[i] <= 'Z') {
 			string[i] = (int)string[i] + 32;
 		}  else if((string[i] == ' ' && string[i-1] == ' ') || (string[i] == '-' && string[i - 1] == '-')){
@@ -115,6 +119,8 @@ void ListsPrint(PersonList list_1, PersonList list_2, bool key) {
 	system("cls");
 }
 
+//TODO: всё срань! Переделай на массивы строк.
+//TODO: и нехрен сюда персону передавать.
 void MakeName(Person* person) {
 	char temp[20];
 	if (person->GetSex() == Муж) {
