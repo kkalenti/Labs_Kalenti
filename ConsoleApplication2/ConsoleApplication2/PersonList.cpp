@@ -8,7 +8,6 @@
 #include "Adult.h"
 #include "num_enumeration.h"
 #include "checking_input_for_person.h"
-#include "PersonalListItem.h"
 #include "lab_five_functions.h"
 
 using namespace std;

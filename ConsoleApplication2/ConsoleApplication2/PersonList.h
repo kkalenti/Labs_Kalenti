@@ -1,6 +1,4 @@
 #pragma once
-
-//#include "PersonalListItem.h"
 #include "Person.h"
 
 class PersonList{

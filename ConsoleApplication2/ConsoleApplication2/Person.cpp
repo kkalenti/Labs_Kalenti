@@ -100,7 +100,8 @@ Person* Person::Read() {
 	bool is_exit;
 	do {
 		while (sex_key == 0) {
-			sex_key = getchar();
+			sex_key = _getch();
+			if (sex_key != num_1 && sex_key != num_2)	sex_key = 0;
 		}
 		is_exit = true;
 		switch (sex_key) {
