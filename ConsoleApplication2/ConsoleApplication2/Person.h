@@ -18,7 +18,7 @@ public: Person();
 		Sex GetSex();
 		void SetSex(Sex _sex);
 
-		static Person* GetRandomPerson();
+		/*static Person* GetRandomPerson();*/
 		Person* Read();
 		void Show();
 		virtual char* GetDiscription();

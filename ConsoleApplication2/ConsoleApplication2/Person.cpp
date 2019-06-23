@@ -22,10 +22,10 @@ Person::Person(bool flag) {
 	else {
 		sex = Æåí;
 	}
+	
+	strcpy_s(name, MakeName(this->GetSex()));
 
-	MakeName(this);
-
-	MakeSurname(this);
+	strcpy_s(surname, MakeSurname(this->GetSex()));
 
 	_age = 1 + rand() % 100;
 }
@@ -69,23 +69,23 @@ void Person::SetSex(Sex sex) {
 	sex = sex;
 }
 
-Person* Person::GetRandomPerson() {
-	Person* person = new Person;
-
-	int sex_key = 1 + rand() % 2;
-	if (sex_key == 1) {
-		person->sex = Ìóæ;
-	}
-	else {
-		person->sex = Æåí;
-	}
-	MakeName(person);
-	
-	MakeSurname(person);
-
-	person->_age = 1 + rand() % 100;
-	return person;
-}
+//Person* Person::GetRandomPerson() {
+//	Person* person = new Person;
+//
+//	int sex_key = 1 + rand() % 2;
+//	if (sex_key == 1) {
+//		person->sex = Ìóæ;
+//	}
+//	else {
+//		person->sex = Æåí;
+//	}
+//	MakeName(person);
+//	
+//	MakeSurname(person);
+//
+//	person->_age = 1 + rand() % 100;
+//	return person;
+//}
 
 Person* Person::Read() {
 	const int kTempSize = 50;

@@ -1,6 +1,4 @@
 #pragma once
-
-//#include "PersonalListItem.h"
 #include "Person.h"
 
 class PersonList{
@@ -24,6 +22,5 @@ public:
 	int IndexOf(Person* person);
 	void Remove(Person* person);
 	void RemoveAt(int index); 
-	void Clear(); 
-	int GetCount();
+	void Clear();
 };

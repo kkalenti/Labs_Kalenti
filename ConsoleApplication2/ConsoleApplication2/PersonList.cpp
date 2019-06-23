@@ -128,18 +128,3 @@ void PersonList::Clear() {
 	}
 	delete curent_item;
 }
-
-int PersonList::GetCount() {
-	//TODO: Не оч. подход. Лучше считать в процессе работы класса.
-	//Делается в процессе,но функцию оставил)
-	//TODO: почему?
-	PersonListItem* curent_item = _head;
-	int count = 0;
-	while (curent_item->next != nullptr) {
-		curent_item = curent_item->next;
-		count++;
-	}
-	//TODO: нахрен последний count?
-	count++;
-	return count;
-}

@@ -78,9 +78,9 @@ Adult* Adult::GetRandomPerson() {
 		adult->sex = Æåí;
 	}
 
-	MakeName(adult);
+	strcpy_s(adult->name, MakeName(adult->GetSex()));
 
-	MakeSurname(adult);
+	strcpy_s(adult->surname, MakeSurname(adult->GetSex()));
 
 	adult->_age = 18 + rand() % 100;
 
@@ -106,9 +106,9 @@ Adult* Adult::GetRandomPerson(Adult* MarriedOn) {
 		adult->sex = Æåí;
 	}
 
-	MakeName(adult);
+	strcpy_s(adult->name, MakeName(adult->GetSex()));
 
-	MakeSurname(adult);
+	strcpy_s(adult->surname, MakeSurname(adult->GetSex()));
 
 	adult->_age = 18 + rand() % 70;
 
