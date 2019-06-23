@@ -4,8 +4,9 @@
 void PersonAgeCorrectionInput(int &age, const char kInvalidMessage[]);
 void PersonPositiveCorrection(int &age);
 bool CheckingText(char *string);
+bool IsBetween(char checked, char lower, char upper);
 PersonList MakeList(int count);
 void ListsPrint(PersonList list_1, PersonList list_2, bool key);
-void MakeName(Person* person);
-void MakeSurname(Person* person);
+char* MakeName(Sex sex);
+char* MakeSurname(Sex sex);
 char* NameInput(const char* text);

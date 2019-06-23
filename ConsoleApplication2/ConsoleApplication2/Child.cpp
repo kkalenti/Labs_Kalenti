@@ -93,9 +93,9 @@ Child* Child::GetRandomPerson() {
 		child->sex = Æåí;
 	}
 
-	MakeName(child);
+	strcpy_s(child->name, MakeName(child->GetSex()));
 
-	MakeSurname(child);
+	strcpy_s(child->surname, MakeSurname(child->GetSex()));
 
 	child->_age = 1 + rand() % 17;
 

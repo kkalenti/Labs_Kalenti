@@ -4,6 +4,7 @@
 class PersonList{
 	
 private: 
+	//TODO: Нахер, если есть уже элемент списка?
 	class PersonListItem {
 	public:
 		Person* person;
@@ -14,8 +15,6 @@ private:
 	PersonListItem* _head; 
 	int _count; 
 public:	
-	//TODO: Нахер count передаёшь в конструктор?
-	//Больше не передаю
 	PersonList(PersonListItem* _head);
 	void Add(Person* person); 
 	void Print();
@@ -23,6 +22,5 @@ public:
 	int IndexOf(Person* person);
 	void Remove(Person* person);
 	void RemoveAt(int index); 
-	void Clear(); 
-	int GetCount();
+	void Clear();
 };

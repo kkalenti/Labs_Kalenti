@@ -70,7 +70,6 @@ int PersonList::IndexOf(Person* person) {
 	PersonListItem* curent_item = _head;
 	int count = 1;
 	while (curent_item->next != nullptr && curent_item != nullptr){
-		//TODO: Длинные строки
 		if (person->GetAge() == curent_item->person->GetAge() && 
 			strcmp(person->GetName(),curent_item->person->GetName()) == 0 &&
 			strcmp(person->GetSurname(),curent_item->person->GetSurname()) == 0 &&
@@ -80,7 +79,6 @@ int PersonList::IndexOf(Person* person) {
 		curent_item = curent_item->next;
 		count++;
 	}
-	//TODO: Неправильно возвращать 0
 	return -1;
 }
 
@@ -128,17 +126,4 @@ void PersonList::Clear() {
 		_head = curent_item;
 	}
 	delete curent_item;
-}
-
-int PersonList::GetCount() {
-	//TODO: Не оч. подход. Лучше считать в процессе работы класса.
-	//Делается в процессе,но функцию оставил)
-	PersonListItem* curent_item = _head;
-	int count = 0;
-	while (curent_item->next != nullptr) {
-		curent_item = curent_item->next;
-		count++;
-	}
-	count++;
-	return count;
 }
