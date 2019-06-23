@@ -57,5 +57,8 @@ void SixthLabMenu() {
 
 void SeventhLabMenu() {
 	cout << "Лабораторная №7." << endl << "Выберите номер задания:" << endl <<
-		"1.Обобщения" << endl << endl;
+		"1.Double" << endl <<
+		"2.Person*" << endl <<
+		"3.Double[5]" << endl <<
+		"4.List<double>" << endl << endl;
 }

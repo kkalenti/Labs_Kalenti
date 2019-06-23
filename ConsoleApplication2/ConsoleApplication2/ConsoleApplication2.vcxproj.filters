@@ -115,6 +115,12 @@
     <Filter Include="Файлы заголовков\Лабораторные\Седьмая лабораторная\Классы">
       <UniqueIdentifier>{25139b75-9d7a-4212-a3b6-14501d9fdf9e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\Лабораторные\Седьмая лабораторная\Функции">
+      <UniqueIdentifier>{aa552c1f-d862-431f-96da-7d72a147ab81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Лабораторные\Седьмая лабораторная\Функции">
+      <UniqueIdentifier>{67db8263-734c-4a30-9565-4644e52c8fdf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -225,6 +231,9 @@
     <ClInclude Include="List.h">
       <Filter>Файлы заголовков\Лабораторные\Седьмая лабораторная\Классы</Filter>
     </ClInclude>
+    <ClInclude Include="labsevenfunctions.h">
+      <Filter>Файлы заголовков\Лабораторные\Седьмая лабораторная\Функции</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -295,6 +304,9 @@
     </ClCompile>
     <ClCompile Include="List.cpp">
       <Filter>Исходные файлы\Лабораторные\Седьмая лабораторная\Классы</Filter>
+    </ClCompile>
+    <ClCompile Include="labsevenfunctions.cpp">
+      <Filter>Исходные файлы\Лабораторные\Седьмая лабораторная\Функции</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

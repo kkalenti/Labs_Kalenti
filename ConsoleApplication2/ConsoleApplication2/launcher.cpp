@@ -241,7 +241,19 @@ int main() {
 					system("cls");
 					switch (key_of_task) {
 					case num_1: {
-						lab7();
+						lab7_1();
+						break;
+					}
+					case num_2: {
+						lab7_2();
+						break;
+					}
+					case num_3: {
+						lab7_3();
+						break;
+					}
+					case num_4: {
+						lab7_4();
 						break;
 					}
 					case backspace: {
