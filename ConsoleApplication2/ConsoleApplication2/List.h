@@ -9,7 +9,7 @@ template <typename T>
 class List {
 	class ListItem {
 	public:
-		T element;
+		T *element;
 		ListItem *next;
 		ListItem *prev;
 	};
@@ -23,7 +23,19 @@ public:
 		_count = 0;
 	}
 
-	void Add(T element) {
+	~List() {
+		ListItem* curent_item = _head;
+		ListItem* temp;
+		while (curent_item->next != nullptr) {
+			temp = curent_item;
+			curent_item = curent_item->next;
+			delete temp;
+			_head = curent_item;
+		}
+		delete curent_item;
+	}
+
+	void Add(T* element) {
 		if (_head == nullptr) {
 			ListItem* head_item = new ListItem;
 			_head = head_item;
@@ -46,7 +58,7 @@ public:
 		return;
 	}
 
-	bool AddTo(T element, int index) {
+	bool AddTo(T* element, int index) {
 		if (index > _count || index < 0) {
 			return false;
 		}
@@ -99,7 +111,7 @@ public:
 			curent_item = curent_item->next;
 			count++;
 		}
-		return &(curent_item->element);
+		return curent_item->element;
 	}
 
 	void RemoveAt(int index) {
@@ -131,17 +143,7 @@ public:
 		return;
 	}
 
-	void Clear() {
-		ListItem* curent_item = _head;
-		ListItem* temp;
-		while (curent_item->next != nullptr) {
-			temp = curent_item;
-			curent_item = curent_item->next;
-			delete temp;
-			_head = curent_item;
-		}
-		delete curent_item;
-	}
+	
 
 	int GetCount() {
 		ListItem* curent_item = _head;
