@@ -195,9 +195,6 @@
     <ClInclude Include="PersonList.h">
       <Filter>Файлы заголовков\Лабораторные\Пятая лаба\Классы</Filter>
     </ClInclude>
-    <ClInclude Include="PersonalListItem.h">
-      <Filter>Файлы заголовков\Лабораторные\Пятая лаба\Классы</Filter>
-    </ClInclude>
     <ClInclude Include="lab5.h">
       <Filter>Файлы заголовков\Лабораторные\Пятая лаба</Filter>
     </ClInclude>

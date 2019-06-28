@@ -168,7 +168,6 @@
     <ClInclude Include="male_surname_enumerations.h" />
     <ClInclude Include="menus.h" />
     <ClInclude Include="num_enumeration.h" />
-    <ClInclude Include="PersonalListItem.h" />
     <ClInclude Include="PersonList.h" />
     <ClInclude Include="person_list.h" />
     <ClInclude Include="person_structure.h" />
