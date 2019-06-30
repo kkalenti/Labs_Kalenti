@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Model
+﻿namespace Model.Interfaces
 {
-	interface IFigure
+	/// <summary>
+	/// Интерфейс для геометрических фигур
+	/// </summary>
+	public interface IFigure
 	{
-		double Angles { get; }
+		/// <summary>
+		/// Площадь фигуры
+		/// </summary>
+		/// <returns></returns>
+		double Surface { get; }
 
-		double CalculateSurface();
-		double CalculatePerimeter();
+		/// <summary>
+		/// Периметр фигуры
+		/// </summary>
+		/// <returns></returns>
+		double Perimeter { get; }
 	}
 }

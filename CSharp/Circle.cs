@@ -3,45 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Model.Interfaces;
 
 namespace Model
-{
+{	/// <summary>
+	/// Класс для кругов
+	/// </summary>
 	public class Circle : IFigure
 	{
-		private double _radius;
+		/// <summary>
+		/// Площадь фигуры
+		/// </summary>
+		public double Surface { get; }
 
-		public double Angles { get; }
-		public double Radius {
-			get
-			{
-				return _radius;
-			}
-			set
-			{
-				if(value <= 0)
-				{
-					throw new ArgumentException("Введенное значение меньше или равно 0");
-				}
-				else
-				{
-					_radius = value;
-				}
-			}
-		}
+		/// <summary>
+		/// Периметр фигуры
+		/// </summary>
+		public double Perimeter { get; }
 
-		public Circle(double radius)
+		/// <summary>
+		/// Радиус фигуры
+		/// </summary>
+		public double Radius { get; }
+		
+		public  Circle(double radius)
 		{
-			_radius = radius;
-		}
-
-		public double CalculatePerimeter()
-		{
-			return 2 * Math.PI * _radius;
-		}
-
-		public double CalculateSurface()
-		{
-			return Math.PI * _radius * _radius;
+			Radius = radius;
+			Surface = 2 * Math.PI * radius;
+			Perimeter = Math.PI * Radius * Radius;
 		}
 	}
 }
