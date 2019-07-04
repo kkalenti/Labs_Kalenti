@@ -6,10 +6,11 @@ class Child:public Person{
 private:
 	Adult* mother_ = nullptr;
 	Adult* father_ = nullptr;
-	char school[100];
+	char* school_;
 public:
+	Child(char* _name, char* _surname, Sex _sex, int age, Adult* mother, Adult* father, char* school);
 	void SetMother(Adult* mother);
-	Person* GetMother();
+	Adult* GetMother();
 	void SetFather(Adult* father);
 	char* GetDiscription() override;
 	static Child* GetRandomPerson();

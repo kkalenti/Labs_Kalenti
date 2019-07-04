@@ -100,9 +100,6 @@
     <Filter Include="Исходные файлы\Лабораторные\Шестая лабораторная\Реализация классов">
       <UniqueIdentifier>{fce3e0c5-451d-40c7-8aaa-3862719f1537}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\Лабораторные\Пятая лаба\Перечисления">
-      <UniqueIdentifier>{df60d1d9-a208-48c2-a9e0-590ba829029d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Исходные файлы\Лабораторные\Седьмая лабораторная">
       <UniqueIdentifier>{1530b5ee-6d0a-4ff0-8d44-2ae373225c67}</UniqueIdentifier>
     </Filter>
@@ -209,18 +206,6 @@
     </ClInclude>
     <ClInclude Include="lab_five_functions.h">
       <Filter>Файлы заголовков\Лабораторные\Пятая лаба\Функции</Filter>
-    </ClInclude>
-    <ClInclude Include="male_name_enumeration.h">
-      <Filter>Файлы заголовков\Лабораторные\Пятая лаба\Перечисления</Filter>
-    </ClInclude>
-    <ClInclude Include="female_name_enumeration.h">
-      <Filter>Файлы заголовков\Лабораторные\Пятая лаба\Перечисления</Filter>
-    </ClInclude>
-    <ClInclude Include="male_surname_enumerations.h">
-      <Filter>Файлы заголовков\Лабораторные\Пятая лаба\Перечисления</Filter>
-    </ClInclude>
-    <ClInclude Include="female_surname_enumeration.h">
-      <Filter>Файлы заголовков\Лабораторные\Пятая лаба\Перечисления</Filter>
     </ClInclude>
     <ClInclude Include="lab7.h">
       <Filter>Файлы заголовков\Лабораторные\Седьмая лабораторная</Filter>

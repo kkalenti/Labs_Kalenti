@@ -4,7 +4,6 @@
 class PersonList{
 	
 private: 
-	//TODO: Нахер, если есть уже элемент списка?
 	class PersonListItem {
 	public:
 		Person* person;

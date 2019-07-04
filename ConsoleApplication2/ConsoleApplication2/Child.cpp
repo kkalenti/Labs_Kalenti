@@ -7,6 +7,12 @@
 
 using namespace std;
 
+Child::Child(char* _name, char* _surname, Sex _sex, int age, Adult* mother, Adult* father, char* school) : Person(_name, _surname, _sex, age) {
+	mother_ = mother;
+	father_ = father;
+	school_ = school;
+}
+
 int Child::GetAge() {
 	return _age;
 }
@@ -27,7 +33,7 @@ void Child::SetMother(Adult* mother) {
 	mother_ = mother;
 }
 
-Person* Child::GetMother() {
+Adult* Child::GetMother() {
 	return mother_;
 }
 
@@ -77,99 +83,23 @@ char* Child::GetDiscription() {
 	}
 	strcat_s(inform, ", ");
 	strcat_s(inform, "учитс€ в: ");
-	strcat_s(inform, school);
+	strcat_s(inform, school_);
 	return inform;
 }
 
 Child* Child::GetRandomPerson() {
-	char temp[5];
-	Child* child = new Child;
-
+	Sex sex;
 	int sex_key = 1 + rand() % 2;
 	if (sex_key == 1) {
-		child->sex = ћуж;
+		sex = ћуж;
 	}
 	else {
-		child->sex = ∆ен;
+		sex = ∆ен;
 	}
 
-	strcpy_s(child->name, MakeName(child->GetSex()));
+	int _age = 1 + rand() % 17;
 
-	strcpy_s(child->surname, MakeSurname(child->GetSex()));
+	char* school = CreateBusiness();
 
-	child->_age = 1 + rand() % 17;
-
-	
-	child->SetMother(Adult::GetRandomPerson());
-	if (child->mother_->GetSex() == ∆ен) {
-		child->SetFather(child->mother_->GetMarriedOn());
-	} else {
-		child->SetFather(child->mother_);
-		child->SetMother(child->father_->GetMarriedOn());
-	}
-
-
-	for (int i = 0; i < 5; i++) {
-		temp[i] = 97 + rand() % 25;
-	}
-	strncpy_s(child->school, temp, 5);
-	return child;
+	return new Child(MakeName(sex), MakeSurname(sex), sex, _age, nullptr, nullptr, school);
 }
-
-/*Adult* Adult::GetRandomPerson() {
-	char temp[5];
-	temp[0] = 65 + rand() % 25;
-	for (int i = 1; i < 5; i++) {
-		temp[i] = 97 + rand() % 25;
-	}
-	Adult* adult = new Adult();
-	strncpy_s(adult->name, temp, 5);
-
-	temp[0] = 65 + rand() % 25;
-	for (int i = 1; i < 5; i++) {
-		temp[i] = 97 + rand() % 25;
-	}
-	strncpy_s(adult->surname, temp, 5);
-
-	adult->sex = ∆ен;
-
-	adult->_age = 18 + rand() % 100;
-
-	adult->SetMarriedOn(Adult::GetRandomPerson(adult));
-
-	temp[0] = 65 + rand() % 25;
-	for (int i = 1; i < 5; i++) {
-		temp[i] = 97 + rand() % 25;
-	}
-	strncpy_s(adult->work_place, temp, 5);
-	return adult;
-}
-
-Adult* Adult::GetRandomPerson(Adult* MarriedOn) {
-	char temp[5];
-	temp[0] = 65 + rand() % 25;
-	for (int i = 1; i < 5; i++) {
-		temp[i] = 97 + rand() % 25;
-	}
-	Adult* adult = new Adult();
-	strncpy_s(adult->name, temp, 5);
-
-	temp[0] = 65 + rand() % 25;
-	for (int i = 1; i < 5; i++) {
-		temp[i] = 97 + rand() % 25;
-	}
-	strncpy_s(adult->surname, temp, 5);
-
-	adult->sex = ћуж;
-
-	adult->_age = 18 + rand() % 100;
-
-	adult->SetMarriedOn(MarriedOn);
-
-	temp[0] = 65 + rand() % 25;
-	for (int i = 1; i < 5; i++) {
-		temp[i] = 97 + rand() % 25;
-	}
-	strncpy_s(adult->work_place, temp, 5);
-	return adult;
-}*/

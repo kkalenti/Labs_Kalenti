@@ -1,14 +1,11 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "stdafx.h"
 #include <iostream>
+#include <string>
 #include <conio.h>
 #include <iomanip>
 #include "num_enumeration.h"
 #include "PersonList.h"
-#include "male_name_enumeration.h"
-#include "female_name_enumeration.h"
-#include "male_surname_enumerations.h"
-#include "female_surname_enumeration.h"
 
 using namespace std;
 
@@ -38,57 +35,87 @@ bool IsBetween(char checked, char lower, char upper) {
 	}
 }
 
+bool CheckOtherSymbols(char *string, int index) {
+	if (string[index] == ' ' || string[index] == '-') {
+		return true;
+	}
+	return false;
+}
+
+bool CheckLowercase(char *string, int index) {
+	if (IsBetween(string[index], 'a', 'z') || IsBetween(string[index], 'а', 'я')) {
+		return true;
+	}
+	return false;
+}
+
+bool CheckCapital(char *string, int index) {
+	if (IsBetween(string[index], 'A', 'Z') || IsBetween(string[index], 'А', 'Я')) {
+		return true;
+	}
+	return false;
+}
+
+void Lower2Uppercase(char *string, int index) {
+	string[index] = (int)string[index] - 32;
+}
+
+void Upper2Lowercase(char *string, int index) {
+	string[index] = (int)string[index] + 32;
+}
+
+void MakeShift(char *string, int index) {
+	while (string[index] != '\0') {
+		string[index - 1] = string[index];
+		index++;
+	}
+	string[index - 1] = '\0';
+}
+
 bool CheckingText(char *string) {
 	int i = 1;
 	bool key = 1;
-	//TODO: ниже какой-то пиздецкий пиздец!!! Обсудим лично.
-	//TODO: все диапазонные сравнения можно вынести в метод IsBetween(char checked, char lower, char upper)
-	if (IsBetween(string[0], 'A', 'Z') || IsBetween(string[0], 'А', 'Я')) {
-		//TODO: Где код?
-	} else if (string[0] == ' ' || string[0] == '-') {
-		int j = 1;
-		while (string[j] != '\0') {
-			string[j - 1] = string[j];
-			j++;
+	if (!CheckCapital(string, 0)) {
+		if (CheckOtherSymbols(string, 0)) {
+			int j = 1;
+			MakeShift(string, j);
 		}
-		string[j - 1] = '\0';
-	} else if (IsBetween(string[0], 'a', 'z') || IsBetween(string[0], 'а', 'я')) {
-		string[0] = (int)string[0] - 32;
-	} else {
-		key = 0;
-		return key;
+		else if (CheckLowercase(string, 0)) {
+			Lower2Uppercase(string, 0);
+		}
+		else {
+			key = 0;
+			return key;
+		}
 	}
 	while (string[i] != '\0' && key == 1) {
-		if ((string[i - 2] == ' ') || (string[i - 2] == '-')) {
-			if (IsBetween(string[i-1], 'A', 'Z') || IsBetween(string[i-1], 'А', 'Я')) {
-				//TODO: Где код?
-			} else if (IsBetween(string[i+1], 'a', 'z') || IsBetween(string[i+1], 'а', 'я')) {
-				string[i - 1] = (int)string[i - 1] - 32;
-			} else {
+		if (CheckOtherSymbols(string, i-2)) {
+			if (!CheckCapital(string, i-1)) {
+				if (CheckLowercase(string, i+1)) {
+					Lower2Uppercase(string, i-1);
+				}
+				else {
+					key = 0;
+					return key;
+				}
+			}
+		}
+		if (!CheckLowercase(string, i)) {
+			if (CheckCapital(string, i)) {
+				Upper2Lowercase(string, i);
+			}
+			else if ((string[i] == ' ' && string[i - 1] == ' ') || (string[i] == '-' && string[i - 1] == '-')) {
+				int j = i;
+				MakeShift(string, j);
+			}
+			if (!CheckOtherSymbols(string, i)) {
 				key = 0;
 				return key;
 			}
 		}
-		if (IsBetween(string[i], 'a', 'z') || IsBetween(string[i], 'а', 'я')) {
-			//TODO: Где код?
-		} else if (IsBetween(string[i], 'A', 'Z') || IsBetween(string[i], 'А', 'Я')) {
-			string[i] = (int)string[i] + 32;
-		}  else if((string[i] == ' ' && string[i-1] == ' ') || (string[i] == '-' && string[i - 1] == '-')){
-			int j = i;
-			while (string[j] != '\0') {
-				string[j - 1] = string[j];
-				j++;
-			}
-			string[j - 1] = '\0';
-		} else if (string[i] == ' ' || string[i] == '-') {
-
-		} else {
-			key = 0;
-			return key;
-		}
 		i++;
 	}
-	if (string[i - 1] == ' ' || string[i - 1] == '-') {
+	if (CheckOtherSymbols(string, i-1)) {
 		string[i - 1] = '\0';
 	}
 	return key;
@@ -116,291 +143,100 @@ void ListsPrint(PersonList list_1, PersonList list_2, bool key) {
 	system("cls");
 }
 
-//TODO: всё срань! Переделай на массивы строк.
-//TODO: и нехрен сюда персону передавать.
+char* RandomName(string* names, int namesArrayLength) {
+	int randomCounter =  rand() % (namesArrayLength - 1);
+	char* temp = new char[names[randomCounter].length() + 1];
+	strncpy(temp, names[randomCounter].c_str(), names[randomCounter].length() + 1);
+	return temp;
+}
+
 char* MakeName(Sex sex) {
-	char* temp = new char[20];
 	if (sex == Муж) {
-		switch (Константин + rand() % 12){
-			case(Константин):{
-				strncpy(temp, "Константин", 11);
-				return temp;
-				break;
-			}
-			case(Алексей): {
-				strncpy(temp, "Алексей", 8);
-				return temp;
-				break;
-			}
-			case(Владислав): {
-				strncpy(temp, "Владислав", 10);
-				return temp;
-				break;
-			}
-			case(Антон): {
-				strncpy(temp, "Антон", 6);
-				return temp;
-				break;
-			}
-			case(Вячеслав): {
-				strncpy(temp, "Вячеслав", 9);
-				return temp;
-				break;
-			}
-			case(Стас): {
-				strncpy(temp, "Стас", 5);
-				return temp;
-				break;
-			}
-			case(Иван): {
-				strncpy(temp, "Иван", 5);
-				return temp;
-				break;
-			}
-			case(Генадий): {
-				strncpy(temp, "Генадий", 8);
-				return temp;
-				break;
-			}
-			case(Владимир): {
-				strncpy(temp, "Владимир", 9);
-				return temp;
-				break;
-			}
-			case(Филипп): {
-				strncpy(temp, "Филипп", 7);
-				return temp;
-				break;
-			}
-			case(Николай): {
-				strncpy(temp, "Николай", 8);
-				return temp;
-				break;
-			}
-			case(Дмитрий): {
-				strncpy(temp, "Дмитрий", 8);
-				return temp;
-				break;
-			}
-			case(Александр): {
-				strncpy(temp, "Александр", 10);
-				return temp;
-				break;
-			}
-			default:
-				break;
-		}
+		string names[13] = { "Константин", "Алексей", "Владислав", "Антон", "Вячеслав",
+			"Стас", "Иван", "Генадий", "Владимир", "Филипп", "Николай", "Дмитрий", "Александр" };
+		return RandomName(names, 13);
 	} else {
-		switch (Валерия + rand() % 10) {
-			case(Валерия): {
-				strncpy(temp, "Валерия", 8);
-				return temp;
-				break;
-			}
-			case(Екатерина): {
-				strncpy(temp, "Екатерина", 10);
-				return temp;
-				break;
-			}
-			case(Елена): {
-				strncpy(temp, "Елена", 6);
-				return temp;
-				break;
-			}
-			case(Ирина): {
-				strncpy(temp, "Ирина", 6);
-				return temp;
-				break;
-			}
-			case(Полина): {
-				strncpy(temp, "Полина", 7);
-				return temp;
-				break;
-			}
-			case(Маргарита): {
-				strncpy(temp, "Маргарита", 10);
-				return temp;
-				break;
-			}
-			case(Александра): {
-				strncpy(temp, "Александра", 11);
-				return temp;
-				break;
-			}
-			case(Мария): {
-				strncpy(temp, "Мария", 6);
-				return temp;
-				break;
-			}
-			case(Наталья): {
-				strncpy(temp, "Наталья", 8);
-				return temp;
-				break;
-			}
-			case(Алина): {
-				strncpy(temp, "Алина", 6);
-				return temp;
-				break;
-			}
-			case(Марина): {
-				strncpy(temp, "Марина", 7);
-				return temp;
-				break;
-			}
-			default:
-				break;
-		}
+		string names[11] = { "Валерия", "Екатерина", "Елена", "Ирина", "Полина",
+			"Маргарита", "Александра", "Мария", "Наталья", "Алина", "Марина"};
+		return RandomName(names, 11);
 	}
 }
 
 char* MakeSurname(Sex sex) {
-	char* temp = new char[20];
 	if (sex == Муж) {
-		switch (Иванов + rand() % 11) {
-		case(Иванов): {
-			strncpy(temp, "Иванов", 7);
-			return temp;
-			break;
-		}
-		case(Смирнов): {
-			strncpy(temp, "Смирнов", 8);
-			return temp;
-			break;
-		}
-		case(Кузнецов): {
-			strncpy(temp, "Кузнецов", 9);
-			return temp;
-			break;
-		}
-		case(Попов): {
-			strncpy(temp, "Попов", 6);
-			return temp;
-			break;
-		}
-		case(Васильев): {
-			strncpy(temp, "Васильев", 9);
-			return temp;
-			break;
-		}
-		case(Петров): {
-			strncpy(temp, "Петров", 7);
-			return temp;
-			break;
-		}
-		case(Соколов): {
-			strncpy(temp, "Соколов", 8);
-			return temp;
-			break;
-		}
-		case(Михайлов): {
-			strncpy(temp, "Михайлов", 9);
-			return temp;
-			break;
-		}
-		case(Новиков): {
-			strncpy(temp, "Новиков", 8);
-			return temp;
-			break;
-		}
-		case(Федоров): {
-			strncpy(temp, "Федоров", 8);
-			return temp;
-			break;
-		}
-		case(Морозов): {
-			strncpy(temp, "Морозов", 8);
-			return temp;
-			break;
-		}
-		case(Волков): {
-			strncpy(temp, "Волков", 7);
-			return temp;
-			break;
-		}
-		default:
-			break;
-		}
+		string surnames[12] = { "Иванов", "Смирнов", "Кузнецов", "Попов", "Васильев",
+			"Петров", "Соколов", "Михайлов", "Новиков", "Федоров", "Морозов", "Волков"};
+		return RandomName(surnames, 12);
 	}
 	else {
-		switch (Орлова + rand() % 11) {
-		case(Орлова): {
-			strncpy(temp, "Орлова", 7);
-			return temp;
-			break;
-		}
-		case(Андреева): {
-			strncpy(temp, "Андреева", 9);
-			return temp;
-			break;
-		}
-		case(Федотова): {
-			strncpy(temp, "Федотова", 9);
-			return temp;
-			break;
-		}
-		case(Федорова): {
-			strncpy(temp, "Федорова", 9);
-			return temp;
-			break;
-		}
-		case(Яковлева): {
-			strncpy(temp, "Яковлева", 9);
-			return temp;
-			break;
-		}
-		case(Романова): {
-			strncpy(temp, "Романова", 9);
-			return temp;
-			break;
-		}
-		case(Воробьева): {
-			strncpy(temp, "Воробьева", 10);
-			return temp;
-			break;
-		}
-		case(Сергеева): {
-			strncpy(temp, "Сергеева", 9);
-			return temp;
-			break;
-		}
-		case(Фролова): {
-			strncpy(temp, "Фролова", 8);
-			return temp;
-			break;
-		}
-		case(Королева): {
-			strncpy(temp, "Королева", 9);
-			return temp;
-			break;
-		}
-		case(Гусева): {
-			strncpy(temp, "Гусева", 7);
-			return temp;
-			break;
-		}
-		case(Киселева): {
-			strncpy(temp, "Киселева", 9);
-			return temp;
-			break;
-		}
-		default:
-			break;
-		}
+		string surnames[12] = { "Орлова", "Андреева", "Федотова", "Федорова", "Яковлева",
+			"Романова", "Воробьева", "Сергеева", "Фролова", "Королева", "Гусева",  "Киселева"};
+		return RandomName(surnames, 12);
 	}
 }
 
 char* NameInput(const char* text) {
-	const char kTempSize = 50;
-	char temp[kTempSize];
+	string temp = "";
 	int key = 0;
-	strcpy_s(temp, "");
-	while (strcmp(temp, "") == NULL) {
+	char* myName = nullptr;
+	while (myName == nullptr) {
 		while (key == 0) {
-			cout << text;
-			cin.getline(temp, kTempSize);
-			key = CheckingText(temp);
+			cout << text; 
+			getline(cin, temp);
+			myName = new char[temp.length() + 1];
+			strncpy(myName, temp.c_str(), temp.length() + 1);
+			key = CheckingText(myName);
 		}
 	}
-	return temp;
+	return myName;
+}
+
+Person* Read() {
+	int sex_key = 0;
+
+	char* name = NameInput("Введите имя:");
+
+	char* surname = NameInput("Введите фамилию:");
+	cout << "Введите пол (1-муж/2-жен):" << endl;
+	bool is_exit;
+	Sex sex;
+	do {
+		while (sex_key == 0) {
+			sex_key = _getch();
+			if (sex_key != num_1 && sex_key != num_2)	sex_key = 0;
+		}
+		is_exit = true;
+		switch (sex_key) {
+		case num_1: {
+			sex = Муж;
+			is_exit = false;
+			break;
+		}
+		case num_2: {
+			sex = Жен;
+			is_exit = false;
+			break;
+		}
+		default: {
+			cout << "Неверный ввод,введите число заново" << endl;
+			break;
+		}
+		}
+	} while (is_exit == true);
+	cout << "Введите возраст:" << endl;
+	int age;
+	PersonPositiveCorrection(age);
+
+	return new Person(name, surname, sex, age);
+}
+
+char* CreateBusiness() {
+	char* business = new char[6];
+	business[0] = 'A' + rand() % 25;
+	for (int i = 1; i < 5; i++) {
+		business[i] = 'a' + rand() % 25;
+	}
+	business[6] = '\0';
+	return business;
 }
 

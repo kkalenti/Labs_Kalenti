@@ -155,8 +155,6 @@
     <ClInclude Include="console_colors.h" />
     <ClInclude Include="enumeration.h" />
     <ClInclude Include="checking_input_for_person.h" />
-    <ClInclude Include="female_name_enumeration.h" />
-    <ClInclude Include="female_surname_enumeration.h" />
     <ClInclude Include="lab7.h" />
     <ClInclude Include="labsevenfunctions.h" />
     <ClInclude Include="lab_five_functions.h" />
@@ -164,8 +162,6 @@
     <ClInclude Include="lab5.h" />
     <ClInclude Include="lab6.h" />
     <ClInclude Include="List.h" />
-    <ClInclude Include="male_name_enumeration.h" />
-    <ClInclude Include="male_surname_enumerations.h" />
     <ClInclude Include="menus.h" />
     <ClInclude Include="num_enumeration.h" />
     <ClInclude Include="PersonList.h" />

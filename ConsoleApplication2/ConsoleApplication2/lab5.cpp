@@ -8,7 +8,7 @@
 using namespace std; 
 
 void lab5() {
-	Person rand_person;
+	//TODO: с конструктором хуйня, нужно править
 	PersonList list_1 = MakeList(3);
 	PersonList list_2 = MakeList(3);
 	cout << "Списки созданы" << endl << "Нажмите любую кнопку" << endl;
@@ -18,7 +18,7 @@ void lab5() {
 	ListsPrint(list_1,list_2,key);
 
 	cout << "Введите данные нового пользователя:" << endl;
-	list_1.Add(rand_person.Read());
+	list_1.Add(Read());
 	ListsPrint(list_1, list_2, key);
 
 	list_2.Add(list_1.Find(2));

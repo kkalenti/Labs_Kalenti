@@ -6,6 +6,12 @@
 
 using namespace std;
 
+
+Adult::Adult(char* _name, char* _surname, Sex _sex, int age, Adult* _married_on, char* _work_place) : Person(_name, _surname, _sex, age) {
+	married_on = _married_on;
+	work_place = _work_place;
+}
+
 int Adult::GetAge() {
 	return _age;
 }
@@ -66,58 +72,33 @@ char* Adult::GetDiscription() {
 }
 
 Adult* Adult::GetRandomPerson() {
-	char temp[5];
-	
-	Adult* adult = new Adult();
-
+	Sex sex;
 	int sex_key = 1 + rand() % 2;
 	if (sex_key == 1) {
-		adult->sex = Ìóæ;
+		sex = Ìóæ;
 	}
 	else {
-		adult->sex = Æåí;
+		sex = Æåí;
 	}
 
-	strcpy_s(adult->name, MakeName(adult->GetSex()));
-
-	strcpy_s(adult->surname, MakeSurname(adult->GetSex()));
-
-	adult->_age = 18 + rand() % 100;
-
-	adult->SetMarriedOn(Adult::GetRandomPerson(adult));
+	int _age = 18 + rand() % 70;
 	
-	temp[0] = 65 + rand() % 25;
-	for (int i = 1; i < 5; i++) {
-		temp[i] = 97 + rand() % 25;
-	}
-	strncpy_s(adult->work_place, temp, 5);
-	return adult;
+	char* work_place = CreateBusiness();
+
+	return new Adult(MakeName(sex), MakeSurname(sex), sex, _age, nullptr, work_place);
 }
 
-Adult* Adult::GetRandomPerson(Adult* MarriedOn) {
-	char temp[5];
-
-	Adult* adult = new Adult();
-
+Adult* Adult::GetMarriedPerson(Adult* MarriedOn) {
+	Sex sex;
 	if (MarriedOn->sex == Æåí) {
-		adult->sex = Ìóæ;
+		sex = Ìóæ;
 	}
 	else {
-		adult->sex = Æåí;
+		sex = Æåí;
 	}
+	int _age = 18 + rand() % 70;
 
-	strcpy_s(adult->name, MakeName(adult->GetSex()));
+	char* work_place = CreateBusiness();
 
-	strcpy_s(adult->surname, MakeSurname(adult->GetSex()));
-
-	adult->_age = 18 + rand() % 70;
-
-	adult->SetMarriedOn(MarriedOn);
-
-	temp[0] = 65 + rand() % 25;
-	for (int i = 1; i < 5; i++) {
-		temp[i] = 97 + rand() % 25;
-	}
-	strncpy_s(adult->work_place, temp, 5);
-	return adult;
+	return new Adult(MakeName(sex), MakeSurname(sex), sex, _age, MarriedOn, work_place);
 }
