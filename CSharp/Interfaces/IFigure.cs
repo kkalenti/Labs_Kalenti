@@ -16,5 +16,10 @@
 		/// </summary>
 		/// <returns></returns>
 		double Perimeter { get; }
+
+		/// <summary>
+		/// Вывод информации о фигуре
+		/// </summary>
+		void GetDescription();
 	}
 }

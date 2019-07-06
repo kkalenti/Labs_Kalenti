@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 using Model.Interfaces;
 
 namespace Model
-{	/// <summary>
-	/// Класс для кругов
-	/// </summary>
-	public class Circle : IFigure
+{
+	public class Rectangle : IFigure
 	{
 		/// <summary>
 		/// Площадь фигуры
@@ -22,15 +20,22 @@ namespace Model
 		public double Perimeter { get; }
 
 		/// <summary>
-		/// Радиус фигуры
+		/// Ширина
 		/// </summary>
-		public double Radius { get; }
-		
-		public  Circle(double radius)
+		public double Width { get; }
+
+		/// <summary>
+		/// Длина
+		/// </summary>
+		public double Lengh { get; }
+
+		public Rectangle(double width, double length)
 		{
-			Radius = radius;
-			Surface = 2 * Math.PI * radius;
-			Perimeter = Math.PI * Radius * Radius;
+			Width = width;
+			Lengh = length;
+
+			Surface = width * length;
+			Perimeter = 2 * width + 2 * length;
 		}
 
 		/// <summary>
@@ -38,8 +43,8 @@ namespace Model
 		/// </summary>
 		public void GetDescription()
 		{
-			Console.WriteLine("Круг, радиус: {0}, площадь: {1}, периметр: {2}",
-				Radius, Surface, Perimeter);
+			Console.WriteLine("Прямоугольник, ширина: {0}, длина: {1}, площадь: {2}, периметр: {3}",
+				Width, Lengh, Surface, Perimeter);
 		}
 	}
 }
