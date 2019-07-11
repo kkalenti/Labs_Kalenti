@@ -38,7 +38,7 @@ namespace Model
 		/// </summary>
 		public void GetDescription()
 		{
-			Console.WriteLine("Круг, радиус: {0}, площадь: {1}, периметр: {2}",
+			Console.WriteLine("Круг, радиус: {0}, площадь: {1:0.00}, периметр: {2:0.00}",
 				Radius, Surface, Perimeter);
 		}
 	}

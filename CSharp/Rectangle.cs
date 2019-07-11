@@ -43,7 +43,7 @@ namespace Model
 		/// </summary>
 		public void GetDescription()
 		{
-			Console.WriteLine("Прямоугольник, ширина: {0}, длина: {1}, площадь: {2}, периметр: {3}",
+			Console.WriteLine("Прямоугольник, ширина: {0}, длина: {1}, площадь: {2:0.00}, периметр: {3:0.00}",
 				Width, Lengh, Surface, Perimeter);
 		}
 	}
