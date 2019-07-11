@@ -8,6 +8,7 @@ private:
 	Adult* father_ = nullptr;
 	char* school_;
 public:
+	//TODO: Почему входные параметры с нижним подчёркиванием?
 	Child(char* _name, char* _surname, Sex _sex, int age, Adult* mother, Adult* father, char* school);
 	void SetMother(Adult* mother);
 	Adult* GetMother();

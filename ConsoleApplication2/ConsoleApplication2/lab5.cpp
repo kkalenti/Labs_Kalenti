@@ -8,7 +8,6 @@
 using namespace std; 
 
 void lab5() {
-	//TODO: с конструктором хуйня, нужно править
 	PersonList list_1 = MakeList(3);
 	PersonList list_2 = MakeList(3);
 	cout << "Списки созданы" << endl << "Нажмите любую кнопку" << endl;

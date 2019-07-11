@@ -7,6 +7,7 @@
 
 using namespace std;
 
+//TODO: Длинная строка, переноси
 Child::Child(char* _name, char* _surname, Sex _sex, int age, Adult* mother, Adult* father, char* school) : Person(_name, _surname, _sex, age) {
 	mother_ = mother;
 	father_ = father;
@@ -42,6 +43,7 @@ void Child::SetFather(Adult* father) {
 }
 
 char* Child::GetDiscription() {
+	//TODO: Чё за привычка со статикой работать? А если у тебя инфа не влезет в 200 символов? Переделай на динамику!
 	char inform[200];
 	char temp[200];
 	strcpy_s(inform, surname);
@@ -58,6 +60,8 @@ char* Child::GetDiscription() {
 		strcat_s(inform, "женщина, ");
 	}
 	if (mother_ != nullptr && father_ != nullptr) { //TODO: Спросить здесь
+		//TODO: Ниже куча дублей. Я бы сделал у Person метод GetInfo, который бы возвращал строку 
+		//TODO: "GetSurname() GetName()" и всё это сократилось бы нах
 		strcat_s(inform, "Родители: ");
 		strcat_s(inform, mother_->GetSurname());
 		strcat_s(inform, " ");

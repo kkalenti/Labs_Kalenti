@@ -18,6 +18,7 @@ void PersonAgeCorrectionInput(int &age, const char kInvalidMessage[]) {
 }
 
 void PersonPositiveCorrection(int &age) {
+	//TODO: Корректнее будет сделать minAge и maxAge константами
 	do {
 		PersonAgeCorrectionInput(age, "Введено не число! Повторите ввод:");
 		if (age <= 0 || age > 120) {
@@ -27,6 +28,8 @@ void PersonPositiveCorrection(int &age) {
 }
 
 bool IsBetween(char checked, char lower, char upper) {
+	//TODO: Можно сильно посокращать кол-во строк, если просто возвращать результат if-а и везде ниже тоже
+	//TODO: Смотри сам, конечно, но по мне - читается такая конструкция лучше
 	if (checked >= lower && checked <= upper) {
 		return true;
 	}
@@ -43,6 +46,7 @@ bool CheckOtherSymbols(char *string, int index) {
 }
 
 bool CheckLowercase(char *string, int index) {
+	//TODO: Длинновата строка, я бы перенёс || IsBetween(string[index], 'а', 'я') на другую строку
 	if (IsBetween(string[index], 'a', 'z') || IsBetween(string[index], 'а', 'я')) {
 		return true;
 	}
@@ -50,6 +54,7 @@ bool CheckLowercase(char *string, int index) {
 }
 
 bool CheckCapital(char *string, int index) {
+	//TODO: Длинновато
 	if (IsBetween(string[index], 'A', 'Z') || IsBetween(string[index], 'А', 'Я')) {
 		return true;
 	}
@@ -57,6 +62,7 @@ bool CheckCapital(char *string, int index) {
 }
 
 void Lower2Uppercase(char *string, int index) {
+	//TODO: 32 - какая-то магическая хуета, лучше литеральную константу завести
 	string[index] = (int)string[index] - 32;
 }
 
@@ -65,6 +71,7 @@ void Upper2Lowercase(char *string, int index) {
 }
 
 void MakeShift(char *string, int index) {
+	//TODO: \0 - конец строки, также можно завести литеральную константу, чтобы повысить читаемость
 	while (string[index] != '\0') {
 		string[index - 1] = string[index];
 		index++;
@@ -74,6 +81,7 @@ void MakeShift(char *string, int index) {
 
 bool CheckingText(char *string) {
 	int i = 1;
+	//TODO: Не присваивай булю инты, не беси меня бл...!
 	bool key = 1;
 	if (!CheckCapital(string, 0)) {
 		if (CheckOtherSymbols(string, 0)) {
@@ -88,6 +96,7 @@ bool CheckingText(char *string) {
 			return key;
 		}
 	}
+	//TODO: Конец строки
 	while (string[i] != '\0' && key == 1) {
 		if (CheckOtherSymbols(string, i-2)) {
 			if (!CheckCapital(string, i-1)) {
@@ -104,6 +113,7 @@ bool CheckingText(char *string) {
 			if (CheckCapital(string, i)) {
 				Upper2Lowercase(string, i);
 			}
+			//TODO: Длинновато
 			else if ((string[i] == ' ' && string[i - 1] == ' ') || (string[i] == '-' && string[i - 1] == '-')) {
 				int j = i;
 				MakeShift(string, j);
@@ -116,6 +126,7 @@ bool CheckingText(char *string) {
 		i++;
 	}
 	if (CheckOtherSymbols(string, i-1)) {
+		//TODO: Конец строки
 		string[i - 1] = '\0';
 	}
 	return key;
@@ -143,6 +154,11 @@ void ListsPrint(PersonList list_1, PersonList list_2, bool key) {
 	system("cls");
 }
 
+//TODO: 1- название параметров пососное, т.к. ты можешь передавать не только имена
+//TODO: 2- ищи стандартные средства для улучшения масштабирования кода, в случае передачи размерности массива
+//TODO: тебе всегда надо будет держать в башке, сколько элементов в массиве. Дак вот не удобнее ли будет 
+//TODO: вычислять размер массива на месте? Как-нибудь типа такого 
+// https://stackoverflow.com/questions/4108313/how-do-i-find-the-length-of-an-array
 char* RandomName(string* names, int namesArrayLength) {
 	int randomCounter =  rand() % (namesArrayLength - 1);
 	char* temp = new char[names[randomCounter].length() + 1];
@@ -152,8 +168,9 @@ char* RandomName(string* names, int namesArrayLength) {
 
 char* MakeName(Sex sex) {
 	if (sex == Муж) {
+		//TODO: Длинновато, объединял бы по три имени в строке, остальное переносил
 		string names[13] = { "Константин", "Алексей", "Владислав", "Антон", "Вячеслав",
-			"Стас", "Иван", "Генадий", "Владимир", "Филипп", "Николай", "Дмитрий", "Александр" };
+			"Стас", "Иван", "Генадий", "Владимир", "Филипп", "Николай", "Дмитрий", "Александр" };		
 		return RandomName(names, 13);
 	} else {
 		string names[11] = { "Валерия", "Екатерина", "Елена", "Ирина", "Полина",
@@ -164,6 +181,7 @@ char* MakeName(Sex sex) {
 
 char* MakeSurname(Sex sex) {
 	if (sex == Муж) {
+		//TODO: тоже самое что выше
 		string surnames[12] = { "Иванов", "Смирнов", "Кузнецов", "Попов", "Васильев",
 			"Петров", "Соколов", "Михайлов", "Новиков", "Федоров", "Морозов", "Волков"};
 		return RandomName(surnames, 12);
@@ -231,6 +249,7 @@ Person* Read() {
 }
 
 char* CreateBusiness() {
+	//TODO: а тут, бл., всё в куче - размер массива, магическое число 25, конец строки...
 	char* business = new char[6];
 	business[0] = 'A' + rand() % 25;
 	for (int i = 1; i < 5; i++) {

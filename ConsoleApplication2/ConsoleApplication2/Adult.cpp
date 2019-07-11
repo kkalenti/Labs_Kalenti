@@ -6,7 +6,7 @@
 
 using namespace std;
 
-
+//TODO: Длинная строка, переноси
 Adult::Adult(char* _name, char* _surname, Sex _sex, int age, Adult* _married_on, char* _work_place) : Person(_name, _surname, _sex, age) {
 	married_on = _married_on;
 	work_place = _work_place;
@@ -34,6 +34,7 @@ Adult* Adult::GetMarriedOn() {
 }
 
 char* Adult::GetDiscription() {
+	//TODO: Чё за привычка со статикой работать? А если у тебя инфа не влезет в 200 символов? Переделай на динамику!
 	char inform[200];
 	char temp[200];
 	strcpy_s(inform, surname);
@@ -71,6 +72,7 @@ char* Adult::GetDiscription() {
 	return inform;
 }
 
+//TODO: Ниже дубль, почти один в один.
 Adult* Adult::GetRandomPerson() {
 	Sex sex;
 	int sex_key = 1 + rand() % 2;
@@ -80,7 +82,7 @@ Adult* Adult::GetRandomPerson() {
 	else {
 		sex = Жен;
 	}
-
+	//TODO: Дурацкое именование, плохо отличающее локальные переменные от полей.
 	int _age = 18 + rand() % 70;
 	
 	char* work_place = CreateBusiness();
@@ -96,6 +98,7 @@ Adult* Adult::GetMarriedPerson(Adult* MarriedOn) {
 	else {
 		sex = Жен;
 	}
+	//TODO: Дурацкое именование, плохо отличающее локальные переменные от полей.
 	int _age = 18 + rand() % 70;
 
 	char* work_place = CreateBusiness();
