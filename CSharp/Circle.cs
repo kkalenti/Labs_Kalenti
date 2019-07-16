@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using Model.Interfaces;
 
 namespace Model
-{	/// <summary>
+{	
+	[Serializable]
+	/// <summary>
 	/// Класс для кругов
 	/// </summary>
 	public class Circle : IFigure
@@ -26,6 +28,8 @@ namespace Model
 		/// </summary>
 		public double Radius { get; }
 		
+		public Circle() { }
+
 		public  Circle(double radius)
 		{
 			Radius = radius;

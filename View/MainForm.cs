@@ -6,14 +6,22 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Model;
 using Model.Interfaces;
 using System.Windows.Forms;
+using System.IO;
 
 namespace View
 {
+	/// <summary>
+	/// Основная форма
+	/// </summary>
 	public partial class MainForm : Form
 	{
+		/// <summary>
+		/// Список фигур
+		/// </summary>
 		public List<IFigure> figures = new List<IFigure>();
 
 		public MainForm()
@@ -79,6 +87,31 @@ namespace View
 		{
 			FindingForm finding = new FindingForm(this);
 			finding.Show();
+		}
+
+		private void SaveButton_Click(object sender, EventArgs e)
+		{
+			foreach (IFigure figure in figures)
+			{
+				if(figure is Model.Rectangle)
+				{
+					XmlSerializer writer = new XmlSerializer(typeof(Model.Rectangle));
+					using (FileStream file = new FileStream("C:\\Users\\kosti\\Desktop\\lessons\\Extra labs\\2\\persons.xml", FileMode.Append))
+					{
+						writer.Serialize(file, figure);
+						file.Close();
+					}
+				}
+				else
+				{
+					XmlSerializer writer = new XmlSerializer(typeof(Model.Circle));
+					using (FileStream file = new FileStream("C:\\Users\\kosti\\Desktop\\lessons\\Extra labs\\2\\persons.xml", FileMode.Append))
+					{
+						writer.Serialize(file, figure);
+						file.Close();
+					}
+				}
+			}
 		}
 	}
 }

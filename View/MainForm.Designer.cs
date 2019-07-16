@@ -37,6 +37,7 @@
 			this.Perimeter = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.RemoveButton = new System.Windows.Forms.Button();
 			this.AddButton = new System.Windows.Forms.Button();
+			this.SaveButton = new System.Windows.Forms.Button();
 			this.FigureGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.FigureGrid)).BeginInit();
 			this.SuspendLayout();
@@ -46,6 +47,7 @@
 			this.FigureGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.FigureGroupBox.Controls.Add(this.SaveButton);
 			this.FigureGroupBox.Controls.Add(this.RandomObjectButton);
 			this.FigureGroupBox.Controls.Add(this.FindObjectButton);
 			this.FigureGroupBox.Controls.Add(this.FigureGrid);
@@ -139,6 +141,17 @@
 			this.AddButton.UseVisualStyleBackColor = true;
 			this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
 			// 
+			// SaveButton
+			// 
+			this.SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.SaveButton.Location = new System.Drawing.Point(139, 263);
+			this.SaveButton.Name = "SaveButton";
+			this.SaveButton.Size = new System.Drawing.Size(88, 33);
+			this.SaveButton.TabIndex = 6;
+			this.SaveButton.Text = "Save data";
+			this.SaveButton.UseVisualStyleBackColor = true;
+			this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -165,6 +178,7 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn Perimeter;
 		private System.Windows.Forms.Button FindObjectButton;
 		private System.Windows.Forms.Button RandomObjectButton;
+		private System.Windows.Forms.Button SaveButton;
 	}
 }
 

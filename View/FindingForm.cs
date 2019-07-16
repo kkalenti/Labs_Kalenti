@@ -35,25 +35,24 @@ namespace View
 				{
 					if (figure is Model.Rectangle && RectangleCheckBox.Checked)
 					{
-						if (IsBetween(Convert.ToDouble(SurfaceFirstTextBox.Text),
-							Convert.ToDouble(SurfaceSecondTextBox.Text), figure.Surface) && 
-							IsBetween(Convert.ToDouble(PerimeterFirstTextBox.Text),
-							Convert.ToDouble(PerimeterSecondTextBox.Text), figure.Perimeter))
-						{
-							FigureGrid.Rows.Add("Rectangle", figure.Surface, figure.Perimeter);
-						}
+						AddToGrid("Rectangle", figure);
 					}
 					else if (figure is Model.Circle && CircleCheckBox.Checked)
 					{
-						if (IsBetween(Convert.ToDouble(SurfaceFirstTextBox.Text),
-							Convert.ToDouble(SurfaceSecondTextBox.Text), figure.Surface) &&
-							IsBetween(Convert.ToDouble(PerimeterFirstTextBox.Text),
-							Convert.ToDouble(PerimeterSecondTextBox.Text), figure.Perimeter))
-						{
-							FigureGrid.Rows.Add("Circle", figure.Surface, figure.Perimeter);
-						}
+						AddToGrid("Circle", figure);
 					}
 				}
+			}
+		}
+
+		public void AddToGrid(string name, IFigure figure)
+		{
+			if (IsBetween(Convert.ToDouble(SurfaceFirstTextBox.Text),
+				Convert.ToDouble(SurfaceSecondTextBox.Text), figure.Surface) &&
+				IsBetween(Convert.ToDouble(PerimeterFirstTextBox.Text),
+				Convert.ToDouble(PerimeterSecondTextBox.Text), figure.Perimeter))
+			{
+				FigureGrid.Rows.Add(name, figure.Surface, figure.Perimeter);
 			}
 		}
 

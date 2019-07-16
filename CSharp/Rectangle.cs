@@ -7,6 +7,7 @@ using Model.Interfaces;
 
 namespace Model
 {
+	[Serializable]
 	public class Rectangle : IFigure
 	{
 		/// <summary>
@@ -28,6 +29,8 @@ namespace Model
 		/// Длина
 		/// </summary>
 		public double Lengh { get; }
+
+		public Rectangle()	{}
 
 		public Rectangle(double width, double length)
 		{
