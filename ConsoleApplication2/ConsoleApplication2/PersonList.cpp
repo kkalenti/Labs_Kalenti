@@ -43,12 +43,12 @@ void PersonList::Add(Person* person) {
 
 void PersonList::Print() {
 	PersonListItem* curent_item = _head;
-	char temp[150];
-	strcpy_s(temp,curent_item->person->GetDiscription());
+	string temp;
+	temp = curent_item->person->GetDiscription();
 	cout << temp << endl;
 	while (curent_item->next != nullptr) {
 		curent_item = curent_item->next;
-		strcpy_s(temp,curent_item->person->GetDiscription());
+		temp = curent_item->person->GetDiscription();
 		cout << temp << endl;
 	}
 }

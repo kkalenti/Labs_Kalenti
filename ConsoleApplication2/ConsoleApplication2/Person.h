@@ -1,22 +1,26 @@
 #pragma once
 #include "sex_enumeration.h"
-//TODO:  ак сдашь 5 лабу - сделай этот класс абстрактным. ƒл€ 6 лабы так будет правльнее.
+
 class Person {
-protected: int _age;
-		char *name;
-		char *surname;
-		Sex sex;
+protected: 
+	static const int kMinAge_ = 0;
+	static const int kMaxAge_ = 120;
+	int age_;
+	char *name_;
+	char *surname_;
+	Sex sex_;
 public:
-		Person(char* name, char* surname, Sex sex, int age);
-		Person(bool flag);
-		int GetAge();
-		void SetAge(int age);
-		char* GetName();
-		char* GetSurname();
-		Sex GetSex();
-		void SetSex(Sex _sex);
-		static Person* GetRandomPerson();
-		//Person* Read();
-		void Show();
-		virtual char* GetDiscription();
+	Person(char* name, char* surname, Sex sex, int age);
+	Person(bool flag);
+	std::string GetInfo();
+	int GetAge();
+	void SetAge(int age);
+	char* GetName();
+	char* GetSurname();
+	Sex GetSex();
+	void SetSex(Sex _sex);
+	void Show();
+	virtual std::string GetDiscription() = 0;
+	static void PersonAgeCorrectionInput(int& age, const char kInvalidMessage[]);
+	static void PersonPositiveCorrection(int& age);
 };

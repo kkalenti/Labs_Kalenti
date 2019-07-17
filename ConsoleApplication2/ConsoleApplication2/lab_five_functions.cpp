@@ -4,85 +4,56 @@
 #include <string>
 #include <conio.h>
 #include <iomanip>
+#include <vector>
 #include "num_enumeration.h"
 #include "PersonList.h"
 
 using namespace std;
 
-void PersonAgeCorrectionInput(int &age, const char kInvalidMessage[]) {
-	while (!(cin >> age) || (cin.peek() != '\n')) {
-		cin.clear();
-		while (cin.get() != '\n');
-		cout << kInvalidMessage;
-	}
-}
-
-void PersonPositiveCorrection(int &age) {
-	//TODO: Корректнее будет сделать minAge и maxAge константами
-	do {
-		PersonAgeCorrectionInput(age, "Введено не число! Повторите ввод:");
-		if (age <= 0 || age > 120) {
-			cout << "Число введено не верно! Повторите ввод:";
-		}
-	} while (age <= 0 || age > 120);
-}
+#define UPPER_TO_LOWER_GAP 32
+#define STRING_END '\0'
 
 bool IsBetween(char checked, char lower, char upper) {
 	//TODO: Можно сильно посокращать кол-во строк, если просто возвращать результат if-а и везде ниже тоже
 	//TODO: Смотри сам, конечно, но по мне - читается такая конструкция лучше
-	if (checked >= lower && checked <= upper) {
-		return true;
-	}
-	else {
-		return false;
-	}
+	return checked >= lower && checked <= upper;
 }
 
 bool CheckOtherSymbols(char *string, int index) {
-	if (string[index] == ' ' || string[index] == '-') {
-		return true;
-	}
-	return false;
+	return string[index] == ' ' || string[index] == '-';
 }
 
 bool CheckLowercase(char *string, int index) {
-	//TODO: Длинновата строка, я бы перенёс || IsBetween(string[index], 'а', 'я') на другую строку
-	if (IsBetween(string[index], 'a', 'z') || IsBetween(string[index], 'а', 'я')) {
-		return true;
-	}
-	return false;
+	return IsBetween(string[index], 'a', 'z')
+		|| IsBetween(string[index], 'а', 'я');
 }
 
 bool CheckCapital(char *string, int index) {
-	//TODO: Длинновато
-	if (IsBetween(string[index], 'A', 'Z') || IsBetween(string[index], 'А', 'Я')) {
-		return true;
-	}
-	return false;
+	return IsBetween(string[index], 'A', 'Z')
+		|| IsBetween(string[index], 'А', 'Я');
 }
 
 void Lower2Uppercase(char *string, int index) {
 	//TODO: 32 - какая-то магическая хуета, лучше литеральную константу завести
-	string[index] = (int)string[index] - 32;
+	string[index] = (int)string[index] - UPPER_TO_LOWER_GAP;
 }
 
 void Upper2Lowercase(char *string, int index) {
-	string[index] = (int)string[index] + 32;
+	string[index] = (int)string[index] + UPPER_TO_LOWER_GAP;
 }
 
 void MakeShift(char *string, int index) {
 	//TODO: \0 - конец строки, также можно завести литеральную константу, чтобы повысить читаемость
-	while (string[index] != '\0') {
+	while (string[index] != STRING_END) {
 		string[index - 1] = string[index];
 		index++;
 	}
-	string[index - 1] = '\0';
+	string[index - 1] = STRING_END;
 }
 
 bool CheckingText(char *string) {
 	int i = 1;
-	//TODO: Не присваивай булю инты, не беси меня бл...!
-	bool key = 1;
+	bool key = true;
 	if (!CheckCapital(string, 0)) {
 		if (CheckOtherSymbols(string, 0)) {
 			int j = 1;
@@ -97,7 +68,7 @@ bool CheckingText(char *string) {
 		}
 	}
 	//TODO: Конец строки
-	while (string[i] != '\0' && key == 1) {
+	while (string[i] != STRING_END && key == 1) {
 		if (CheckOtherSymbols(string, i-2)) {
 			if (!CheckCapital(string, i-1)) {
 				if (CheckLowercase(string, i+1)) {
@@ -113,8 +84,8 @@ bool CheckingText(char *string) {
 			if (CheckCapital(string, i)) {
 				Upper2Lowercase(string, i);
 			}
-			//TODO: Длинновато
-			else if ((string[i] == ' ' && string[i - 1] == ' ') || (string[i] == '-' && string[i - 1] == '-')) {
+			else if ((string[i] == ' ' && string[i - 1] == ' ')
+				|| (string[i] == '-' && string[i - 1] == '-')) {
 				int j = i;
 				MakeShift(string, j);
 			}
@@ -127,17 +98,9 @@ bool CheckingText(char *string) {
 	}
 	if (CheckOtherSymbols(string, i-1)) {
 		//TODO: Конец строки
-		string[i - 1] = '\0';
+		string[i - 1] = STRING_END;
 	}
 	return key;
-}
-
-PersonList MakeList(int count) {
-	PersonList list(nullptr);
-	for (int i = 0; i < count; i++) {
-		list.Add(new Person(true));
-	}
-	return list;
 }
 
 void ListsPrint(PersonList list_1, PersonList list_2, bool key) {
@@ -159,37 +122,44 @@ void ListsPrint(PersonList list_1, PersonList list_2, bool key) {
 //TODO: тебе всегда надо будет держать в башке, сколько элементов в массиве. Дак вот не удобнее ли будет 
 //TODO: вычислять размер массива на месте? Как-нибудь типа такого 
 // https://stackoverflow.com/questions/4108313/how-do-i-find-the-length-of-an-array
-char* RandomName(string* names, int namesArrayLength) {
-	int randomCounter =  rand() % (namesArrayLength - 1);
-	char* temp = new char[names[randomCounter].length() + 1];
-	strncpy(temp, names[randomCounter].c_str(), names[randomCounter].length() + 1);
+char* RandomArrayElement(vector<string> stringArray) {
+	int randomCounter =  rand() % (stringArray.size() - 1);
+	char* temp = new char[stringArray[randomCounter].length() + 1];
+	strncpy(temp, stringArray[randomCounter].c_str(), stringArray[randomCounter].length() + 1);
 	return temp;
 }
 
 char* MakeName(Sex sex) {
 	if (sex == Муж) {
-		//TODO: Длинновато, объединял бы по три имени в строке, остальное переносил
-		string names[13] = { "Константин", "Алексей", "Владислав", "Антон", "Вячеслав",
-			"Стас", "Иван", "Генадий", "Владимир", "Филипп", "Николай", "Дмитрий", "Александр" };		
-		return RandomName(names, 13);
+		vector<string> names = { "Константин", "Алексей", "Владислав",
+			"Антон", "Вячеслав","Стас",
+			"Иван", "Генадий", "Владимир",
+			"Филипп", "Николай", "Дмитрий",
+			"Александр" };
+		return RandomArrayElement(names);
 	} else {
-		string names[11] = { "Валерия", "Екатерина", "Елена", "Ирина", "Полина",
-			"Маргарита", "Александра", "Мария", "Наталья", "Алина", "Марина"};
-		return RandomName(names, 11);
+		vector<string> names = { "Валерия", "Екатерина", "Елена",
+			"Ирина", "Полина", "Маргарита", 
+			"Александра", "Мария", "Наталья",
+			"Алина", "Марина"};
+		return RandomArrayElement(names);
 	}
 }
 
 char* MakeSurname(Sex sex) {
 	if (sex == Муж) {
-		//TODO: тоже самое что выше
-		string surnames[12] = { "Иванов", "Смирнов", "Кузнецов", "Попов", "Васильев",
-			"Петров", "Соколов", "Михайлов", "Новиков", "Федоров", "Морозов", "Волков"};
-		return RandomName(surnames, 12);
+		vector<string> surnames = { "Иванов", "Смирнов", "Кузнецов",
+			"Попов", "Васильев", "Петров",
+			"Соколов", "Михайлов", "Новиков",
+			"Федоров", "Морозов", "Волков"};
+		return RandomArrayElement(surnames);
 	}
 	else {
-		string surnames[12] = { "Орлова", "Андреева", "Федотова", "Федорова", "Яковлева",
-			"Романова", "Воробьева", "Сергеева", "Фролова", "Королева", "Гусева",  "Киселева"};
-		return RandomName(surnames, 12);
+		vector<string> surnames = { "Орлова", "Андреева", "Федотова",
+			"Федорова", "Яковлева", "Романова",
+			"Воробьева", "Сергеева", "Фролова",
+			"Королева", "Гусева",  "Киселева"};
+		return RandomArrayElement(surnames);
 	}
 }
 
@@ -209,53 +179,15 @@ char* NameInput(const char* text) {
 	return myName;
 }
 
-Person* Read() {
-	int sex_key = 0;
-
-	char* name = NameInput("Введите имя:");
-
-	char* surname = NameInput("Введите фамилию:");
-	cout << "Введите пол (1-муж/2-жен):" << endl;
-	bool is_exit;
-	Sex sex;
-	do {
-		while (sex_key == 0) {
-			sex_key = _getch();
-			if (sex_key != num_1 && sex_key != num_2)	sex_key = 0;
-		}
-		is_exit = true;
-		switch (sex_key) {
-		case num_1: {
-			sex = Муж;
-			is_exit = false;
-			break;
-		}
-		case num_2: {
-			sex = Жен;
-			is_exit = false;
-			break;
-		}
-		default: {
-			cout << "Неверный ввод,введите число заново" << endl;
-			break;
-		}
-		}
-	} while (is_exit == true);
-	cout << "Введите возраст:" << endl;
-	int age;
-	PersonPositiveCorrection(age);
-
-	return new Person(name, surname, sex, age);
-}
-
 char* CreateBusiness() {
 	//TODO: а тут, бл., всё в куче - размер массива, магическое число 25, конец строки...
-	char* business = new char[6];
-	business[0] = 'A' + rand() % 25;
-	for (int i = 1; i < 5; i++) {
-		business[i] = 'a' + rand() % 25;
+	const int wordSize = 6;
+	char* business = new char[wordSize];
+	business[0] = 'А' + rand() % UPPER_TO_LOWER_GAP;
+	for (int i = 1; i < wordSize - 2; i++) {
+		business[i] = 'а' + rand() % UPPER_TO_LOWER_GAP;
 	}
-	business[6] = '\0';
+	business[wordSize - 1] = STRING_END;
 	return business;
 }
 

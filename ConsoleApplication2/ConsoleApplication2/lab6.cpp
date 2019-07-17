@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include <iostream>
+#include <string>
 #include "Person.h"
 #include "Adult.h"
 #include "Child.h"
@@ -33,20 +34,17 @@ void lab6() {
 	new_list.Print();
 
 	cout << endl;
-	//TODO: RAGEMODE!!!!111
-	char temp[200];
-	Person* randPerson = Child::GetRandomPerson();
-	//TODO: Нихуя не правильно. Проверяя на возвраст, ты проверяешь контекст
-	//Который известен только наследнику типа Child, а твой код должен нихера не знать об этом
-	//Ты должен дёрнуть рандомный элемент из списка, проверить его тип (один из наследников)
-	//выполнить приведение к этому типу и дёрнуть специфический для этого типа метод.
-	if (randPerson->GetAge() < 18)
+	string temp;
+
+	int index = 1 + rand() % 6;
+	Person* randPerson = new_list.Find(index);
+	if (typeid(*randPerson) == typeid(Child))
 	{
 		Child* child = (Child*)randPerson;
 		cout << "This is a child" << endl;
 
 		if (child->GetMother() != nullptr) {
-			strcpy_s(temp, child->GetMother()->GetDiscription());
+			temp = child->GetMother()->GetDiscription();
 			cout << "Мама: " << temp << endl;
 		}
 		else {
@@ -56,9 +54,9 @@ void lab6() {
 	else
 	{
 		Adult* adult = (Adult*)randPerson;
-		strcpy_s(temp, adult->GetMarriedOn()->GetDiscription());
+		temp = adult->GetMarriedOn()->GetDiscription();
 		cout << "This is an adult" << endl << "В браке с: " << temp << endl;
 	}
-
 	system("pause");
+	//TODO: Спросить по утечек памяти
 }

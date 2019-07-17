@@ -1,7 +1,9 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "stdafx.h"
 #include <iostream>
 #include <conio.h>
 #include <iomanip>
+#include <string>
 #include <Windows.h>
 #include "Person.h"
 #include "lab_five_functions.h"
@@ -10,117 +12,66 @@
 using namespace std;
 
 Person::Person(char* _name, char* _surname, Sex _sex, int age) {
-	name = _name;
-	surname = _surname;
-	sex = _sex;
-	_age = age;
-}
-
-//Для совместимости со следующей лабой
-Person* Person::GetRandomPerson() {
-	Sex sex;
-	int sex_key = 1 + rand() % 2;
-	if (sex_key == 1) {
-		sex = Муж;
-	}
-	else {
-		sex = Жен;
-	}
-	char* name = MakeName(sex);
-	char* surname = MakeSurname(sex);
-
-	int age;
-	age = 1 + rand() % 100;
-
-	return new Person(name, surname, sex, age);
+	name_ = _name;
+	surname_ = _surname;
+	sex_ = _sex;
+	age_ = age;
 }
 
 Person::Person(bool flag) {
 	int sex_key = 1 + rand() % 2;
 	if (sex_key == 1) {
-		sex = Муж;
+		sex_ = Муж;
 	}
 	else {
-		sex = Жен;
+		sex_ = Жен;
 	}
 	
-	name = MakeName(this->GetSex());
-	surname = MakeSurname(this->GetSex());
+	name_ = MakeName(this->GetSex());
+	surname_ = MakeSurname(this->GetSex());
 
-	_age = 1 + rand() % 100;
+	age_ = 1 + rand() % 100;
+}
+
+string Person::GetInfo() {
+	string info;
+	info = GetName();
+	info += " ";
+	info += GetSurname();
+	return info;
 }
 
 int Person::GetAge() {
-	return _age;
+	return age_;
 }
 
 void Person::SetAge(int age) {
 	PersonPositiveCorrection(age);
-	_age = age;
+	age = age;
 }
 
 char* Person::GetName() {
-	return name;
+	return name_;
 }
 
 char* Person::GetSurname() {
-	return surname;
+	return surname_;
 }
 
 
 Sex Person::GetSex() {
-	return sex;
+	return sex_;
 }
 
 void Person::SetSex(Sex sex) {
 	sex = sex;
 }
 
-//Person* Person::Read() {
-//	const int kTempSize = 50;
-//	Person* person = new Person;
-//	int sex_key = 0;
-//	int key = 0;
-//
-//	person->name = NameInput("Введите имя:");
-//
-//	person->surname = NameInput("Введите фамилию:");
-//	cout << "Введите пол (1-муж/2-жен):" << endl;
-//	bool is_exit;
-//	do {
-//		while (sex_key == 0) {
-//			sex_key = _getch();
-//			if (sex_key != num_1 && sex_key != num_2)	sex_key = 0;
-//		}
-//		is_exit = true;
-//		switch (sex_key) {
-//		case num_1: {
-//			person->sex = Муж;
-//			is_exit = false;
-//			break;
-//		}
-//		case num_2: {
-//			person->sex = Жен;
-//			is_exit = false;
-//			break;
-//		}
-//		default: {
-//			cout << "Неверный ввод,введите число заново" << endl;
-//			break;
-//		}
-//		}
-//	} while (is_exit == true);
-//	cout << "Введите возраст:" << endl;
-//	int age = 0;
-//	person->SetAge(age);
-//	return person;
-//}
-
 void Person::Show() {
-	cout << setw(20) << left << surname << setw(20) << left << name
-		<< setw(8) << left << "Возраст: " << setw(10) << left << _age
+	cout << setw(20) << left << surname_ << setw(20) << left << name_
+		<< setw(8) << left << "Возраст: " << setw(10) << left << age_
 		<< setw(4) << left << "Пол:" << setw(10) << left;
-	if (sex == Муж) {
+	if (sex_ == Муж) {
 		cout << "Мужской" << endl;
 	}
 	else {
@@ -128,22 +79,20 @@ void Person::Show() {
 	}
 }
 
-char* Person::GetDiscription() {
-	char inform[100];
-	char temp[100];
-	strcpy_s(inform, surname);
-	strcat_s(inform, " ");
-	strcat_s(inform, name);
-	strcat_s(inform, ", ");
-	sprintf_s(temp,"%d" ,GetAge());
-	strcat_s(inform, temp);
-	strcat_s(inform, " лет ,");
-	if (sex == Муж) {
-		strcat_s(inform, "муж");
+void Person::PersonAgeCorrectionInput(int& age, const char kInvalidMessage[]) {
+	while (!(cin >> age) || (cin.peek() != '\n')) {
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << kInvalidMessage;
 	}
-	else {
-		strcat_s(inform, "жен");
-	}
-	strcat_s(inform, "\0");
-	return inform;
+}
+
+void Person::PersonPositiveCorrection(int& age) {
+	//TODO: Корректнее будет сделать minAge и maxAge константами
+	do {
+		PersonAgeCorrectionInput(age, "Введено не число! Повторите ввод:");
+		if (age <= kMinAge_ || age > kMaxAge_) {
+			cout << "Число введено не верно! Повторите ввод:";
+		}
+	} while (age <= kMinAge_ || age > kMaxAge_);
 }

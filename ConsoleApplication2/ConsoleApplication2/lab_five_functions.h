@@ -10,5 +10,5 @@ void ListsPrint(PersonList list_1, PersonList list_2, bool key);
 char* MakeName(Sex sex);
 char* MakeSurname(Sex sex);
 char* NameInput(const char* text);
-Person* Read();
+//Person* Read();
 char* CreateBusiness();

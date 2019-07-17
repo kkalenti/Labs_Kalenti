@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include <iostream>
+#include <string>
 #include "Person.h"
 #include "Child.h"
 #include "Adult.h"
@@ -7,26 +8,27 @@
 
 using namespace std;
 
-//TODO: Длинная строка, переноси
-Child::Child(char* _name, char* _surname, Sex _sex, int age, Adult* mother, Adult* father, char* school) : Person(_name, _surname, _sex, age) {
+Child::Child(char* name, char* surname, Sex sex,
+	int age, Adult* mother, Adult* father, char* school) 
+	: Person(name, surname, sex, age) {
 	mother_ = mother;
 	father_ = father;
 	school_ = school;
 }
 
 int Child::GetAge() {
-	return _age;
+	return age_;
 }
 
 void Child::SetAge(int age) {
 	if (age < 18 && age > 0) {
-		_age = age;
+		age = age;
 	}
 	else if (age < 1) {
-		_age = 1;
+		age = 1;
 	}
 	else {
-		_age = 17;
+		age = 17;
 	}
 }
 
@@ -42,52 +44,45 @@ void Child::SetFather(Adult* father) {
 	father_ = father;
 }
 
-char* Child::GetDiscription() {
+string Child::GetDiscription() {
 	//TODO: Чё за привычка со статикой работать? А если у тебя инфа не влезет в 200 символов? Переделай на динамику!
-	char inform[200];
-	char temp[200];
-	strcpy_s(inform, surname);
-	strcat_s(inform, " ");
-	strcat_s(inform, name);
-	strcat_s(inform, ", ");
-	sprintf_s(temp, "%d", GetAge());
-	strcat_s(inform, temp);
-	strcat_s(inform, " лет, ");
-	if (sex == Муж) {
-		strcat_s(inform, "мужчина, ");
+	// Спросить про выделение памяти
+	string inform;
+	string temp;
+	inform = surname_;
+	inform += " ";
+	inform += name_;
+	inform += ", ";
+	temp = to_string(GetAge());
+	inform += temp;
+	inform += " лет, ";
+	if (sex_ == Муж) {
+		inform += "мужчина, ";
 	}
 	else {
-		strcat_s(inform, "женщина, ");
+		inform += "женщина, ";
 	}
-	if (mother_ != nullptr && father_ != nullptr) { //TODO: Спросить здесь
+	if (mother_ != nullptr && father_ != nullptr) {
 		//TODO: Ниже куча дублей. Я бы сделал у Person метод GetInfo, который бы возвращал строку 
 		//TODO: "GetSurname() GetName()" и всё это сократилось бы нах
-		strcat_s(inform, "Родители: ");
-		strcat_s(inform, mother_->GetSurname());
-		strcat_s(inform, " ");
-		strcat_s(inform, mother_->GetName());
-		strcat_s(inform, " и ");
-		strcat_s(inform, father_->GetSurname());
-		strcat_s(inform, " ");
-		strcat_s(inform, father_->GetName());
+		inform += "Родители: ";
+		inform += mother_->GetInfo();
+		inform += " и ";
+		inform += father_->GetInfo();
 	}
 	else if (mother_ == nullptr && father_ != nullptr) {
-		strcat_s(inform, "Отец");
-		strcat_s(inform, father_->GetSurname());
-		strcat_s(inform, " ");
-		strcat_s(inform, father_->GetName());
+		inform += "Отец";
+		inform += father_->GetInfo();
 	}
 	else if (mother_ != nullptr && father_ == nullptr) {
-		strcat_s(inform, "Мать");
-		strcat_s(inform, mother_->GetSurname());
-		strcat_s(inform, " ");
-		strcat_s(inform, mother_->GetName());
+		inform += "Мать";
+		inform += mother_->GetInfo();
 	} else {
-		strcat_s(inform, "нет родителей");
+		inform += "нет родителей";
 	}
-	strcat_s(inform, ", ");
-	strcat_s(inform, "учится в: ");
-	strcat_s(inform, school_);
+	inform += ", ";
+	inform += "учится в: ";
+	inform += school_;
 	return inform;
 }
 

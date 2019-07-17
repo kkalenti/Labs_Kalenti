@@ -6,9 +6,8 @@ private:
 	Adult* married_on;
 	char* work_place;
 public:
-	//TODO: Почему входные параметры с нижним подчёркиванием?
-	Adult(char* _name, char* _surname, Sex _sex, int age, Adult* married_on, char* work_place);
-	char* GetDiscription() override;
+	Adult(char* name, char* surname, Sex sex, int age, Adult* marriedOn, char* workPlace);
+	virtual std::string GetDiscription();
 	static Adult* GetRandomPerson();
 	static Adult* GetMarriedPerson(Adult* MarriedOn);
 	void SetAge(int age);

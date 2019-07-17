@@ -229,47 +229,6 @@ int main() {
 				} while (is_exit_lab_four == true);
 				break;
 			}
-			case num_7: { //седьмая лаба
-				bool is_exit_lab_four = true;
-				do {
-					system("cls");
-					key_of_task = 0;
-					SeventhLabMenu();
-					while (key_of_task == 0) {
-						key_of_task = _getch();
-					}
-					system("cls");
-					switch (key_of_task) {
-					case num_1: {
-						lab7_1();
-						break;
-					}
-					case num_2: {
-						lab7_2();
-						break;
-					}
-					case num_3: {
-						lab7_3();
-						break;
-					}
-					case num_4: {
-						lab7_4();
-						break;
-					}
-					case backspace: {
-						is_exit_lab_four = false;
-						break;
-					}
-					default: {
-						system("cls");
-						cout << "Не правильно введен номер задания" << endl;
-						system("pause");
-						break;
-					}
-					}
-				} while (is_exit_lab_four == true);
-				break;
-			}
 			case backspace: {
 				is_exit_labs = false;
 				break;

@@ -8,7 +8,7 @@
 using namespace std; 
 
 void lab5() {
-	PersonList list_1 = MakeList(3);
+	/*PersonList list_1 = MakeList(3);
 	PersonList list_2 = MakeList(3);
 	cout << "Списки созданы" << endl << "Нажмите любую кнопку" << endl;
 	bool key = _getch();
@@ -29,5 +29,5 @@ void lab5() {
 	list_2.Clear();
 	ListsPrint(list_1, list_2, key);
 
-	system("pause");
+	system("pause");*/
 }
