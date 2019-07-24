@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model.Interfaces;
+using System.Xml.Serialization;
 
 namespace Model
 {	
@@ -13,16 +14,19 @@ namespace Model
 	/// </summary>
 	public class Circle : IFigure
 	{
+		[XmlAttribute]
 		/// <summary>
 		/// Площадь фигуры
 		/// </summary>
 		public double Surface { get; }
 
+		[XmlAttribute]
 		/// <summary>
 		/// Периметр фигуры
 		/// </summary>
 		public double Perimeter { get; }
 
+		[XmlAttribute]
 		/// <summary>
 		/// Радиус фигуры
 		/// </summary>

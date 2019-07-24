@@ -29,12 +29,22 @@ namespace View
 			InitializeComponent();
 		}
 
+		/// <summary>
+		/// Обработка кнопки для открытия формы добавления фигуры
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void AddButton_Click(object sender, EventArgs e)
 		{
 			AddingForm adding = new AddingForm(this);
 			adding.Show();
 		}
 
+		/// <summary>
+		/// Обработка кнопки удаления выделенных строк
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void RemoveButton_Click(object sender, EventArgs e)
 		{
 			foreach (DataGridViewRow row in FigureGrid.SelectedRows)
@@ -66,8 +76,12 @@ namespace View
 			FigureGrid.Rows.Add("Rectangle", rectangle.Surface, rectangle.Perimeter);
 		}
 
-		//TODO: че сделать чтобы она не отображалась?
 #if DEBUG
+		/// <summary>
+		/// Генерация рандомной фигуры
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void RandomObjectButton_Click(object sender, EventArgs e)
 		{
 			Random rand = new Random();
@@ -83,12 +97,22 @@ namespace View
 		}
 #endif
 
+		/// <summary>
+		/// Обработка кнопки для открытия формы поиска
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void FindObjectButton_Click(object sender, EventArgs e)
 		{
 			FindingForm finding = new FindingForm(this);
 			finding.Show();
 		}
 
+		/// <summary>
+		/// Обработка кнопки для сохранения данных
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void SaveButton_Click(object sender, EventArgs e)
 		{
 			foreach (IFigure figure in figures)
@@ -99,7 +123,6 @@ namespace View
 					using (FileStream file = new FileStream("C:\\Users\\kosti\\Desktop\\lessons\\Extra labs\\2\\persons.xml", FileMode.Append))
 					{
 						writer.Serialize(file, figure);
-						file.Close();
 					}
 				}
 				else
@@ -108,7 +131,6 @@ namespace View
 					using (FileStream file = new FileStream("C:\\Users\\kosti\\Desktop\\lessons\\Extra labs\\2\\persons.xml", FileMode.Append))
 					{
 						writer.Serialize(file, figure);
-						file.Close();
 					}
 				}
 			}

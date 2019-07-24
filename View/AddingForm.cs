@@ -10,8 +10,14 @@ using System.Windows.Forms;
 
 namespace View
 {
+	/// <summary>
+	/// Форма для добавления объектов
+	/// </summary>
 	public partial class AddingForm : Form
 	{
+		/// <summary>
+		/// Указатель на родительскую форму
+		/// </summary>
 		static MainForm main;
 
 		public AddingForm()
@@ -25,6 +31,11 @@ namespace View
 			main = mainForm;
 		}
 
+		/// <summary>
+		/// Выбор ввода информации о кругах
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void CircleRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
 			RectangleGroupBox.Enabled = false;
@@ -35,6 +46,11 @@ namespace View
 			this.errorProvider.SetError(LengthTextBox, "");
 		}
 
+		/// <summary>
+		/// Выбор ввода информации о прямоугольниках
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void RectangleRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
 			RectangleGroupBox.Enabled = true;
@@ -43,11 +59,21 @@ namespace View
 			this.errorProvider.SetError(RadiusTextBox, "");
 		}
 
+		/// <summary>
+		/// Обработка кнопки отмены
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void CancelButton_Click(object sender, EventArgs e)
 		{
 			this.Close();
 		}
 
+		/// <summary>
+		/// Обработка кнопки добавления объекта
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void AddButton_Click(object sender, EventArgs e)
 		{
 			if (CircleRadioButton.Checked)
@@ -64,6 +90,11 @@ namespace View
 			this.Close();
 		}
 
+		/// <summary>
+		/// Запрет на ввод любых символов кроме цифр и backspace
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void RadiusTextBox_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (!Char.IsDigit(e.KeyChar))
@@ -75,6 +106,11 @@ namespace View
 			}
 		}
 
+		/// <summary>
+		/// Проверка на валидность введенных данных о круге
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void RadiusTextBox_Validating(object sender, CancelEventArgs e)
 		{
 			string errorMsg;
@@ -90,6 +126,12 @@ namespace View
 			}
 		}
 
+		/// <summary>
+		/// Проверка стрки на отсутствие символов
+		/// </summary>
+		/// <param name="field">Введенная строка</param>
+		/// <param name="errorMessage">Сообщение об ошибке</param>
+		/// <returns></returns>
 		public bool IsZero(string field, out string errorMessage)
 		{
 			foreach(char letter in field)
@@ -104,6 +146,11 @@ namespace View
 			return true;
 		}
 
+		/// <summary>
+		/// Валидация для полей добавления прямоугольника
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void WidthTextBox_Validating(object sender, CancelEventArgs e)
 		{
 			string errorMsg;
@@ -125,6 +172,12 @@ namespace View
 			}
 		}
 
+		/// <summary>
+		/// Задать текст для ошибки
+		/// </summary>
+		/// <param name="ButtonEnabled">Разрешение на добавление в список</param>
+		/// <param name="WidthErr">Текст для ошибки поля ширины</param>
+		/// <param name="LengthErr">Текст для ошибки поля длины</param>
 		public void SetError(bool ButtonEnabled, string WidthErr, string LengthErr)
 		{
 			AddButton.Enabled = ButtonEnabled;

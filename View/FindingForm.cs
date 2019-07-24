@@ -11,8 +11,14 @@ using System.Windows.Forms;
 
 namespace View
 {
+	/// <summary>
+	/// Форма для поиска фигур
+	/// </summary>
 	public partial class FindingForm : Form
 	{
+		/// <summary>
+		/// Ссылка на родительскую форму
+		/// </summary>
 		static MainForm main;
 
 		public FindingForm()
@@ -26,6 +32,11 @@ namespace View
 			main = mainForm;
 		}
 
+		/// <summary>
+		/// Обработка кнопки поиска подходящих объектов
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void SearchButton_Click(object sender, EventArgs e)
 		{
 			FigureGrid.Rows.Clear();
@@ -45,6 +56,11 @@ namespace View
 			}
 		}
 
+		/// <summary>
+		/// Добавление фигуры в список
+		/// </summary>
+		/// <param name="name">Название фигуры</param>
+		/// <param name="figure">Фигура</param>
 		public void AddToGrid(string name, IFigure figure)
 		{
 			if (IsBetween(Convert.ToDouble(SurfaceFirstTextBox.Text),
@@ -56,6 +72,13 @@ namespace View
 			}
 		}
 
+		/// <summary>
+		/// Проверка на вхождение в интервал
+		/// </summary>
+		/// <param name="min">Минимум</param>
+		/// <param name="max">Максимум</param>
+		/// <param name="argument">Аргумент для проверки</param>
+		/// <returns></returns>
 		public bool IsBetween(double min, double max, double argument)
 		{
 			if(argument >= min && argument <= max)
@@ -65,6 +88,11 @@ namespace View
 			return false;
 		}
 
+		/// <summary>
+		/// Валидация для полей площади
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void SurfaceFirstTextBox_Validating(object sender, CancelEventArgs e)
 		{
 			string errorMsg;
@@ -81,6 +109,11 @@ namespace View
 			}
 		}
 
+		/// <summary>
+		/// Валидация для полей периметра
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void PerimeterFirstTextBox_Validating(object sender, CancelEventArgs e)
 		{
 			string errorMsg;
@@ -97,6 +130,11 @@ namespace View
 			}
 		}
 
+		/// <summary>
+		/// Запрет на ввод всего проме цифр и backspace
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void SurfaceFirstTextBox_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (!(Char.IsDigit(e.KeyChar)))
@@ -108,6 +146,14 @@ namespace View
 			}
 		}
 
+		/// <summary>
+		/// Установить ошибки для полей
+		/// </summary>
+		/// <param name="firstStr">Первое поле</param>
+		/// <param name="secondStr">Второе поле</param>
+		/// <param name="errorMsg">Сообщение об ошибке</param>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		public void SetError(TextBox firstStr, TextBox secondStr,
 			string errorMsg, object sender, CancelEventArgs e)
 		{
@@ -124,6 +170,11 @@ namespace View
 			}
 		}
 
+		/// <summary>
+		/// Проверка на пустую строку
+		/// </summary>
+		/// <param name="errorMessage">Текст ошибки</param>
+		/// <returns></returns>
 		public bool BlankFieldChecking(out string errorMessage)
 		{
 			if (SurfaceFirstTextBox.Text.Length == 0 || SurfaceSecondTextBox.Text.Length == 0 ||
@@ -136,11 +187,19 @@ namespace View
 			return true;
 		}
 
-		public bool ValidValueGap(string currentStr, string secondStr, out string errorMessage)
+		/// <summary>
+		/// Проверка на соответствие условию
+		/// значение первой строки меньше или равно значению второй
+		/// </summary>
+		/// <param name="firstStr">Первая строка</param>
+		/// <param name="secondStr">Вторая строка</param>
+		/// <param name="errorMessage">Текст ошибки</param>
+		/// <returns></returns>
+		public bool ValidValueGap(string firstStr, string secondStr, out string errorMessage)
 		{
-			if (currentStr.Length != 0 && secondStr.Length != 0)
+			if (firstStr.Length != 0 && secondStr.Length != 0)
 			{
-				if (Convert.ToDouble(currentStr) > Convert.ToDouble(secondStr))
+				if (Convert.ToDouble(firstStr) > Convert.ToDouble(secondStr))
 				{
 					errorMessage = "Second value must be more or equal to the first";
 					return false;

@@ -29,7 +29,9 @@
 		private void InitializeComponent()
 		{
 			this.FigureGroupBox = new System.Windows.Forms.GroupBox();
-			this.RandomObjectButton = new System.Windows.Forms.Button();
+#if DEBUG
+			this.RandomObjectButton = new System.Windows.Forms.Button(); 
+#endif
 			this.FindObjectButton = new System.Windows.Forms.Button();
 			this.FigureGrid = new System.Windows.Forms.DataGridView();
 			this.Figure = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,7 +50,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.FigureGroupBox.Controls.Add(this.SaveButton);
-			this.FigureGroupBox.Controls.Add(this.RandomObjectButton);
+#if DEBUG
+			this.FigureGroupBox.Controls.Add(this.RandomObjectButton); 
+#endif
 			this.FigureGroupBox.Controls.Add(this.FindObjectButton);
 			this.FigureGroupBox.Controls.Add(this.FigureGrid);
 			this.FigureGroupBox.Controls.Add(this.RemoveButton);
@@ -59,6 +63,7 @@
 			this.FigureGroupBox.TabIndex = 0;
 			this.FigureGroupBox.TabStop = false;
 			this.FigureGroupBox.Text = "Table of figures";
+#if DEBUG
 			// 
 			// RandomObjectButton
 			// 
@@ -69,7 +74,8 @@
 			this.RandomObjectButton.TabIndex = 5;
 			this.RandomObjectButton.Text = "Random";
 			this.RandomObjectButton.UseVisualStyleBackColor = true;
-			this.RandomObjectButton.Click += new System.EventHandler(this.RandomObjectButton_Click);
+			this.RandomObjectButton.Click += new System.EventHandler(this.RandomObjectButton_Click); 
+#endif
 			// 
 			// FindObjectButton
 			// 
@@ -177,7 +183,9 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn Surface;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Perimeter;
 		private System.Windows.Forms.Button FindObjectButton;
+#if DEBUG
 		private System.Windows.Forms.Button RandomObjectButton;
+#endif
 		private System.Windows.Forms.Button SaveButton;
 	}
 }
