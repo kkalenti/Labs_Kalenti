@@ -17,6 +17,7 @@ void DoubleOutput(List<double> *list) {
 
 void PersonOutput(List<Person> *list) {
 	cout << "Список Person: ";
+	//TODO: статика
 	char temp[150];
 	Person* person;
 	for (int i = 0; i < list->GetCount(); i++) {

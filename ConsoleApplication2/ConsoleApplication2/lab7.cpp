@@ -6,7 +6,9 @@
 #include "labsevenfunctions.h"
 
 using namespace std;
-
+//TODO: “.к. методы у теб€ работают по одной схеме - добавл€ем столько-то, показываем, удал€ем 2, показываем, добавл€ем ещЄ один , показываем
+//TODO: необходимо вынести саму структуру в качестве одного метода, а метода добавлени€/показывани€/другого добавлени€ передавать
+//TODO: в этот обобщЄнный метод в качестве калбеков (указателей на методы) 
 void lab7_1 () {
 	List<double> *list = new List<double>(nullptr);
 	for (int i = 0; i < 5; i++) {
@@ -23,7 +25,7 @@ void lab7_1 () {
 	*element = 10;
 	list->AddTo(element,4);
 	DoubleOutput(list);
-
+	//TODO: „то за коммент
 	delete list;//где что € не удал€ю?
 	system("pause");
 }
@@ -65,7 +67,7 @@ void lab7_3() {
 	}
 	list->AddTo(&mass, 4);
 	DoubleFiveOutput(list);
-
+	//TODO: очистка листа?
 	system("pause");
 }
 
