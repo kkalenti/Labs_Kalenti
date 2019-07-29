@@ -43,12 +43,12 @@ void PersonList::Add(Person* person) {
 
 void PersonList::Print() {
 	PersonListItem* curent_item = _head;
-	char temp[150];
-	strcpy_s(temp,curent_item->person->GetDiscription());
+	string temp;
+	temp = curent_item->person->GetDiscription();
 	cout << temp << endl;
 	while (curent_item->next != nullptr) {
 		curent_item = curent_item->next;
-		strcpy_s(temp,curent_item->person->GetDiscription());
+		temp = curent_item->person->GetDiscription();
 		cout << temp << endl;
 	}
 }
@@ -69,10 +69,10 @@ Person* PersonList::Find(int index) {
 int PersonList::IndexOf(Person* person) {
 	PersonListItem* curent_item = _head;
 	int count = 1;
-	while (curent_item->next != nullptr && curent_item != nullptr){
-		if (person->GetAge() == curent_item->person->GetAge() && 
-			strcmp(person->GetName(),curent_item->person->GetName()) == 0 &&
-			strcmp(person->GetSurname(),curent_item->person->GetSurname()) == 0 &&
+	while (curent_item->next != nullptr && curent_item != nullptr) {
+		if (person->GetAge() == curent_item->person->GetAge() &&
+			strcmp(person->GetName(), curent_item->person->GetName()) == 0 &&
+			strcmp(person->GetSurname(), curent_item->person->GetSurname()) == 0 &&
 			person->GetSex() == curent_item->person->GetSex()) {
 			return count;
 		}
@@ -119,7 +119,7 @@ void PersonList::RemoveAt(int index) {
 void PersonList::Clear() {
 	PersonListItem* curent_item = _head;
 	PersonListItem* temp;
-	while(curent_item->next != nullptr) {
+	while (curent_item->next != nullptr) {
 		temp = curent_item;
 		curent_item = curent_item->next;
 		delete temp;

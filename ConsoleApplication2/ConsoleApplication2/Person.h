@@ -2,22 +2,20 @@
 #include "sex_enumeration.h"
 
 class Person {
-protected: int _age;
-		   //TODO: должны быть динамические строки, а не предзаданные
-		char *name;
-		char *surname;
-		Sex sex;
+protected: int age_;
+		   char *name_;
+		   char *surname_;
+		   Sex sex_;
 public:
 		Person(char* name, char* surname, Sex sex, int age);
 		Person(bool flag);
+		std::string GetInfo();
 		int GetAge();
 		void SetAge(int age);
 		char* GetName();
 		char* GetSurname();
 		Sex GetSex();
 		void SetSex(Sex _sex);
-		static Person* GetRandomPerson();
-		//Person* Read();
 		void Show();
-		virtual char* GetDiscription();
+		virtual std::string GetDiscription();
 };

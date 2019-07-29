@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include <iostream>
 #include <conio.h>
+#include <string>
 #include "List.h"
 #include "Person.h"
 #include "labsevenfunctions.h"
@@ -17,12 +18,11 @@ void DoubleOutput(List<double> *list) {
 
 void PersonOutput(List<Person> *list) {
 	cout << "Список Person: ";
-	//TODO: статика
-	char temp[150];
+	string temp;
 	Person* person;
 	for (int i = 0; i < list->GetCount(); i++) {
 		person = list->Find(i);
-		strcpy_s(temp, person->GetDiscription());
+		temp = person->GetDiscription();
 		cout << temp << endl;
 	}
 

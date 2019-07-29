@@ -106,9 +106,6 @@
     <Filter Include="Файлы заголовков\Лабораторные\Седьмая лабораторная">
       <UniqueIdentifier>{034e52c0-23e7-40d1-9ffc-8673a6456cd9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Исходные файлы\Лабораторные\Седьмая лабораторная\Классы">
-      <UniqueIdentifier>{007d3969-c6af-4ed6-8c84-2be197574489}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Файлы заголовков\Лабораторные\Седьмая лабораторная\Классы">
       <UniqueIdentifier>{25139b75-9d7a-4212-a3b6-14501d9fdf9e}</UniqueIdentifier>
     </Filter>
@@ -283,9 +280,6 @@
     </ClCompile>
     <ClCompile Include="lab7.cpp">
       <Filter>Исходные файлы\Лабораторные\Седьмая лабораторная</Filter>
-    </ClCompile>
-    <ClCompile Include="List.cpp">
-      <Filter>Исходные файлы\Лабораторные\Седьмая лабораторная\Классы</Filter>
     </ClCompile>
     <ClCompile Include="labsevenfunctions.cpp">
       <Filter>Исходные файлы\Лабораторные\Седьмая лабораторная\Функции</Filter>
