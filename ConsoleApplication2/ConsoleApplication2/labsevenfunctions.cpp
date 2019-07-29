@@ -16,6 +16,20 @@ void DoubleOutput(List<double> *list) {
 	cout << endl;
 }
 
+void DoubleCreateList(List<double> *list) {
+	for (int i = 0; i < 5; i++) {
+		double *element = new double;
+		*element = i;
+		list->Add(element);
+	}
+}
+
+void AddDoubleElement(List<double> *list) {
+	double *element = new double;
+	*element = 10;
+	list->AddTo(element, 4);
+}
+
 void PersonOutput(List<Person> *list) {
 	cout << "Список Person: ";
 	string temp;
@@ -29,7 +43,17 @@ void PersonOutput(List<Person> *list) {
 	cout << endl;
 }
 
-void DoubleFiveOutput(List<double[5]>* list) {
+void PersonCreateList(List<Person> *list) {
+	for (int i = 0; i < 5; i++) {
+		list->Add(new Person(true));
+	}
+}
+
+void AddPersonElement(List<Person> *list) {
+	list->AddTo(new Person(true), 4);
+}
+
+void DoubleArrayOutput(List<double[5]>* list) {
 	cout << "Список Double[5]: ";
 	for (int i = 0; i < list->GetCount(); i++) {
 		double* mass = *list->Find(i);
@@ -42,7 +66,25 @@ void DoubleFiveOutput(List<double[5]>* list) {
 	cout << endl;
 }
 
-void ListOutput(List<List<double>> *list) {
+void DoubleArrayCreateList(List<double[5]> *list) {
+	for (int i = 0; i < 5; i++) {
+		double mass[5];
+		for (int j = i; j < i + 5; j++) {
+			mass[j - i] = j;
+		}
+		list->Add(&mass);
+	}
+}
+
+void AddDoubleArrayElement(List<double[5]> *list) {
+	double mass[5];
+	for (int j = 0; j < 5; j++) {
+		mass[j] = j + 10;
+	}
+	list->AddTo(&mass, 4);
+}
+
+void DoubleListOutput(List<List<double>> *list) {
 	cout << "Список List<double>: " << endl;
 	Person* person;
 	for (int i = 0; i < list->GetCount(); i++) {
@@ -54,4 +96,28 @@ void ListOutput(List<List<double>> *list) {
 	}
 
 	cout << endl;
+}
+
+void DoubleListCreateList(List<List<double>> *list) {
+	double *element;
+	for (int i = 0; i < 5; i++) {
+		List<double> *list1 = new List<double>(nullptr);
+		for (int j = i; j < i + 5; j++) {
+			element = new double;
+			*element = j;
+			list1->Add(element);
+		}
+		list->Add(list1);
+	}
+}
+
+void AddDoubleListElement(List<List<double>> *list) {
+	double *element;
+	List<double> *list1 = new List<double>(nullptr);
+	for (int j = 0; j < 5; j++) {
+		element = new double;
+		*element = j + 10;
+		list1->Add(element);
+	}
+	list->AddTo(list1, 4);
 }
