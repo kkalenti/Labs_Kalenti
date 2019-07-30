@@ -12,9 +12,9 @@ using namespace std;
 //TODO: необходимо вынести саму структуру в качестве одного метода, а метода добавления/показывания/другого добавления передавать
 //TODO: в этот обобщённый метод в качестве калбеков (указателей на методы) 
 
-//template<typename T>
-void lab7(void(*CreateFnc)(List<double[5]>*), void(*OutputFnc)(List<double[5]>*), void(*AddFnc)(List<double[5]>*)) {
-	List<double[5]> *list = new List<double[5]>(nullptr);
+template<typename T>
+void lab7(void(*CreateFnc)(List<T>*), void(*OutputFnc)(List<T>*), void(*AddFnc)(List<T>*)) {
+	List<T> *list = new List<T>(nullptr);
 	CreateFnc(list);
 	OutputFnc(list);
 
@@ -40,19 +40,19 @@ void LabSevenMain() {
 		system("cls");
 		switch (key_of_task) {
 		case num_1: {
-			lab7<double>(DoubleCreateList, DoubleOutput, AddDoubleElement);
+			lab7<double>(CreateDoubleList, DoubleOutput, AddDoubleElement);
 			break;
 		}
 		case num_2: {
-			lab7<Person>(PersonCreateList, PersonOutput, AddPersonElement);
+			lab7<Person>(CreatePersonList, PersonOutput, AddPersonElement);
 			break;
 		}
 		case num_3: {
-			lab7<double[5]>(DoubleArrayCreateList, DoubleArrayOutput, AddDoubleArrayElement);
+			lab7<double*>(CreateDoubleArrayList, DoubleArrayOutput, AddDoubleArrayElement);
 			break;
 		}
 		case num_4: {
-			lab7<List<double>>(DoubleListCreateList, DoubleListOutput, AddDoubleListElement);
+			lab7<List<double>>(CreateDoubleListList, DoubleListOutput, AddDoubleListElement);
 			break;
 		}
 		case backspace: {
@@ -68,28 +68,3 @@ void LabSevenMain() {
 		}
 	} while (is_exit_lab_four == true);
 }
-
-void lab7_3() {
-	List<double[5]> *list = new List<double[5]>(nullptr);
-	for (int i = 0; i < 5; i++) {
-		double mass[5];
-		for (int j = i; j < i + 5; j++) {
-			mass[j-i] = j;
-		}
-		list->Add(&mass);
-	}
-	DoubleArrayOutput(list);
-
-	list->RemoveAt(2);
-	DoubleArrayOutput(list);
-
-	double mass[5];
-	for (int j = 0; j < 5; j++) {
-		mass[j] = j+10;
-	}
-	list->AddTo(&mass, 4);
-	DoubleArrayOutput(list);
-	delete list;
-	system("pause");
-}
-

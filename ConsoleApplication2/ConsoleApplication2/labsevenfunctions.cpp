@@ -16,7 +16,7 @@ void DoubleOutput(List<double> *list) {
 	cout << endl;
 }
 
-void DoubleCreateList(List<double> *list) {
+void CreateDoubleList(List<double> *list) {
 	for (int i = 0; i < 5; i++) {
 		double *element = new double;
 		*element = i;
@@ -43,7 +43,7 @@ void PersonOutput(List<Person> *list) {
 	cout << endl;
 }
 
-void PersonCreateList(List<Person> *list) {
+void CreatePersonList(List<Person> *list) {
 	for (int i = 0; i < 5; i++) {
 		list->Add(new Person(true));
 	}
@@ -53,8 +53,8 @@ void AddPersonElement(List<Person> *list) {
 	list->AddTo(new Person(true), 4);
 }
 
-void DoubleArrayOutput(List<double[5]>* list) {
-	cout << "Список Double[5]: ";
+void DoubleArrayOutput(List<double*>* list) {
+	cout << "Список Double*: ";
 	for (int i = 0; i < list->GetCount(); i++) {
 		double* mass = *list->Find(i);
 		for (int j = 0; j < 5; j++) {
@@ -66,22 +66,26 @@ void DoubleArrayOutput(List<double[5]>* list) {
 	cout << endl;
 }
 
-void DoubleArrayCreateList(List<double[5]> *list) {
+void CreateDoubleArrayList(List<double*> *list) {
 	for (int i = 0; i < 5; i++) {
-		double mass[5];
+		double** mass;
+		mass = new double*[1];
+		mass[0] = new double[5];
 		for (int j = i; j < i + 5; j++) {
-			mass[j - i] = j;
+			mass[0][j-i] = j;
 		}
-		list->Add(&mass);
+		list->Add(mass);
 	}
 }
 
-void AddDoubleArrayElement(List<double[5]> *list) {
-	double mass[5];
+void AddDoubleArrayElement(List<double*> *list) {
+	double** mass;
+	mass = new double*[1];
+	mass[0] = new double[5];
 	for (int j = 0; j < 5; j++) {
-		mass[j] = j + 10;
+		mass[0][j] = j + 10;
 	}
-	list->AddTo(&mass, 4);
+	list->AddTo(mass, 4);
 }
 
 void DoubleListOutput(List<List<double>> *list) {
@@ -98,7 +102,7 @@ void DoubleListOutput(List<List<double>> *list) {
 	cout << endl;
 }
 
-void DoubleListCreateList(List<List<double>> *list) {
+void CreateDoubleListList(List<List<double>> *list) {
 	double *element;
 	for (int i = 0; i < 5; i++) {
 		List<double> *list1 = new List<double>(nullptr);
