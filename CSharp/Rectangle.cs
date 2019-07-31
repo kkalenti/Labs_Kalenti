@@ -28,19 +28,20 @@ namespace Model
 		/// <summary>
 		/// Длина
 		/// </summary>
-		public double Lengh { get; }
+		public double Length { get; }
 
 		public Rectangle()	{}
 
 		public Rectangle(double width, double length)
 		{
-			if (width <= 0 || length <= 0)
+			if (width <= 0 || Double.IsNaN(width) || Double.IsInfinity(width)
+				|| length <= 0 || Double.IsNaN(length) || Double.IsInfinity(length))
 			{
 				throw new ArgumentException("Введенное значение меньше или равно 0");
 			}
 
 			Width = width;
-			Lengh = length;
+			Length = length;
 
 			Surface = width * length;
 			Perimeter = 2 * width + 2 * length;
@@ -52,7 +53,7 @@ namespace Model
 		public void GetDescription()
 		{
 			Console.WriteLine("Прямоугольник, ширина: {0}, длина: {1}, площадь: {2:0.00}, периметр: {3:0.00}",
-				Width, Lengh, Surface, Perimeter);
+				Width, Length, Surface, Perimeter);
 		}
 	}
 }

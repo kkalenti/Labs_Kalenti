@@ -36,7 +36,7 @@ namespace Model
 
 		public  Circle(double radius)
 		{
-			if (radius <= 0)
+			if (radius <= 0 || Double.IsNaN(radius) || Double.IsInfinity(radius))
 			{
 				throw new ArgumentException("Введенное значение меньше или равно 0");
 			}
