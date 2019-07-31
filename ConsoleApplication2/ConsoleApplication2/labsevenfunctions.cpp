@@ -8,6 +8,7 @@
 
 using namespace std;
 
+//TODO: Ѕольшинство методов получились достаточно убогими, т.к. везде забито по 5 элеметов, перепиши, чтобы кол-во передавалось снаружи
 void DoubleOutput(List<double> *list) {
 	cout << "—писок double: ";
 	for (int i = 0; i < list->GetCount(); i++) {

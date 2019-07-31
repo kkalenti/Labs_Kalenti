@@ -45,8 +45,7 @@ void Child::SetFather(Adult* father) {
 }
 
 string Child::GetDiscription() {
-	//TODO: Чё за привычка со статикой работать? А если у тебя инфа не влезет в 200 символов? Переделай на динамику!
-	// Спросить про выделение памяти
+
 	string inform;
 	string temp;
 	inform = surname_;
@@ -63,8 +62,6 @@ string Child::GetDiscription() {
 		inform += "женщина, ";
 	}
 	if (mother_ != nullptr && father_ != nullptr) {
-		//TODO: Ниже куча дублей. Я бы сделал у Person метод GetInfo, который бы возвращал строку 
-		//TODO: "GetSurname() GetName()" и всё это сократилось бы нах
 		inform += "Родители: ";
 		inform += mother_->GetInfo();
 		inform += " и ";

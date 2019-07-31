@@ -36,7 +36,6 @@ Adult* Adult::GetMarriedOn() {
 }
 
 string Adult::GetDiscription() {
-	//TODO: Чё за привычка со статикой работать? А если у тебя инфа не влезет в 200 символов? Переделай на динамику!
 	string inform;
 	string temp;
 	inform = surname_;
@@ -71,8 +70,6 @@ string Adult::GetDiscription() {
 	return inform;
 }
 
-//TODO: Ниже дубль, почти один в один.
-// Как здесь лучше?
 Adult* Adult::GetRandomPerson() {
 	Sex sex;
 	int sex_key = 1 + rand() % 2;

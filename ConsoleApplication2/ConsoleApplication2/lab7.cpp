@@ -8,9 +8,6 @@
 #include "num_enumeration.h"
 
 using namespace std;
-//TODO: Т.к. методы у тебя работают по одной схеме - добавляем столько-то, показываем, удаляем 2, показываем, добавляем ещё один , показываем
-//TODO: необходимо вынести саму структуру в качестве одного метода, а метода добавления/показывания/другого добавления передавать
-//TODO: в этот обобщённый метод в качестве калбеков (указателей на методы) 
 
 template<typename T>
 void lab7(void(*CreateFnc)(List<T>*), void(*OutputFnc)(List<T>*), void(*AddFnc)(List<T>*)) {
@@ -29,6 +26,7 @@ void lab7(void(*CreateFnc)(List<T>*), void(*OutputFnc)(List<T>*), void(*AddFnc)(
 }
 
 void LabSevenMain() {
+	//TODO: Название плохое, получается ниже - "пока у тебя выход из лабы 4, то..." нужно другое название
 	bool is_exit_lab_four = true;
 	do {
 		system("cls");
