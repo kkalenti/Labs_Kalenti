@@ -16,16 +16,18 @@ namespace View
 	/// </summary>
 	public partial class FindingForm : Form
 	{
+		//TODO: Неправильно в дочерней форме хранить указатель на родительскую! Убирай нах.
 		/// <summary>
 		/// Ссылка на родительскую форму
 		/// </summary>
 		static MainForm main;
-
+		//TODO: XML
 		public FindingForm()
 		{
 			InitializeComponent();
 		}
 
+		//TODO: Неправильно в дочернюю форму передавать указатель на родительскую! Убирай нах.
 		public FindingForm(MainForm mainForm)
 		{
 			InitializeComponent();
@@ -95,6 +97,7 @@ namespace View
 		/// <param name="e"></param>
 		private void SurfaceFirstTextBox_Validating(object sender, CancelEventArgs e)
 		{
+			//TODO: Дубль
 			string errorMsg;
 			if (!BlankFieldChecking(out errorMsg))
 			{
@@ -116,6 +119,7 @@ namespace View
 		/// <param name="e"></param>
 		private void PerimeterFirstTextBox_Validating(object sender, CancelEventArgs e)
 		{
+			//TODO: Дубль
 			string errorMsg;
 			if (!BlankFieldChecking(out errorMsg))
 			{

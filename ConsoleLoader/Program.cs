@@ -8,16 +8,20 @@ using Model;
 
 namespace ConsoleLoader
 {
+	// TODO: RSDN, XML
 	class Program
 	{
+		//TODO: Используй var, там, где понятен тип, так получается код чище
 		/// <summary>
 		/// Добавление круга в список
 		/// </summary>
 		/// <param name="figures"> Список фигур </param>
+		/// TODO: Порядок ключевых слов, сперва должен идти модификатор доступа, а потом static
 		static public void CircleToList(List<IFigure> figures)
 		{
 			try
 			{
+				//TODO: Дубль
 				Console.WriteLine("Введите радиус круга:");
 				double radius = Convert.ToDouble(Console.ReadLine());
 
@@ -35,19 +39,25 @@ namespace ConsoleLoader
 		/// Добавление прямугольника в список
 		/// </summary>
 		/// <param name="figures"> Список фигур </param>
+		/// TODO: Порядок ключевых слов, сперва должен идти модификатор доступа, а потом static
 		static public void RectangleToList(List<IFigure> figures)
 		{
 			try
 			{
+				//TODO: Неправильно сделан ввод, получается, что если пользователь накосячит
+				//TODO: во втором параметре, то придётся вводить и первый, а это не правильно!
+
+				//TODO: Дубль
 				Console.WriteLine("Введите ширину прямоугольника:");
 				double width = Convert.ToDouble(Console.ReadLine());
 
+				//TODO: Дубль
 				Console.WriteLine("Введите длину прямоугольника:");
 				double length = Convert.ToDouble(Console.ReadLine());
 
 				IFigure rectangle = new Rectangle(width, length);
 				figures.Add(rectangle);
-			}
+			}//TODO: Неправильно обрабатывать по базовому исключению - надо конкретизировать тип исключения
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex.Message);
@@ -59,6 +69,7 @@ namespace ConsoleLoader
 		/// Вывод элементов списка
 		/// </summary>
 		/// <param name="figures"> Список фигур </param>
+		/// TODO: Порядок ключевых слов, сперва должен идти модификатор доступа, а потом static
 		static public void ShowList(List<IFigure> figures)
 		{
 			foreach (IFigure i in figures)
@@ -72,6 +83,7 @@ namespace ConsoleLoader
 		/// Удаление элемента списка
 		/// </summary>
 		/// <param name="figures">Список фигур </param>
+		/// TODO: Порядок ключевых слов, сперва должен идти модификатор доступа, а потом static
 		static public void DeleteElement(List<IFigure> figures)
 		{
 			try
@@ -91,6 +103,7 @@ namespace ConsoleLoader
 		/// <summary>
 		/// Вывод меню программы
 		/// </summary>
+		/// TODO: Порядок ключевых слов, сперва должен идти модификатор доступа, а потом static
 		static public void ShowMenu()
 		{
 			Console.WriteLine("Выберите действие:");
@@ -101,7 +114,7 @@ namespace ConsoleLoader
 			Console.WriteLine("Esc.Выйти из программы");
 		}
 
-
+		//TODO: RSDN
 		static void Main(string[] args)
 		{
 			List<IFigure> figures = new List<IFigure>();
@@ -112,6 +125,7 @@ namespace ConsoleLoader
 				var key = Console.ReadKey(false).Key;
 				switch (key)
 				{
+					//TODO: Работает только с NumPad-овскими клавишами
 					case ConsoleKey.NumPad1:
 						Console.Clear();
 						CircleToList(figures);

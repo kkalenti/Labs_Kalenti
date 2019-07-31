@@ -22,8 +22,10 @@ namespace View
 		/// <summary>
 		/// Список фигур
 		/// </summary>
+		/// //TODO: RSDN
 		public List<IFigure> figures = new List<IFigure>();
 
+		//TODO: XML
 		public MainForm()
 		{
 			InitializeComponent();
@@ -58,6 +60,7 @@ namespace View
 		/// Добавление круга в список
 		/// </summary>
 		/// <param name="figures"> Список фигур </param>
+		/// //TODO: XML
 		public void CircleToList(double radius)
 		{
 			IFigure circle = new Model.Circle(radius);
@@ -69,6 +72,7 @@ namespace View
 		/// Добавление прямугольника в список
 		/// </summary>
 		/// <param name="figures"> Список фигур </param>
+		/// //TODO: XML
 		public void RectangleToList(double width, double length)
 		{
 			IFigure rectangle = new Model.Rectangle(width, length);
@@ -119,7 +123,9 @@ namespace View
 			{
 				if(figure is Model.Rectangle)
 				{
+					//TODO: Дубль
 					XmlSerializer writer = new XmlSerializer(typeof(Model.Rectangle));
+					//TODO: Абсолютные пути, серьёзно?
 					using (FileStream file = new FileStream("C:\\Users\\kosti\\Desktop\\lessons\\Extra labs\\2\\persons.xml", FileMode.Append))
 					{
 						writer.Serialize(file, figure);
@@ -127,7 +133,9 @@ namespace View
 				}
 				else
 				{
+					//TODO: Дубль
 					XmlSerializer writer = new XmlSerializer(typeof(Model.Circle));
+					//TODO: Абсолютные пути, серьёзно?
 					using (FileStream file = new FileStream("C:\\Users\\kosti\\Desktop\\lessons\\Extra labs\\2\\persons.xml", FileMode.Append))
 					{
 						writer.Serialize(file, figure);

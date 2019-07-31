@@ -15,15 +15,19 @@ namespace View
 	/// </summary>
 	public partial class AddingForm : Form
 	{
+		//TODO: Неправильно в дочерней форме хранить указатель на родительскую! Убирай нах.
 		/// <summary>
 		/// Указатель на родительскую форму
 		/// </summary>
 		static MainForm main;
 
+
 		public AddingForm()
 		{
 			InitializeComponent();
 		}
+
+		//TODO: Неправильно в дочернюю форму передавать указатель на родительскую! Убирай нах.
 
 		public AddingForm(MainForm mainForm)
 		{
@@ -178,6 +182,7 @@ namespace View
 		/// <param name="ButtonEnabled">Разрешение на добавление в список</param>
 		/// <param name="WidthErr">Текст для ошибки поля ширины</param>
 		/// <param name="LengthErr">Текст для ошибки поля длины</param>
+		/// TODO: RSDN
 		public void SetError(bool ButtonEnabled, string WidthErr, string LengthErr)
 		{
 			AddButton.Enabled = ButtonEnabled;
