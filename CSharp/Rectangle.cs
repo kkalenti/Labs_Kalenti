@@ -34,6 +34,11 @@ namespace Model
 
 		public Rectangle(double width, double length)
 		{
+			if (width <= 0 || length <= 0)
+			{
+				throw new ArgumentException("Введенное значение меньше или равно 0");
+			}
+
 			Width = width;
 			Lengh = length;
 
