@@ -5,6 +5,7 @@
 #include "List.h"
 #include "Person.h"
 #include "labsevenfunctions.h"
+#define ARRAY_SIZE 5
 
 using namespace std;
 
@@ -17,8 +18,8 @@ void DoubleOutput(List<double> *list) {
 	cout << endl;
 }
 
-void CreateDoubleList(List<double> *list) {
-	for (int i = 0; i < 5; i++) {
+void CreateDoubleList(List<double> *list, int size) {
+	for (int i = 0; i < size; i++) {
 		double *element = new double;
 		*element = i;
 		list->Add(element);
@@ -44,8 +45,8 @@ void PersonOutput(List<Person> *list) {
 	cout << endl;
 }
 
-void CreatePersonList(List<Person> *list) {
-	for (int i = 0; i < 5; i++) {
+void CreatePersonList(List<Person> *list, int size) {
+	for (int i = 0; i < size; i++) {
 		list->Add(new Person(true));
 	}
 }
@@ -58,7 +59,7 @@ void DoubleArrayOutput(List<double*>* list) {
 	cout << "Список Double*: ";
 	for (int i = 0; i < list->GetCount(); i++) {
 		double* mass = *list->Find(i);
-		for (int j = 0; j < 5; j++) {
+		for (int j = 0; j < ARRAY_SIZE; j++) {
 			cout << mass[j] << ' ';
 		}
 		cout << endl;
@@ -67,12 +68,12 @@ void DoubleArrayOutput(List<double*>* list) {
 	cout << endl;
 }
 
-void CreateDoubleArrayList(List<double*> *list) {
-	for (int i = 0; i < 5; i++) {
+void CreateDoubleArrayList(List<double*> *list, int size) {
+	for (int i = 0; i < size; i++) {
 		double** mass;
 		mass = new double*[1];
-		mass[0] = new double[5];
-		for (int j = i; j < i + 5; j++) {
+		mass[0] = new double[size];
+		for (int j = i; j < i + size; j++) {
 			mass[0][j-i] = j;
 		}
 		list->Add(mass);
@@ -82,8 +83,8 @@ void CreateDoubleArrayList(List<double*> *list) {
 void AddDoubleArrayElement(List<double*> *list) {
 	double** mass;
 	mass = new double*[1];
-	mass[0] = new double[5];
-	for (int j = 0; j < 5; j++) {
+	mass[0] = new double[ARRAY_SIZE];
+	for (int j = 0; j < ARRAY_SIZE; j++) {
 		mass[0][j] = j + 10;
 	}
 	list->AddTo(mass, 4);
@@ -103,11 +104,11 @@ void DoubleListOutput(List<List<double>> *list) {
 	cout << endl;
 }
 
-void CreateDoubleListList(List<List<double>> *list) {
+void CreateDoubleListList(List<List<double>> *list, int size) {
 	double *element;
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < size; i++) {
 		List<double> *list1 = new List<double>(nullptr);
-		for (int j = i; j < i + 5; j++) {
+		for (int j = i; j < i + size; j++) {
 			element = new double;
 			*element = j;
 			list1->Add(element);
@@ -119,7 +120,7 @@ void CreateDoubleListList(List<List<double>> *list) {
 void AddDoubleListElement(List<List<double>> *list) {
 	double *element;
 	List<double> *list1 = new List<double>(nullptr);
-	for (int j = 0; j < 5; j++) {
+	for (int j = 0; j < ARRAY_SIZE; j++) {
 		element = new double;
 		*element = j + 10;
 		list1->Add(element);
