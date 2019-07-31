@@ -21,11 +21,6 @@ namespace ConsoleLoader
 				Console.WriteLine("Введите радиус круга:");
 				double radius = Convert.ToDouble(Console.ReadLine());
 
-				if (radius <= 0)
-				{
-					throw new ArgumentException("Введенное значение меньше или равно 0");
-				}
-
 				IFigure circle = new Circle(radius);
 				figures.Add(circle);
 			}
@@ -49,11 +44,6 @@ namespace ConsoleLoader
 
 				Console.WriteLine("Введите длину прямоугольника:");
 				double length = Convert.ToDouble(Console.ReadLine());
-
-				if (width <= 0 || length <= 0)
-				{
-					throw new ArgumentException("Введенное значение меньше или равно 0");
-				}
 
 				IFigure rectangle = new Rectangle(width, length);
 				figures.Add(rectangle);

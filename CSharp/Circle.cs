@@ -36,6 +36,11 @@ namespace Model
 
 		public  Circle(double radius)
 		{
+			if (radius <= 0)
+			{
+				throw new ArgumentException("Введенное значение меньше или равно 0");
+			}
+
 			Radius = radius;
 			Surface = 2 * Math.PI * radius;
 			Perimeter = Math.PI * Radius * Radius;
