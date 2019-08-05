@@ -31,6 +31,11 @@ namespace Model
 		/// Радиус фигуры
 		/// </summary>
 		public double Radius { get; }
+
+		/// <summary>
+		/// Описание фигуры
+		/// </summary>
+		public string Description { get; }
 		
 		//TODO: XML
 		public Circle() { }
@@ -38,26 +43,28 @@ namespace Model
 		//TODO: XML
 		public Circle(double radius)
 		{
+			const int valueAlignment = 4;
 			if (radius <= 0)
 			{
-				//TODO: Сообщение некорректно, т.к. значение может и не вводиться.
-				throw new ArgumentException("Введенное значение меньше или равно 0");
+				//TODO: Сообщение некорректно, т.к. значение может и не вводиться. Done
+				throw new ArgumentException();
 			}
 
 			Radius = radius;
 			Surface = 2 * Math.PI * radius;
 			Perimeter = Math.PI * Radius * Radius;
+			Description = $"Круг, радиус: {Radius}, площадь: {Surface,valueAlignment:F3}," +
+			              $" периметр: {Perimeter,valueAlignment:F3}";
 		}
 
-		//TODO: Правильнее сделать свойством
+		//TODO: Правильнее сделать свойством done
 		/// <summary>
 		/// Вывод информации о фигуре
 		/// </summary>
-		public void GetDescription()
+		public void ShowDescription()
 		{
-			//TODO: Переделай в интерполяционную строку - лучше будет смотреться
-			Console.WriteLine("Круг, радиус: {0}, площадь: {1:0.00}, периметр: {2:0.00}",
-				Radius, Surface, Perimeter);
+			//TODO: Переделай в интерполяционную строку - лучше будет смотреться done
+			Console.WriteLine(Description);
 		}
 	}
 }

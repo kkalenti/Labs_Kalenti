@@ -11,57 +11,61 @@ namespace ConsoleLoader
 	// TODO: RSDN, XML
 	class Program
 	{
-		//TODO: Используй var, там, где понятен тип, так получается код чище
+		//TODO: Используй var, там, где понятен тип, так получается код чище done
 		/// <summary>
 		/// Добавление круга в список
 		/// </summary>
 		/// <param name="figures"> Список фигур </param>
-		/// TODO: Порядок ключевых слов, сперва должен идти модификатор доступа, а потом static
-		static public void CircleToList(List<IFigure> figures)
+		public static void CircleToList(List<IFigure> figures)
 		{
-			try
-			{
-				//TODO: Дубль
-				Console.WriteLine("Введите радиус круга:");
-				double radius = Convert.ToDouble(Console.ReadLine());
+			//TODO: Дубль done
+			var radius = DoubleInput("Введите радиус круга:");
 
-				IFigure circle = new Circle(radius);
-				figures.Add(circle);
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.Message);
-				Console.ReadKey();
-			}
+			IFigure circle = new Circle(radius);
+			figures.Add(circle);
 		}
 
 		/// <summary>
 		/// Добавление прямугольника в список
 		/// </summary>
 		/// <param name="figures"> Список фигур </param>
-		/// TODO: Порядок ключевых слов, сперва должен идти модификатор доступа, а потом static
-		static public void RectangleToList(List<IFigure> figures)
+		public static void RectangleToList(List<IFigure> figures)
 		{
-			try
+			var width = DoubleInput("Введите ширину прямоугольника:");
+			var length = DoubleInput("Введите длину прямоугольника:");
+
+			IFigure rectangle = new Rectangle(width, length);
+			figures.Add(rectangle);
+		}
+
+		public static double DoubleInput(string message)
+		{
+			while (true)
 			{
-				//TODO: Неправильно сделан ввод, получается, что если пользователь накосячит
-				//TODO: во втором параметре, то придётся вводить и первый, а это не правильно!
+				try
+				{
+					//TODO: Неправильно сделан ввод, получается, что если пользователь накосячит
+					//TODO: во втором параметре, то придётся вводить и первый, а это не правильно! done
 
-				//TODO: Дубль
-				Console.WriteLine("Введите ширину прямоугольника:");
-				double width = Convert.ToDouble(Console.ReadLine());
+					//TODO: Дубль done
+					Console.WriteLine(message);
+					var value = Convert.ToDouble(Console.ReadLine());
 
-				//TODO: Дубль
-				Console.WriteLine("Введите длину прямоугольника:");
-				double length = Convert.ToDouble(Console.ReadLine());
+					if (value <= 0)
+					{
+						throw new ArgumentException();
+					}
 
-				IFigure rectangle = new Rectangle(width, length);
-				figures.Add(rectangle);
-			}//TODO: Неправильно обрабатывать по базовому исключению - надо конкретизировать тип исключения
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.Message);
-				Console.ReadKey();
+					return value;
+				} //TODO: Неправильно обрабатывать по базовому исключению - надо конкретизировать тип исключения done
+				catch (ArgumentException)
+				{
+					Console.WriteLine("Введенное значение меньше или равно 0");
+				}
+				catch (FormatException formatEx)
+				{
+					Console.WriteLine(formatEx.Message);
+				}
 			}
 		}
 
@@ -69,12 +73,11 @@ namespace ConsoleLoader
 		/// Вывод элементов списка
 		/// </summary>
 		/// <param name="figures"> Список фигур </param>
-		/// TODO: Порядок ключевых слов, сперва должен идти модификатор доступа, а потом static
-		static public void ShowList(List<IFigure> figures)
+		public static void ShowList(List<IFigure> figures)
 		{
 			foreach (IFigure i in figures)
 			{
-				i.GetDescription();
+				i.ShowDescription();
 			}
 			Console.ReadKey();
 		}
@@ -83,13 +86,12 @@ namespace ConsoleLoader
 		/// Удаление элемента списка
 		/// </summary>
 		/// <param name="figures">Список фигур </param>
-		/// TODO: Порядок ключевых слов, сперва должен идти модификатор доступа, а потом static
-		static public void DeleteElement(List<IFigure> figures)
+		public static void DeleteElement(List<IFigure> figures)
 		{
 			try
 			{
 				Console.WriteLine("Введите номер элемента:");
-				int index = Convert.ToInt32(Console.ReadLine());
+				var index = Convert.ToInt32(Console.ReadLine());
 
 				figures.RemoveAt(index);
 			}
@@ -103,8 +105,7 @@ namespace ConsoleLoader
 		/// <summary>
 		/// Вывод меню программы
 		/// </summary>
-		/// TODO: Порядок ключевых слов, сперва должен идти модификатор доступа, а потом static
-		static public void ShowMenu()
+		public static void ShowMenu()
 		{
 			Console.WriteLine("Выберите действие:");
 			Console.WriteLine("1.Добавить круг в список");
@@ -125,20 +126,24 @@ namespace ConsoleLoader
 				var key = Console.ReadKey(false).Key;
 				switch (key)
 				{
-					//TODO: Работает только с NumPad-овскими клавишами
+					//TODO: Работает только с NumPad-овскими клавишами done
 					case ConsoleKey.NumPad1:
+					case ConsoleKey.D1:
 						Console.Clear();
 						CircleToList(figures);
 						break;
 					case ConsoleKey.NumPad2:
+					case ConsoleKey.D2:
 						Console.Clear();
 						RectangleToList(figures);
 						break;
 					case ConsoleKey.NumPad3:
+					case ConsoleKey.D3:
 						Console.Clear();
 						DeleteElement(figures);
 						break;
 					case ConsoleKey.NumPad4:
+					case ConsoleKey.D4:
 						Console.Clear();
 						ShowList(figures);
 						break;

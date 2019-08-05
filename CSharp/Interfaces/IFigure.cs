@@ -18,8 +18,13 @@
 		double Perimeter { get; }
 
 		/// <summary>
+		/// Описание фигуры
+		/// </summary>
+		string Description { get; }
+
+		/// <summary>
 		/// Вывод информации о фигуре
 		/// </summary>
-		void GetDescription();
+		void ShowDescription();
 	}
 }
