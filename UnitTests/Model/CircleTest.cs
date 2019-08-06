@@ -13,13 +13,15 @@ namespace UnitTests.Model
 	/// Набор тестов класса Circle
 	/// </summary>
 	[TestFixture]
-	class CircleTest
+	internal class CircleTest
 	{
 		[Test]
 		[TestCase(1, TestName = "Тестирование конструктора при присваивании 1")]
 		[TestCase(4, TestName = "Тестирование конструктора при присваивании 4")]
-		[TestCase(Double.MaxValue, TestName = "Тестирование конструктора при присваивании Double.MaxValue")]
-		[TestCase(Double.MaxValue - 1, TestName = "Тестирование конструктора при присваивании Double.MaxValue - 1")]
+		[TestCase(double.MaxValue, TestName = 
+			"Тестирование конструктора при присваивании Double.MaxValue")]
+		[TestCase(double.MaxValue - 1, TestName = 
+			"Тестирование конструктора при присваивании Double.MaxValue - 1")]
 		public void ConstructorPositiveTest(double radius)
 		{
 			new Circle(radius);
@@ -27,10 +29,14 @@ namespace UnitTests.Model
 
 		[Test]
 		[TestCase(-1, TestName = "Тестирование конструктора при присваивании -1")]
-		[TestCase(Double.MinValue, TestName = "Тестирование конструктора при присваивании Double.MinValue")]
-		[TestCase(Double.NaN, TestName = "Тестирование конструктора при присваивании Double.NaN")]
-		[TestCase(Double.NegativeInfinity, TestName = "Тестирование конструктора при присваивании Double.NegativeInfinity")]
-		[TestCase(Double.PositiveInfinity, TestName = "Тестирование конструктора при присваивании Double.PositiveInfinity")]
+		[TestCase(double.MinValue, TestName =
+			"Тестирование конструктора при присваивании Double.MinValue")]
+		[TestCase(double.NaN, TestName = 
+			"Тестирование конструктора при присваивании Double.NaN")]
+		[TestCase(double.NegativeInfinity, TestName = 
+			"Тестирование конструктора при присваивании Double.NegativeInfinity")]
+		[TestCase(double.PositiveInfinity, TestName = 
+			"Тестирование конструктора при присваивании Double.PositiveInfinity")]
 		public void ConstructorNegativeTest(double radius)
 		{
 			Assert.That(() => new Circle(radius),
