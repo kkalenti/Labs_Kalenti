@@ -241,6 +241,8 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(417, 331);
 			this.Controls.Add(this.FindingGroupBox);
+			this.MaximumSize = new System.Drawing.Size(433, 370);
+			this.MinimumSize = new System.Drawing.Size(433, 370);
 			this.Name = "FindingForm";
 			this.Text = "FindingForm";
 			this.FindingGroupBox.ResumeLayout(false);

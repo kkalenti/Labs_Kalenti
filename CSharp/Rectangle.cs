@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Model.Interfaces;
@@ -26,18 +27,35 @@ namespace Model
 		public double Width { get; }
 
 		/// <summary>
-		/// Длина
+		/// Длинна
 		/// </summary>
 		public double Length { get; }
 
+		/// <summary>
+		/// Описание фигуры
+		/// </summary>
+		public string Description { get; }
+
+		//TODO: XML done
+		/// <summary>
+		/// Конструктор по-умолчанию для работы XML сериализации
+		/// </summary>
 		public Rectangle()	{}
 
+		//TODO: XML done
+		/// <summary>
+		/// Конструктор для объекта "Прямоугольник"
+		/// </summary>
+		/// <param name="width">Ширина прямоугольника</param>
+		/// <param name="length">Длина прямоугольника</param>
 		public Rectangle(double width, double length)
 		{
+			const int valueAlignment = 4;
 			if (width <= 0 || Double.IsNaN(width) || Double.IsInfinity(width)
 				|| length <= 0 || Double.IsNaN(length) || Double.IsInfinity(length))
 			{
-				throw new ArgumentException("Введенное значение меньше или равно 0");
+				//TODO: Сообщение некорректно, т.к. значение может и не вводиться. done
+				throw new ArgumentException();
 			}
 
 			Width = width;
@@ -45,15 +63,18 @@ namespace Model
 
 			Surface = width * length;
 			Perimeter = 2 * width + 2 * length;
+			Description = $"Прямоугольник, ширина: {Width}, длина: {Length}," +
+			              $" площадь: {Surface,valueAlignment:F3}, периметр: {Perimeter,valueAlignment:F3}";
 		}
 
+		//TODO: Правильнее сделать свойством done
 		/// <summary>
 		/// Вывод информации о фигуре
 		/// </summary>
-		public void GetDescription()
+		public void ShowDescription()
 		{
-			Console.WriteLine("Прямоугольник, ширина: {0}, длина: {1}, площадь: {2:0.00}, периметр: {3:0.00}",
-				Width, Length, Surface, Perimeter);
+			//TODO: Переделай в интерполяционную строку - лучше будет смотреться done
+			Console.WriteLine(Description);
 		}
 	}
 }

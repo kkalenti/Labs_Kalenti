@@ -8,50 +8,67 @@ using Model;
 
 namespace ConsoleLoader
 {
-	class Program
+	// TODO: RSDN, XML done
+	/// <summary>
+	/// Класс для основной функциональности программы 
+	/// </summary>
+	internal class Program
 	{
+		//TODO: Используй var, там, где понятен тип, так получается код чище done
 		/// <summary>
 		/// Добавление круга в список
 		/// </summary>
 		/// <param name="figures"> Список фигур </param>
-		static public void CircleToList(List<IFigure> figures)
+		public static void CircleToList(List<IFigure> figures)
 		{
-			try
-			{
-				Console.WriteLine("Введите радиус круга:");
-				double radius = Convert.ToDouble(Console.ReadLine());
+			//TODO: Дубль done
+			var radius = DoubleInput("Введите радиус круга:");
 
-				IFigure circle = new Circle(radius);
-				figures.Add(circle);
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.Message);
-				Console.ReadKey();
-			}
+			IFigure circle = new Circle(radius);
+			figures.Add(circle);
 		}
 
 		/// <summary>
 		/// Добавление прямугольника в список
 		/// </summary>
 		/// <param name="figures"> Список фигур </param>
-		static public void RectangleToList(List<IFigure> figures)
+		public static void RectangleToList(List<IFigure> figures)
 		{
-			try
-			{
-				Console.WriteLine("Введите ширину прямоугольника:");
-				double width = Convert.ToDouble(Console.ReadLine());
+			var width = DoubleInput("Введите ширину прямоугольника:");
+			var length = DoubleInput("Введите длину прямоугольника:");
 
-				Console.WriteLine("Введите длину прямоугольника:");
-				double length = Convert.ToDouble(Console.ReadLine());
+			IFigure rectangle = new Rectangle(width, length);
+			figures.Add(rectangle);
+		}
 
-				IFigure rectangle = new Rectangle(width, length);
-				figures.Add(rectangle);
-			}
-			catch (Exception ex)
+		public static double DoubleInput(string message)
+		{
+			while (true)
 			{
-				Console.WriteLine(ex.Message);
-				Console.ReadKey();
+				try
+				{
+					//TODO: Неправильно сделан ввод, получается, что если пользователь накосячит
+					//TODO: во втором параметре, то придётся вводить и первый, а это не правильно! done
+
+					//TODO: Дубль done
+					Console.WriteLine(message);
+					var value = Convert.ToDouble(Console.ReadLine());
+
+					if (value <= 0)
+					{
+						throw new ArgumentException();
+					}
+
+					return value;
+				} //TODO: Неправильно обрабатывать по базовому исключению - надо конкретизировать тип исключения done
+				catch (ArgumentException)
+				{
+					Console.WriteLine("Введенное значение меньше или равно 0");
+				}
+				catch (FormatException formatEx)
+				{
+					Console.WriteLine(formatEx.Message);
+				}
 			}
 		}
 
@@ -59,11 +76,11 @@ namespace ConsoleLoader
 		/// Вывод элементов списка
 		/// </summary>
 		/// <param name="figures"> Список фигур </param>
-		static public void ShowList(List<IFigure> figures)
+		public static void ShowList(List<IFigure> figures)
 		{
 			foreach (IFigure i in figures)
 			{
-				i.GetDescription();
+				i.ShowDescription();
 			}
 			Console.ReadKey();
 		}
@@ -72,12 +89,12 @@ namespace ConsoleLoader
 		/// Удаление элемента списка
 		/// </summary>
 		/// <param name="figures">Список фигур </param>
-		static public void DeleteElement(List<IFigure> figures)
+		public static void DeleteElement(List<IFigure> figures)
 		{
 			try
 			{
 				Console.WriteLine("Введите номер элемента:");
-				int index = Convert.ToInt32(Console.ReadLine());
+				var index = Convert.ToInt32(Console.ReadLine());
 
 				figures.RemoveAt(index);
 			}
@@ -91,7 +108,7 @@ namespace ConsoleLoader
 		/// <summary>
 		/// Вывод меню программы
 		/// </summary>
-		static public void ShowMenu()
+		public static void ShowMenu()
 		{
 			Console.WriteLine("Выберите действие:");
 			Console.WriteLine("1.Добавить круг в список");
@@ -101,10 +118,10 @@ namespace ConsoleLoader
 			Console.WriteLine("Esc.Выйти из программы");
 		}
 
-
-		static void Main(string[] args)
+		//TODO: RSDN done
+		private static void Main(string[] args)
 		{
-			List<IFigure> figures = new List<IFigure>();
+			var figures = new List<IFigure>();
 			while (true)
 			{
 				Console.WriteLine("Количество элементов в списке: {0}", figures.Count());
@@ -112,19 +129,24 @@ namespace ConsoleLoader
 				var key = Console.ReadKey(false).Key;
 				switch (key)
 				{
+					//TODO: Работает только с NumPad-овскими клавишами done
 					case ConsoleKey.NumPad1:
+					case ConsoleKey.D1:
 						Console.Clear();
 						CircleToList(figures);
 						break;
 					case ConsoleKey.NumPad2:
+					case ConsoleKey.D2:
 						Console.Clear();
 						RectangleToList(figures);
 						break;
 					case ConsoleKey.NumPad3:
+					case ConsoleKey.D3:
 						Console.Clear();
 						DeleteElement(figures);
 						break;
 					case ConsoleKey.NumPad4:
+					case ConsoleKey.D4:
 						Console.Clear();
 						ShowList(figures);
 						break;

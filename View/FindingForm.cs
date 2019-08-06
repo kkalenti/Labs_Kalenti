@@ -16,20 +16,14 @@ namespace View
 	/// </summary>
 	public partial class FindingForm : Form
 	{
+		//TODO: Неправильно в дочерней форме хранить указатель на родительскую! Убирай нах. done
+		//TODO: XML done
 		/// <summary>
-		/// Ссылка на родительскую форму
+		/// Конструктор формы поиска
 		/// </summary>
-		static MainForm main;
-
 		public FindingForm()
 		{
 			InitializeComponent();
-		}
-
-		public FindingForm(MainForm mainForm)
-		{
-			InitializeComponent();
-			main = mainForm;
 		}
 
 		/// <summary>
@@ -39,10 +33,11 @@ namespace View
 		/// <param name="e"></param>
 		private void SearchButton_Click(object sender, EventArgs e)
 		{
+			var mainForm = (MainForm)this.Owner;
 			FigureGrid.Rows.Clear();
 			if (RectangleCheckBox.Checked || CircleCheckBox.Checked)
 			{
-				foreach (IFigure figure in main.figures)
+				foreach (IFigure figure in mainForm.Figures)
 				{
 					if (figure is Model.Rectangle && RectangleCheckBox.Checked)
 					{
@@ -81,11 +76,7 @@ namespace View
 		/// <returns></returns>
 		public bool IsBetween(double min, double max, double argument)
 		{
-			if(argument >= min && argument <= max)
-			{
-				return true;
-			}
-			return false;
+			return argument >= min && argument <= max;
 		}
 
 		/// <summary>
@@ -95,18 +86,8 @@ namespace View
 		/// <param name="e"></param>
 		private void SurfaceFirstTextBox_Validating(object sender, CancelEventArgs e)
 		{
-			string errorMsg;
-			if (!BlankFieldChecking(out errorMsg))
-			{
-				SearchButton.Enabled = false;
-				SetError(SurfaceFirstTextBox,SurfaceSecondTextBox, errorMsg, sender, e);
-			}
-			else
-			{
-				SearchButton.Enabled = true;
-				errorMsg = "";
-				SetError(SurfaceFirstTextBox, SurfaceSecondTextBox, errorMsg, sender, e);
-			}
+			//TODO: Дубль done
+			CheckFields(SurfaceFirstTextBox, SurfaceSecondTextBox, sender, e);
 		}
 
 		/// <summary>
@@ -116,17 +97,30 @@ namespace View
 		/// <param name="e"></param>
 		private void PerimeterFirstTextBox_Validating(object sender, CancelEventArgs e)
 		{
+			//TODO: Дубль done
+			CheckFields(PerimeterFirstTextBox, PerimeterSecondTextBox, sender, e);
+		}
+
+		/// <summary>
+		/// Полная проверка полей периметра
+		/// </summary>
+		/// <param name="firstField">Первое поле</param>
+		/// <param name="secondField">Второе поле</param>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void CheckFields(TextBox firstField, TextBox secondField, object sender, CancelEventArgs e)
+		{
 			string errorMsg;
 			if (!BlankFieldChecking(out errorMsg))
 			{
 				SearchButton.Enabled = false;
-				SetError(PerimeterFirstTextBox, PerimeterSecondTextBox, errorMsg, sender, e);
+				SetError(firstField, secondField, errorMsg, sender, e);
 			}
 			else
 			{
 				SearchButton.Enabled = true;
 				errorMsg = "";
-				SetError(PerimeterFirstTextBox, PerimeterSecondTextBox, errorMsg, sender, e);
+				SetError(firstField, secondField, errorMsg, sender, e);
 			}
 		}
 
@@ -137,7 +131,7 @@ namespace View
 		/// <param name="e"></param>
 		private void SurfaceFirstTextBox_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			if (!(Char.IsDigit(e.KeyChar)))
+			if (!(char.IsDigit(e.KeyChar)))
 			{
 				if (e.KeyChar != (char)Keys.Back)
 				{
@@ -166,7 +160,6 @@ namespace View
 				e.Cancel = true;
 				(sender as TextBox).Select(0, (sender as TextBox).Text.Length);
 				this.errorProvider.SetError((sender as TextBox), errorMsg);
-
 			}
 		}
 
