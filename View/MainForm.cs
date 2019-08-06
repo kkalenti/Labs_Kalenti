@@ -22,10 +22,13 @@ namespace View
 		/// <summary>
 		/// Список фигур
 		/// </summary>
-		/// //TODO: RSDN
-		public List<IFigure> figures = new List<IFigure>();
+		/// //TODO: RSDN done
+		public List<IFigure> Figures = new List<IFigure>();
 
-		//TODO: XML
+		/// <summary>
+		/// Конструктор главной формы
+		/// </summary>
+		//TODO: XML done
 		public MainForm()
 		{
 			InitializeComponent();
@@ -38,7 +41,10 @@ namespace View
 		/// <param name="e"></param>
 		private void AddButton_Click(object sender, EventArgs e)
 		{
-			AddingForm adding = new AddingForm(this);
+			var adding = new AddingForm
+			{
+				Owner = this
+			};
 			adding.Show();
 		}
 
@@ -51,7 +57,7 @@ namespace View
 		{
 			foreach (DataGridViewRow row in FigureGrid.SelectedRows)
 			{
-				figures.RemoveAt(row.Index);
+				Figures.RemoveAt(row.Index);
 				FigureGrid.Rows.Remove(row);
 			}
 		}
@@ -59,24 +65,25 @@ namespace View
 		/// <summary>
 		/// Добавление круга в список
 		/// </summary>
-		/// <param name="figures"> Список фигур </param>
-		/// //TODO: XML
+		/// <param name="radius"> Радиус фигуры </param>
+		/// //TODO: XML done
 		public void CircleToList(double radius)
 		{
 			IFigure circle = new Model.Circle(radius);
-			figures.Add(circle);
+			Figures.Add(circle);
 			FigureGrid.Rows.Add("Circle", circle.Surface, circle.Perimeter);
 		}
 
 		/// <summary>
 		/// Добавление прямугольника в список
 		/// </summary>
-		/// <param name="figures"> Список фигур </param>
-		/// //TODO: XML
+		/// <param name="width"> Ширина прямоугольника </param>
+		/// <param name="length"> Длина прямоугольника </param>
+		/// //TODO: XML done
 		public void RectangleToList(double width, double length)
 		{
 			IFigure rectangle = new Model.Rectangle(width, length);
-			figures.Add(rectangle);
+			Figures.Add(rectangle);
 			FigureGrid.Rows.Add("Rectangle", rectangle.Surface, rectangle.Perimeter);
 		}
 
@@ -88,7 +95,7 @@ namespace View
 		/// <param name="e"></param>
 		private void RandomObjectButton_Click(object sender, EventArgs e)
 		{
-			Random rand = new Random();
+			var rand = new Random();
 			bool flag = rand.Next(0, 2) == 1;
 			if(flag == true)
 			{
@@ -108,7 +115,10 @@ namespace View
 		/// <param name="e"></param>
 		private void FindObjectButton_Click(object sender, EventArgs e)
 		{
-			FindingForm finding = new FindingForm(this);
+			var finding = new FindingForm
+			{
+				Owner = this
+			};
 			finding.Show();
 		}
 
@@ -119,27 +129,14 @@ namespace View
 		/// <param name="e"></param>
 		private void SaveButton_Click(object sender, EventArgs e)
 		{
-			foreach (IFigure figure in figures)
+			foreach (IFigure figure in Figures)
 			{
-				if(figure is Model.Rectangle)
+				//TODO: Дубль done
+				var writer = new XmlSerializer(figure.GetType());
+				//TODO: Абсолютные пути, серьёзно? done
+				using (var file = new FileStream("..\\..\\Xml\\figures.xml", FileMode.Append))
 				{
-					//TODO: Дубль
-					XmlSerializer writer = new XmlSerializer(typeof(Model.Rectangle));
-					//TODO: Абсолютные пути, серьёзно?
-					using (FileStream file = new FileStream("C:\\Users\\kosti\\Desktop\\lessons\\Extra labs\\2\\persons.xml", FileMode.Append))
-					{
-						writer.Serialize(file, figure);
-					}
-				}
-				else
-				{
-					//TODO: Дубль
-					XmlSerializer writer = new XmlSerializer(typeof(Model.Circle));
-					//TODO: Абсолютные пути, серьёзно?
-					using (FileStream file = new FileStream("C:\\Users\\kosti\\Desktop\\lessons\\Extra labs\\2\\persons.xml", FileMode.Append))
-					{
-						writer.Serialize(file, figure);
-					}
+					writer.Serialize(file, figure);
 				}
 			}
 		}

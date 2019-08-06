@@ -29,9 +29,8 @@
 		private void InitializeComponent()
 		{
 			this.FigureGroupBox = new System.Windows.Forms.GroupBox();
-#if DEBUG
-			this.RandomObjectButton = new System.Windows.Forms.Button(); 
-#endif
+			this.SaveButton = new System.Windows.Forms.Button();
+			this.RandomObjectButton = new System.Windows.Forms.Button();
 			this.FindObjectButton = new System.Windows.Forms.Button();
 			this.FigureGrid = new System.Windows.Forms.DataGridView();
 			this.Figure = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,7 +38,6 @@
 			this.Perimeter = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.RemoveButton = new System.Windows.Forms.Button();
 			this.AddButton = new System.Windows.Forms.Button();
-			this.SaveButton = new System.Windows.Forms.Button();
 			this.FigureGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.FigureGrid)).BeginInit();
 			this.SuspendLayout();
@@ -50,9 +48,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.FigureGroupBox.Controls.Add(this.SaveButton);
-#if DEBUG
-			this.FigureGroupBox.Controls.Add(this.RandomObjectButton); 
-#endif
+			this.FigureGroupBox.Controls.Add(this.RandomObjectButton);
 			this.FigureGroupBox.Controls.Add(this.FindObjectButton);
 			this.FigureGroupBox.Controls.Add(this.FigureGrid);
 			this.FigureGroupBox.Controls.Add(this.RemoveButton);
@@ -63,7 +59,17 @@
 			this.FigureGroupBox.TabIndex = 0;
 			this.FigureGroupBox.TabStop = false;
 			this.FigureGroupBox.Text = "Table of figures";
-#if DEBUG
+			// 
+			// SaveButton
+			// 
+			this.SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.SaveButton.Location = new System.Drawing.Point(139, 263);
+			this.SaveButton.Name = "SaveButton";
+			this.SaveButton.Size = new System.Drawing.Size(88, 33);
+			this.SaveButton.TabIndex = 6;
+			this.SaveButton.Text = "Save data";
+			this.SaveButton.UseVisualStyleBackColor = true;
+			this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
 			// 
 			// RandomObjectButton
 			// 
@@ -74,8 +80,7 @@
 			this.RandomObjectButton.TabIndex = 5;
 			this.RandomObjectButton.Text = "Random";
 			this.RandomObjectButton.UseVisualStyleBackColor = true;
-			this.RandomObjectButton.Click += new System.EventHandler(this.RandomObjectButton_Click); 
-#endif
+			this.RandomObjectButton.Click += new System.EventHandler(this.RandomObjectButton_Click);
 			// 
 			// FindObjectButton
 			// 
@@ -147,23 +152,13 @@
 			this.AddButton.UseVisualStyleBackColor = true;
 			this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
 			// 
-			// SaveButton
-			// 
-			this.SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.SaveButton.Location = new System.Drawing.Point(139, 263);
-			this.SaveButton.Name = "SaveButton";
-			this.SaveButton.Size = new System.Drawing.Size(88, 33);
-			this.SaveButton.TabIndex = 6;
-			this.SaveButton.Text = "Save data";
-			this.SaveButton.UseVisualStyleBackColor = true;
-			this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(539, 331);
 			this.Controls.Add(this.FigureGroupBox);
+			this.MaximumSize = new System.Drawing.Size(555, 370);
 			this.MinimumSize = new System.Drawing.Size(555, 370);
 			this.Name = "MainForm";
 			this.Text = "Main window";

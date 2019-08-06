@@ -8,8 +8,11 @@ using Model;
 
 namespace ConsoleLoader
 {
-	// TODO: RSDN, XML
-	class Program
+	// TODO: RSDN, XML done
+	/// <summary>
+	/// Класс для основной функциональности программы 
+	/// </summary>
+	internal class Program
 	{
 		//TODO: Используй var, там, где понятен тип, так получается код чище done
 		/// <summary>
@@ -115,10 +118,10 @@ namespace ConsoleLoader
 			Console.WriteLine("Esc.Выйти из программы");
 		}
 
-		//TODO: RSDN
-		static void Main(string[] args)
+		//TODO: RSDN done
+		private static void Main(string[] args)
 		{
-			List<IFigure> figures = new List<IFigure>();
+			var figures = new List<IFigure>();
 			while (true)
 			{
 				Console.WriteLine("Количество элементов в списке: {0}", figures.Count());

@@ -36,11 +36,18 @@ namespace Model
 		/// Описание фигуры
 		/// </summary>
 		public string Description { get; }
-		
-		//TODO: XML
+
+		//TODO: XML done
+		/// <summary>
+		/// Конструктор по-умолчанию для работы XML сериализации
+		/// </summary>
 		public Circle() { }
 
-		//TODO: XML
+		//TODO: XML done
+		/// <summary>
+		/// Конструктор для объектов "Круг"
+		/// </summary>
+		/// <param name="radius">Радиус круга</param>
 		public Circle(double radius)
 		{
 			const int valueAlignment = 4;

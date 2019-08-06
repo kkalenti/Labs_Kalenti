@@ -15,24 +15,10 @@ namespace View
 	/// </summary>
 	public partial class AddingForm : Form
 	{
-		//TODO: Неправильно в дочерней форме хранить указатель на родительскую! Убирай нах.
-		/// <summary>
-		/// Указатель на родительскую форму
-		/// </summary>
-		static MainForm main;
-
-
+		//TODO: Неправильно в дочерней форме хранить указатель на родительскую! Убирай нах. done
 		public AddingForm()
 		{
 			InitializeComponent();
-		}
-
-		//TODO: Неправильно в дочернюю форму передавать указатель на родительскую! Убирай нах.
-
-		public AddingForm(MainForm mainForm)
-		{
-			InitializeComponent();
-			main = mainForm;
 		}
 
 		/// <summary>
@@ -80,16 +66,17 @@ namespace View
 		/// <param name="e"></param>
 		private void AddButton_Click(object sender, EventArgs e)
 		{
+			var mainForm = (MainForm)this.Owner;
 			if (CircleRadioButton.Checked)
 			{
-				double radius = Convert.ToDouble(RadiusTextBox.Text);
-				main.CircleToList(radius);
+				var radius = Convert.ToDouble(RadiusTextBox.Text);
+				mainForm.CircleToList(radius);
 			}
 			else
 			{
-				double width = Convert.ToDouble(WidthTextBox.Text);
-				double length = Convert.ToDouble(LengthTextBox.Text);
-				main.RectangleToList(width, length);
+				var width = Convert.ToDouble(WidthTextBox.Text);
+				var length = Convert.ToDouble(LengthTextBox.Text);
+				mainForm.RectangleToList(width, length);
 			}
 			this.Close();
 		}
@@ -101,9 +88,10 @@ namespace View
 		/// <param name="e"></param>
 		private void RadiusTextBox_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			if (!Char.IsDigit(e.KeyChar))
+			if (!char.IsDigit(e.KeyChar))
 			{
-				if (e.KeyChar != (char)Keys.Back)
+				if (e.KeyChar != (char)Keys.Back &&
+				    (e.KeyChar != ',' || RadiusTextBox.Text.Contains(',')))
 				{
 					e.Handled = true;
 				}
@@ -179,15 +167,15 @@ namespace View
 		/// <summary>
 		/// Задать текст для ошибки
 		/// </summary>
-		/// <param name="ButtonEnabled">Разрешение на добавление в список</param>
-		/// <param name="WidthErr">Текст для ошибки поля ширины</param>
-		/// <param name="LengthErr">Текст для ошибки поля длины</param>
-		/// TODO: RSDN
-		public void SetError(bool ButtonEnabled, string WidthErr, string LengthErr)
+		/// <param name="buttonEnabled">Разрешение на добавление в список</param>
+		/// <param name="widthErr">Текст для ошибки поля ширины</param>
+		/// <param name="lengthErr">Текст для ошибки поля длины</param>
+		/// TODO: RSDN done
+		public void SetError(bool buttonEnabled, string widthErr, string lengthErr)
 		{
-			AddButton.Enabled = ButtonEnabled;
-			this.errorProvider.SetError(WidthTextBox, WidthErr);
-			this.errorProvider.SetError(LengthTextBox, LengthErr);
+			AddButton.Enabled = buttonEnabled;
+			this.errorProvider.SetError(WidthTextBox, widthErr);
+			this.errorProvider.SetError(LengthTextBox, lengthErr);
 		}
 	}
 }

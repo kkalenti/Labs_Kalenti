@@ -36,10 +36,18 @@ namespace Model
 		/// </summary>
 		public string Description { get; }
 
-		//TODO: XML
+		//TODO: XML done
+		/// <summary>
+		/// Конструктор по-умолчанию для работы XML сериализации
+		/// </summary>
 		public Rectangle()	{}
 
-		//TODO: XML
+		//TODO: XML done
+		/// <summary>
+		/// Конструктор для объекта "Прямоугольник"
+		/// </summary>
+		/// <param name="width">Ширина прямоугольника</param>
+		/// <param name="length">Длина прямоугольника</param>
 		public Rectangle(double width, double length)
 		{
 			const int valueAlignment = 4;
