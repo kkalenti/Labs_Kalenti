@@ -140,5 +140,10 @@ namespace View
 				}
 			}
 		}
+
+		private void FigureGrid_SelectionChanged(object sender, EventArgs e)
+		{
+			FigureGrid.Rows[FigureGrid.CurrentCell.RowIndex].Selected = true;
+		}
 	}
 }

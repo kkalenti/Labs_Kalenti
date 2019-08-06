@@ -108,6 +108,7 @@
 			this.FigureGrid.ReadOnly = true;
 			this.FigureGrid.Size = new System.Drawing.Size(502, 232);
 			this.FigureGrid.TabIndex = 0;
+			this.FigureGrid.SelectionChanged += new System.EventHandler(this.FigureGrid_SelectionChanged);
 			// 
 			// Figure
 			// 
