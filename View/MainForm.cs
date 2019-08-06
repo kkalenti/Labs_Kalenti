@@ -32,6 +32,7 @@ namespace View
 		public MainForm()
 		{
 			InitializeComponent();
+
 		}
 
 		/// <summary>
