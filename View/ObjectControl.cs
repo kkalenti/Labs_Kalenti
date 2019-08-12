@@ -15,7 +15,11 @@ namespace View
 	public partial class ObjectControl : UserControl
 	{
 		public IFigure Object
+		/// <summary>
+		/// Свойство для хранения используемой фигуры
+		/// </summary>
 		{
+
 			get
 			{
 				if (RectangleRadioButton.Checked)
@@ -39,7 +43,9 @@ namespace View
 					case Model.Rectangle rectangle:
 					{
 						RectangleRadioButton.Checked = true;
-						CircleRadioButton.Checked = true;
+						RectangleRadioButton.Enabled = false;
+						CircleRadioButton.Checked = false;
+						CircleRadioButton.Enabled = false;
 
 						WidthTextBox.Text = rectangle.Width.ToString();
 						LengthTextBox.Text = rectangle.Length.ToString();
@@ -47,8 +53,10 @@ namespace View
 					}
 					case Model.Circle circle:
 					{
-						RectangleRadioButton.Checked = true;
+						RectangleRadioButton.Checked = false;
+						RectangleRadioButton.Enabled = false;
 						CircleRadioButton.Checked = true;
+						CircleRadioButton.Enabled = false;
 
 						RadiusTextBox.Text = circle.Radius.ToString();
 						break;
@@ -57,19 +65,41 @@ namespace View
 			}
 		}
 
+		/// <summary>
+		/// Запрет на редактирование информации
+		/// </summary>
 		private bool _readOnly = true;
 
+		/// <summary>
+		/// Свойство запрет на редактирование информации
+		/// </summary>
 		public bool ReadOnly
 		{
 			get => _readOnly;
 			set
 			{
-				WidthTextBox.ReadOnly = value;
-				LengthTextBox.ReadOnly = value;
-				RadiusTextBox.ReadOnly = value;
+				_readOnly = value;
+				WidthTextBox.Enabled = !_readOnly;
+				LengthTextBox.Enabled = !_readOnly;
+				RadiusTextBox.Enabled = !_readOnly;
 			}
 		}
 
+		public void CleanFields()
+		{
+			WidthTextBox.Text = "";
+			LengthTextBox.Text = "";
+			RadiusTextBox.Text = "";
+		}
+
+		/// <summary>
+		/// Разрешение на добавление элемента исходя из валидации
+		/// </summary>
+		public bool AddingEnable { get; private set; }
+
+		/// <summary>
+		/// Конструктор контрола
+		/// </summary>
 		public ObjectControl()
 		{
 			InitializeComponent();
@@ -82,14 +112,23 @@ namespace View
 		/// <param name="e"></param>
 		private void CircleRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
-			RectangleGroupBox.Enabled = false;
-			RectangleGroupBox.Visible = false;
-			CircleGroupBox.Enabled = true;
-			CircleGroupBox.Visible = true;
+			EnabledGroupBox(RectangleGroupBox, false);
+			EnabledGroupBox(CircleGroupBox, true);
 			WidthTextBox.Text = "";
 			LengthTextBox.Text = "";
 			this.errorProvider.SetError(WidthTextBox, "");
 			this.errorProvider.SetError(LengthTextBox, "");
+		}
+
+		/// <summary>
+		/// Отключение доступа и скрытие контрола
+		/// </summary>
+		/// <param name="groupBox"> Выбранный GroupBox</param>
+		/// <param name="enable">Доступ</param>
+		public void EnabledGroupBox(GroupBox groupBox, bool enable)
+		{
+			groupBox.Enabled = enable;
+			groupBox.Visible = enable;
 		}
 
 		/// <summary>
@@ -99,10 +138,8 @@ namespace View
 		/// <param name="e"></param>
 		private void RectangleRadioButton_CheckedChanged(object sender, EventArgs e)
 		{
-			RectangleGroupBox.Enabled = true;
-			RectangleGroupBox.Visible = true;
-			CircleGroupBox.Enabled = false;
-			CircleGroupBox.Visible = false;
+			EnabledGroupBox(RectangleGroupBox, true);
+			EnabledGroupBox(CircleGroupBox, false);
 			RadiusTextBox.Text = "";
 			this.errorProvider.SetError(RadiusTextBox, "");
 		}
@@ -131,13 +168,14 @@ namespace View
 		/// <param name="e"></param>
 		private void RadiusTextBox_Validating(object sender, CancelEventArgs e)
 		{
-			string errorMsg;
-			if (IsZero(RadiusTextBox.Text, out errorMsg))
+			if (IsZero(RadiusTextBox.Text, out var errorMsg))
 			{
+				AddingEnable = false;
 				this.errorProvider.SetError(RadiusTextBox, errorMsg);
 			}
 			else
 			{
+				AddingEnable = true;
 				errorMsg = "";
 				this.errorProvider.SetError(RadiusTextBox, errorMsg);
 			}
@@ -170,18 +208,20 @@ namespace View
 		/// <param name="e"></param>
 		private void WidthTextBox_Validating(object sender, CancelEventArgs e)
 		{
-			string errorMsg;
-			if (IsZero(WidthTextBox.Text, out errorMsg) && IsZero(LengthTextBox.Text, out errorMsg))
+			if (IsZero(WidthTextBox.Text, out var widthErrorMsg) 
+			    && IsZero(LengthTextBox.Text, out var lengthErrorMsg))
 			{
-				SetError(false, errorMsg, errorMsg);
+				SetError(false, widthErrorMsg, lengthErrorMsg);
 			}
-			else if (IsZero(WidthTextBox.Text, out errorMsg) && !IsZero(LengthTextBox.Text, out errorMsg))
+			else if (IsZero(WidthTextBox.Text, out widthErrorMsg) 
+			         && !IsZero(LengthTextBox.Text, out lengthErrorMsg))
 			{
-				SetError(false, errorMsg, "");
+				SetError(false, widthErrorMsg, "");
 			}
-			else if (!IsZero(WidthTextBox.Text, out errorMsg) && IsZero(LengthTextBox.Text, out errorMsg))
+			else if (!IsZero(WidthTextBox.Text, out widthErrorMsg)
+			         && IsZero(LengthTextBox.Text, out lengthErrorMsg))
 			{
-				SetError(false, "", errorMsg);
+				SetError(false, "", lengthErrorMsg);
 			}
 			else
 			{
@@ -197,6 +237,7 @@ namespace View
 		/// <param name="lengthErr">Текст для ошибки поля длины</param>
 		public void SetError(bool buttonEnabled, string widthErr, string lengthErr)
 		{
+			AddingEnable = buttonEnabled;
 			this.errorProvider.SetError(WidthTextBox, widthErr);
 			this.errorProvider.SetError(LengthTextBox, lengthErr);
 		}

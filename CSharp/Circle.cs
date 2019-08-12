@@ -5,32 +5,49 @@ using System.Text;
 using System.Threading.Tasks;
 using Model.Interfaces;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
 namespace Model
-{	
-	[Serializable]
+{
 	/// <summary>
 	/// Класс для кругов
 	/// </summary>
+	[DataContract]
 	public class Circle : IFigure
 	{
-		[XmlAttribute]
+		private double _surface;
 		/// <summary>
 		/// Площадь фигуры
 		/// </summary>
-		public double Surface { get; }
+		[DataMember]
+		public double Surface
+		{
+			get => _surface;
+			set => _surface = value;
+		}
 
-		[XmlAttribute]
+		private double _perimeter;
 		/// <summary>
 		/// Периметр фигуры
 		/// </summary>
-		public double Perimeter { get; }
+		[DataMember]
+		public double Perimeter
+		{
+			get => _perimeter;
+			set => _perimeter = value;
+		}
 
-		[XmlAttribute]
+
+		private double _radius;
+		[DataMember]
 		/// <summary>
 		/// Радиус фигуры
 		/// </summary>
-		public double Radius { get; }
+		public double Radius
+		{
+			get => _radius;
+			set => _radius = value;
+		}
 
 		/// <summary>
 		/// Описание фигуры

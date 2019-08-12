@@ -4,32 +4,58 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Model.Interfaces;
+using System.Runtime.Serialization;
 
 namespace Model
 {
-	[Serializable]
+	[DataContract]
 	public class Rectangle : IFigure
 	{
+		private double _surface;
 		/// <summary>
 		/// Площадь фигуры
 		/// </summary>
-		public double Surface { get; }
+		[DataMember]
+		public double Surface
+		{
+			get => _surface;
+			set => _surface = value;
+		}
 
+		private double _perimeter;
 		/// <summary>
 		/// Периметр фигуры
 		/// </summary>
-		public double Perimeter { get; }
+		[DataMember]
+		public double Perimeter
+		{
+			get => _perimeter;
+			set => _perimeter = value;
+		}
 
+		private double _width;
 		/// <summary>
 		/// Ширина
 		/// </summary>
-		public double Width { get; }
+		[DataMember]
+		public double Width
+		{
+			get => _width;
+			set => _width = value;
+		}
 
+		private double _length;
 		/// <summary>
 		/// Длинна
 		/// </summary>
-		public double Length { get; }
+		[DataMember]
+		public double Length
+		{
+			get => _length;
+			set => _length = value;
+		}
 
 		/// <summary>
 		/// Описание фигуры

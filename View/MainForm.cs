@@ -11,18 +11,21 @@ using Model;
 using Model.Interfaces;
 using System.Windows.Forms;
 using System.IO;
+using  System.Runtime.Serialization;
 
 namespace View
 {
 	/// <summary>
 	/// Основная форма
 	/// </summary>
+	[DataContract]
 	public partial class MainForm : Form
 	{
 		/// <summary>
 		/// Список фигур
 		/// </summary>
 		/// //TODO: RSDN done
+		[DataMember]
 		public List<IFigure> Figures = new List<IFigure>();
 
 		/// <summary>
@@ -32,7 +35,16 @@ namespace View
 		public MainForm()
 		{
 			InitializeComponent();
+		}
 
+		/// <summary>
+		/// Конструктор главной формы с входным аргументом
+		/// </summary>
+		/// <param name="args">Путь к входному файлу</param>
+		public MainForm(string[] args)
+		{
+			InitializeComponent();
+			OpenInputFile(args[0]);
 		}
 
 		/// <summary>
@@ -42,11 +54,29 @@ namespace View
 		/// <param name="e"></param>
 		private void AddButton_Click(object sender, EventArgs e)
 		{
-			var adding = new AddingForm
+			var adding = new AddingForm()
 			{
 				Owner = this
 			};
 			adding.Show();
+		}
+
+		/// <summary>
+		/// Кнопка вызова формы изменения данных о фигуре
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void ModifyButton_Click(object sender, EventArgs e)
+		{
+			if (FigureGrid.SelectedRows.Count > 0)
+			{
+				IFigure figure = Figures[FigureGrid.SelectedRows[0].Index];
+				var modify = new AddingForm(figure)
+				{
+					Owner = this
+				};
+				modify.Show();
+			}
 		}
 
 		/// <summary>
@@ -64,28 +94,40 @@ namespace View
 		}
 
 		/// <summary>
-		/// Добавление круга в список
+		/// Изменение фигуры
 		/// </summary>
-		/// <param name="radius"> Радиус фигуры </param>
-		/// //TODO: XML done
-		public void CircleToList(double radius)
+		/// <param name="figure">Фигура</param>
+		public void ModifyElement(IFigure figure)
 		{
-			IFigure circle = new Model.Circle(radius);
-			Figures.Add(circle);
-			FigureGrid.Rows.Add("Circle", circle.Surface, circle.Perimeter);
+			Figures.RemoveAt(FigureGrid.CurrentRow.Index);
+			FigureGrid.Rows.Remove(FigureGrid.CurrentRow);
+			FigureToList(figure);
 		}
 
 		/// <summary>
-		/// Добавление прямугольника в список
+		/// Добавление фигуры в список и таблицу
 		/// </summary>
-		/// <param name="width"> Ширина прямоугольника </param>
-		/// <param name="length"> Длина прямоугольника </param>
-		/// //TODO: XML done
-		public void RectangleToList(double width, double length)
+		/// <param name="figure">Фигура</param>
+		public void FigureToList(IFigure figure)
 		{
-			IFigure rectangle = new Model.Rectangle(width, length);
-			Figures.Add(rectangle);
-			FigureGrid.Rows.Add("Rectangle", rectangle.Surface, rectangle.Perimeter);
+			Figures.Add(figure);
+			FigureToGrid(figure);
+		}
+
+		/// <summary>
+		/// Добавление фигуры в список
+		/// </summary>
+		/// <param name="figure">Фигура</param>
+		public void FigureToGrid(IFigure figure)
+		{
+			if (figure is Model.Circle)
+			{
+				FigureGrid.Rows.Add("Circle", figure.Surface, figure.Perimeter);
+			}
+			else
+			{
+				FigureGrid.Rows.Add("Rectangle", figure.Surface, figure.Perimeter);
+			}
 		}
 
 #if DEBUG
@@ -100,11 +142,12 @@ namespace View
 			bool flag = rand.Next(0, 2) == 1;
 			if(flag == true)
 			{
-				CircleToList(rand.Next(1, 20));
+				FigureToList(new Model.Circle(rand.Next(1, 20)));
 			}
 			else
 			{
-				RectangleToList(rand.Next(1, 20), rand.Next(1, 20));
+				FigureToList(new Model.Rectangle(rand.Next(1, 20),
+					rand.Next(1, 20)));
 			}
 		}
 #endif
@@ -130,21 +173,90 @@ namespace View
 		/// <param name="e"></param>
 		private void SaveButton_Click(object sender, EventArgs e)
 		{
-			foreach (IFigure figure in Figures)
+			saveFile.Filter = "Xml file|*.kk";
+			if (saveFile.ShowDialog() == DialogResult.Cancel)
+				return;
+			var filename = saveFile.FileName;
+			
+			var writer = new DataContractSerializer(typeof(List<IFigure>), 
+				new List<Type> { typeof(Model.Rectangle), typeof(Model.Circle) });
+
+			using (var fs = new FileStream(filename, FileMode.Create))
 			{
-				//TODO: Дубль done
-				var writer = new XmlSerializer(figure.GetType());
-				//TODO: Абсолютные пути, серьёзно? done
-				using (var file = new FileStream("..\\..\\Xml\\figures.xml", FileMode.Append))
-				{
-					writer.Serialize(file, figure);
-				}
+				writer.WriteObject(fs, Figures);
+			}
+
+		}
+
+		/// <summary>
+		/// Выделение всей выбранной строки
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void FigureGrid_SelectionChanged(object sender, EventArgs e)
+		{
+			if (FigureGrid.CurrentCell != null)
+			{
+				FigureGrid.Rows[FigureGrid.CurrentCell.RowIndex].Selected = true;
+				MyControl.Object = Figures[FigureGrid.CurrentRow.Index];
+				MyControl.ReadOnly = true;
+			}
+			else
+			{
+				MyControl.CleanFields();
 			}
 		}
 
-		private void FigureGrid_SelectionChanged(object sender, EventArgs e)
+		/// <summary>
+		/// Открытие и десериализация выбранного файла
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void OpenFileButton_Click(object sender, EventArgs e)
 		{
-			FigureGrid.Rows[FigureGrid.CurrentCell.RowIndex].Selected = true;
+			openFile.Filter = "Xml file|*.kk";
+			if (openFile.ShowDialog() == DialogResult.Cancel)
+			{
+				return;
+			}
+			var filename = openFile.FileName;
+
+			FiguresDeserializing(filename);
+
+			foreach (IFigure figure in Figures)
+			{
+				FigureToGrid(figure);
+			}
+		}
+
+
+		/// <summary>
+		/// Десериализация данных из файла
+		/// </summary>
+		/// <param name="filename">Имя файла</param>
+		public void FiguresDeserializing(string filename)
+		{
+			var reader = new DataContractSerializer(typeof(List<IFigure>),
+				new List<Type> { typeof(Model.Rectangle), typeof(Model.Circle) });
+
+			using (var fs = new FileStream(filename, FileMode.Open))
+			{
+				Figures = (List<IFigure>)reader.ReadObject(fs);
+			}
+		}
+
+		/// <summary>
+		/// Открытие входного файла
+		/// </summary>
+		/// <param name="filename">Имя файла</param>
+		public void OpenInputFile(string filename)
+		{
+			FiguresDeserializing(filename);
+
+			foreach (IFigure figure in Figures)
+			{
+				FigureToGrid(figure);
+			}
 		}
 	}
 }

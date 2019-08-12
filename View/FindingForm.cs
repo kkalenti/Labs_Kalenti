@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Model.Interfaces;
 using System.Windows.Forms;
+using Model;
 
 namespace View
 {
@@ -27,25 +28,33 @@ namespace View
 		}
 
 		/// <summary>
+		/// Все поля прошли валидацию
+		/// </summary>
+		private bool IsValidated { get; set; }
+
+		/// <summary>
 		/// Обработка кнопки поиска подходящих объектов
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void SearchButton_Click(object sender, EventArgs e)
 		{
-			var mainForm = (MainForm)this.Owner;
-			FigureGrid.Rows.Clear();
-			if (RectangleCheckBox.Checked || CircleCheckBox.Checked)
+			if (IsValidated)
 			{
-				foreach (IFigure figure in mainForm.Figures)
+				var mainForm = (MainForm) this.Owner;
+				FigureGrid.Rows.Clear();
+				if (RectangleCheckBox.Checked || CircleCheckBox.Checked)
 				{
-					if (figure is Model.Rectangle && RectangleCheckBox.Checked)
+					foreach (IFigure figure in mainForm.Figures)
 					{
-						AddToGrid("Rectangle", figure);
-					}
-					else if (figure is Model.Circle && CircleCheckBox.Checked)
-					{
-						AddToGrid("Circle", figure);
+						if (figure is Model.Rectangle && RectangleCheckBox.Checked)
+						{
+							AddToGrid("Rectangle", figure);
+						}
+						else if (figure is Model.Circle && CircleCheckBox.Checked)
+						{
+							AddToGrid("Circle", figure);
+						}
 					}
 				}
 			}
@@ -110,15 +119,14 @@ namespace View
 		/// <param name="e"></param>
 		private void CheckFields(TextBox firstField, TextBox secondField, object sender, CancelEventArgs e)
 		{
-			string errorMsg;
-			if (!BlankFieldChecking(out errorMsg))
+			if (!BlankFieldChecking(out var errorMsg))
 			{
-				SearchButton.Enabled = false;
+				IsValidated = false;
 				SetError(firstField, secondField, errorMsg, sender, e);
 			}
 			else
 			{
-				SearchButton.Enabled = true;
+				IsValidated = true;
 				errorMsg = "";
 				SetError(firstField, secondField, errorMsg, sender, e);
 			}
