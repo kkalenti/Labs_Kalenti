@@ -1,4 +1,5 @@
-﻿namespace Model.Interfaces
+﻿//TODO: Некорректный namespace - посмотри настройки проекта
+namespace Model.Interfaces
 {
 	/// <summary>
 	/// Интерфейс для геометрических фигур

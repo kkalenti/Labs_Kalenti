@@ -22,13 +22,12 @@ namespace View
 		/// <summary>
 		/// Список фигур
 		/// </summary>
-		/// //TODO: RSDN done
+		/// //TODO: Публичные поля, ну шозах..ня?
 		public List<IFigure> Figures = new List<IFigure>();
 
 		/// <summary>
 		/// Конструктор главной формы
 		/// </summary>
-		//TODO: XML done
 		public MainForm()
 		{
 			InitializeComponent();
@@ -58,6 +57,7 @@ namespace View
 			foreach (DataGridViewRow row in FigureGrid.SelectedRows)
 			{
 				Figures.RemoveAt(row.Index);
+				//TODO: Работа с гридом не корректная
 				FigureGrid.Rows.Remove(row);
 			}
 		}
@@ -66,11 +66,11 @@ namespace View
 		/// Добавление круга в список
 		/// </summary>
 		/// <param name="radius"> Радиус фигуры </param>
-		/// //TODO: XML done
 		public void CircleToList(double radius)
 		{
 			IFigure circle = new Model.Circle(radius);
 			Figures.Add(circle);
+			//TODO: Работа с гридом не корректная
 			FigureGrid.Rows.Add("Circle", circle.Surface, circle.Perimeter);
 		}
 
@@ -84,6 +84,7 @@ namespace View
 		{
 			IFigure rectangle = new Model.Rectangle(width, length);
 			Figures.Add(rectangle);
+			//TODO: Работа с гридом не корректная
 			FigureGrid.Rows.Add("Rectangle", rectangle.Surface, rectangle.Perimeter);
 		}
 
@@ -97,6 +98,8 @@ namespace View
 		{
 			var rand = new Random();
 			bool flag = rand.Next(0, 2) == 1;
+			//TODO: Если нормально поименуешь флаг, то не надо будет сравнивать с true
+			//TODO: и вообще, бл.., прикрати сравнивать с true!!!
 			if(flag == true)
 			{
 				CircleToList(rand.Next(1, 20));
@@ -129,11 +132,10 @@ namespace View
 		/// <param name="e"></param>
 		private void SaveButton_Click(object sender, EventArgs e)
 		{
+			//TODO: var
 			foreach (IFigure figure in Figures)
 			{
-				//TODO: Дубль done
 				var writer = new XmlSerializer(figure.GetType());
-				//TODO: Абсолютные пути, серьёзно? done
 				using (var file = new FileStream("..\\..\\Xml\\figures.xml", FileMode.Append))
 				{
 					writer.Serialize(file, figure);

@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Model.Interfaces;
-
+//TODO: Некорректный namespace - посмотри настройки проекта
 namespace Model
 {
 	[Serializable]
@@ -36,14 +36,13 @@ namespace Model
 		/// </summary>
 		public string Description { get; }
 
-		//TODO: XML done
 		/// <summary>
 		/// Конструктор по-умолчанию для работы XML сериализации
 		/// </summary>
 		public Rectangle()	{}
 
-		//TODO: XML done
 		/// <summary>
+		/// TODO: некорректный комментарий
 		/// Конструктор для объекта "Прямоугольник"
 		/// </summary>
 		/// <param name="width">Ширина прямоугольника</param>
@@ -54,26 +53,26 @@ namespace Model
 			if (width <= 0 || Double.IsNaN(width) || Double.IsInfinity(width)
 				|| length <= 0 || Double.IsNaN(length) || Double.IsInfinity(length))
 			{
-				//TODO: Сообщение некорректно, т.к. значение может и не вводиться. done
 				throw new ArgumentException();
 			}
 
 			Width = width;
 			Length = length;
-
+			//TODO: Не совсем удачная с точки зрения масштабирования модель, т.к. есть 
+			//TODO: вероятность, что я не вызову никогда эти свойства, а время на их расчёт
+			//TODO: уже потратится. А если их будет 100000000000 (много?)
 			Surface = width * length;
 			Perimeter = 2 * width + 2 * length;
+			//TODO: Длинная строка
 			Description = $"Прямоугольник, ширина: {Width}, длина: {Length}," +
 			              $" площадь: {Surface,valueAlignment:F3}, периметр: {Perimeter,valueAlignment:F3}";
 		}
 
-		//TODO: Правильнее сделать свойством done
 		/// <summary>
 		/// Вывод информации о фигуре
 		/// </summary>
 		public void ShowDescription()
 		{
-			//TODO: Переделай в интерполяционную строку - лучше будет смотреться done
 			Console.WriteLine(Description);
 		}
 	}

@@ -16,8 +16,6 @@ namespace View
 	/// </summary>
 	public partial class FindingForm : Form
 	{
-		//TODO: Неправильно в дочерней форме хранить указатель на родительскую! Убирай нах. done
-		//TODO: XML done
 		/// <summary>
 		/// Конструктор формы поиска
 		/// </summary>
@@ -108,6 +106,7 @@ namespace View
 		/// <param name="secondField">Второе поле</param>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
+		/// TODO: Метод говно. Много параметров передаётся и делается одно и тоже
 		private void CheckFields(TextBox firstField, TextBox secondField, object sender, CancelEventArgs e)
 		{
 			string errorMsg;
@@ -131,6 +130,7 @@ namespace View
 		/// <param name="e"></param>
 		private void SurfaceFirstTextBox_KeyPress(object sender, KeyPressEventArgs e)
 		{
+			//TODO: Инвертируй, будет лучше читаться
 			if (!(char.IsDigit(e.KeyChar)))
 			{
 				if (e.KeyChar != (char)Keys.Back)
@@ -148,6 +148,8 @@ namespace View
 		/// <param name="errorMsg">Сообщение об ошибке</param>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
+		/// TODO: Метод плохой, не стоит сюда передавать sender и е
+		/// TODO: почему паблик?
 		public void SetError(TextBox firstStr, TextBox secondStr,
 			string errorMsg, object sender, CancelEventArgs e)
 		{
@@ -170,6 +172,7 @@ namespace View
 		/// <returns></returns>
 		public bool BlankFieldChecking(out string errorMessage)
 		{
+			//TODO: Длинные строки
 			if (SurfaceFirstTextBox.Text.Length == 0 || SurfaceSecondTextBox.Text.Length == 0 ||
 				PerimeterFirstTextBox.Text.Length == 0 || PerimeterSecondTextBox.Text.Length == 0)
 			{
@@ -192,6 +195,7 @@ namespace View
 		{
 			if (firstStr.Length != 0 && secondStr.Length != 0)
 			{
+				//TODO: Потенциальная генерация исключений!
 				if (Convert.ToDouble(firstStr) > Convert.ToDouble(secondStr))
 				{
 					errorMessage = "Second value must be more or equal to the first";

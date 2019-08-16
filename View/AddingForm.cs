@@ -15,7 +15,7 @@ namespace View
 	/// </summary>
 	public partial class AddingForm : Form
 	{
-		//TODO: Неправильно в дочерней форме хранить указатель на родительскую! Убирай нах. done
+		//TODO: RSDN!
 		public AddingForm()
 		{
 			InitializeComponent();
@@ -30,6 +30,7 @@ namespace View
 		{
 			RectangleGroupBox.Enabled = false;
 			CircleGroupBox.Enabled = true;
+			//TODO: Дублирование
 			WidthTextBox.Text = "";
 			LengthTextBox.Text = "";
 			this.errorProvider.SetError(WidthTextBox, "");
@@ -45,6 +46,7 @@ namespace View
 		{
 			RectangleGroupBox.Enabled = true;
 			CircleGroupBox.Enabled = false;
+			//TODO: Дублирование
 			RadiusTextBox.Text = "";
 			this.errorProvider.SetError(RadiusTextBox, "");
 		}
@@ -66,6 +68,7 @@ namespace View
 		/// <param name="e"></param>
 		private void AddButton_Click(object sender, EventArgs e)
 		{
+			//TODO: фубл... фунах...
 			var mainForm = (MainForm)this.Owner;
 			if (CircleRadioButton.Checked)
 			{
@@ -88,6 +91,7 @@ namespace View
 		/// <param name="e"></param>
 		private void RadiusTextBox_KeyPress(object sender, KeyPressEventArgs e)
 		{
+			//TODO: Инвертируй, будет лучше читаться
 			if (!char.IsDigit(e.KeyChar))
 			{
 				if (e.KeyChar != (char)Keys.Back &&
@@ -105,6 +109,7 @@ namespace View
 		/// <param name="e"></param>
 		private void RadiusTextBox_Validating(object sender, CancelEventArgs e)
 		{
+			//TODO: Можно вписать в IsZero
 			string errorMsg;
 			if (IsZero(RadiusTextBox.Text, out errorMsg)){
 				AddButton.Enabled = false;
@@ -126,6 +131,7 @@ namespace View
 		/// <returns></returns>
 		public bool IsZero(string field, out string errorMessage)
 		{
+			//TODO: var + resharper
 			foreach(char letter in field)
 			{
 				if (letter != '0')
@@ -145,6 +151,7 @@ namespace View
 		/// <param name="e"></param>
 		private void WidthTextBox_Validating(object sender, CancelEventArgs e)
 		{
+			//TODO: Скорее всего можно переписать проще, куча однотипных условий
 			string errorMsg;
 			if (IsZero(WidthTextBox.Text, out errorMsg) && IsZero(LengthTextBox.Text, out errorMsg))
 			{
@@ -170,7 +177,7 @@ namespace View
 		/// <param name="buttonEnabled">Разрешение на добавление в список</param>
 		/// <param name="widthErr">Текст для ошибки поля ширины</param>
 		/// <param name="lengthErr">Текст для ошибки поля длины</param>
-		/// TODO: RSDN done
+		/// TODO: Метод не оч. я бы передавал текстбокс, строку и енаблед с false по-умолчанию
 		public void SetError(bool buttonEnabled, string widthErr, string lengthErr)
 		{
 			AddButton.Enabled = buttonEnabled;

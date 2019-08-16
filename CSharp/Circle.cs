@@ -6,26 +6,31 @@ using System.Threading.Tasks;
 using Model.Interfaces;
 using System.Xml.Serialization;
 
+//TODO: Некорректный namespace - посмотри настройки проекта
 namespace Model
 {	
+	//TODO: Аттрибуты должны быть после xml
 	[Serializable]
 	/// <summary>
 	/// Класс для кругов
 	/// </summary>
 	public class Circle : IFigure
 	{
+		//TODO: Аттрибуты должны быть после xml
 		[XmlAttribute]
 		/// <summary>
 		/// Площадь фигуры
 		/// </summary>
 		public double Surface { get; }
 
+		//TODO: Аттрибуты должны быть после xml
 		[XmlAttribute]
 		/// <summary>
 		/// Периметр фигуры
 		/// </summary>
 		public double Perimeter { get; }
 
+		//TODO: Аттрибуты должны быть после xml
 		[XmlAttribute]
 		/// <summary>
 		/// Радиус фигуры
@@ -37,14 +42,14 @@ namespace Model
 		/// </summary>
 		public string Description { get; }
 
-		//TODO: XML done
 		/// <summary>
 		/// Конструктор по-умолчанию для работы XML сериализации
 		/// </summary>
 		public Circle() { }
 
-		//TODO: XML done
+		//TODO: я бы писал подругому Конструктор класса <see cref=Circle>
 		/// <summary>
+		/// TODO: некорректный комментарий
 		/// Конструктор для объектов "Круг"
 		/// </summary>
 		/// <param name="radius">Радиус круга</param>
@@ -53,13 +58,17 @@ namespace Model
 			const int valueAlignment = 4;
 			if (radius <= 0 || double.IsNaN(radius) || double.IsInfinity(radius))
 			{
-				//TODO: Сообщение некорректно, т.к. значение может и не вводиться. Done
+				//TODO: Как будешь определять - что пошло не так?
 				throw new ArgumentException();
 			}
 
 			Radius = radius;
+			//TODO: Не совсем удачная с точки зрения масштабирования модель, т.к. есть 
+			//TODO: вероятность, что я не вызову никогда эти свойства, а время на их расчёт
+			//TODO: уже потратится. А если их будет 100000000000 (много?)
 			Surface = 2 * Math.PI * radius;
 			Perimeter = Math.PI * Radius * Radius;
+			//TODO: Длинная строка
 			Description = $"Круг, радиус: {Radius}, площадь: {Surface,valueAlignment:F3}," +
 			              $" периметр: {Perimeter,valueAlignment:F3}";
 		}
