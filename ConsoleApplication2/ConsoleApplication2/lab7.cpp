@@ -10,7 +10,7 @@
 using namespace std;
 
 template<typename T>
-void lab7(void(*CreateFnc)(List<T>*, int size), void(*OutputFnc)(List<T>*), void(*AddFnc)(List<T>*)) {
+void lab7(void(*CreateFnc)(List<T>*, const int), void(*OutputFnc)(List<T>*), void(*AddFnc)(List<T>*, const int)) {
 	List<T> *list = new List<T>(nullptr);
 	CreateFnc(list,5);
 	OutputFnc(list);
@@ -18,7 +18,7 @@ void lab7(void(*CreateFnc)(List<T>*, int size), void(*OutputFnc)(List<T>*), void
 	list->RemoveAt(2);
 	OutputFnc(list);
 
-	AddFnc(list);
+	AddFnc(list, 4);
 	OutputFnc(list);
 
 	delete list;
@@ -26,8 +26,8 @@ void lab7(void(*CreateFnc)(List<T>*, int size), void(*OutputFnc)(List<T>*), void
 }
 
 void LabSevenMain() {
-	//TODO: Ќазвание плохое, зачем така€ конкретика в названии?
-	bool is_exit_lab_seven = true;
+	//TODO: Ќазвание плохое, зачем така€ конкретика в названии? done
+	bool is_exit = true;
 	do {
 		system("cls");
 		int key_of_task = 0;
@@ -54,7 +54,7 @@ void LabSevenMain() {
 			break;
 		}
 		case backspace: {
-			is_exit_lab_seven = false;
+			is_exit = false;
 			break;
 		}
 		default: {
@@ -64,5 +64,5 @@ void LabSevenMain() {
 			break;
 		}
 		}
-	} while (is_exit_lab_seven == true);
+	} while (is_exit == true);
 }
