@@ -26,7 +26,7 @@ void lab7(void(*CreateFnc)(List<T>*, int size), void(*OutputFnc)(List<T>*), void
 }
 
 void LabSevenMain() {
-	//TODO: Название плохое, получается ниже - "пока у тебя выход из лабы 4, то..." нужно другое название
+	//TODO: Название плохое, зачем такая конкретика в названии?
 	bool is_exit_lab_seven = true;
 	do {
 		system("cls");

@@ -5,11 +5,11 @@
 #include "List.h"
 #include "Person.h"
 #include "labsevenfunctions.h"
+//TODO: Зачем, если можно передать в метод?
 #define ARRAY_SIZE 5
 
 using namespace std;
 
-//TODO: Большинство методов получились достаточно убогими, т.к. везде забито по 5 элеметов, перепиши, чтобы кол-во передавалось снаружи
 void DoubleOutput(List<double> *list) {
 	cout << "Список double: ";
 	for (int i = 0; i < list->GetCount(); i++) {
@@ -18,15 +18,18 @@ void DoubleOutput(List<double> *list) {
 	cout << endl;
 }
 
+//TODO Везде, где есть size правильнее его сделать const параметром
 void CreateDoubleList(List<double> *list, int size) {
+	//TODO: можно использовать auto вместо int и других инициализаций
 	for (int i = 0; i < size; i++) {
-		double *element = new double;
+		auto element = new double;
 		*element = i;
 		list->Add(element);
 	}
 }
 
 void AddDoubleElement(List<double> *list) {
+	//TODO auto
 	double *element = new double;
 	*element = 10;
 	list->AddTo(element, 4);
@@ -34,8 +37,10 @@ void AddDoubleElement(List<double> *list) {
 
 void PersonOutput(List<Person> *list) {
 	cout << "Список Person: ";
+	//TODO: почему за for сделано?
 	string temp;
 	Person* person;
+	//TODO auto
 	for (int i = 0; i < list->GetCount(); i++) {
 		person = list->Find(i);
 		temp = person->GetDiscription();
@@ -45,18 +50,22 @@ void PersonOutput(List<Person> *list) {
 	cout << endl;
 }
 
+//TODO Везде, где есть size правильнее его сделать const параметром
 void CreatePersonList(List<Person> *list, int size) {
+	//TODO auto
 	for (int i = 0; i < size; i++) {
 		list->Add(new Person(true));
 	}
 }
 
 void AddPersonElement(List<Person> *list) {
+	//TODO: 4 прибита гвоздями - не очень правильно!
 	list->AddTo(new Person(true), 4);
 }
 
 void DoubleArrayOutput(List<double*>* list) {
 	cout << "Список Double*: ";
+	//TODO auto
 	for (int i = 0; i < list->GetCount(); i++) {
 		double* mass = *list->Find(i);
 		for (int j = 0; j < ARRAY_SIZE; j++) {
@@ -68,8 +77,11 @@ void DoubleArrayOutput(List<double*>* list) {
 	cout << endl;
 }
 
+//TODO Везде, где есть size правильнее его сделать const параметром
 void CreateDoubleArrayList(List<double*> *list, int size) {
+	//TODO auto
 	for (int i = 0; i < size; i++) {
+		//TODO: Зачем разделил?
 		double** mass;
 		mass = new double*[1];
 		mass[0] = new double[size];
@@ -81,9 +93,11 @@ void CreateDoubleArrayList(List<double*> *list, int size) {
 }
 
 void AddDoubleArrayElement(List<double*> *list) {
+	//TODO: Зачем разделил?
 	double** mass;
 	mass = new double*[1];
 	mass[0] = new double[ARRAY_SIZE];
+	//TODO auto
 	for (int j = 0; j < ARRAY_SIZE; j++) {
 		mass[0][j] = j + 10;
 	}
@@ -93,8 +107,11 @@ void AddDoubleArrayElement(List<double*> *list) {
 void DoubleListOutput(List<List<double>> *list) {
 	cout << "Список List<double>: " << endl;
 	Person* person;
+	//TODO auto
 	for (int i = 0; i < list->GetCount(); i++) {
+		//TODO auto
 		List<double>* list1 = list->Find(i);
+		//TODO auto
 		for (int j = 0; j < list1->GetCount(); j++) {
 			cout << *list1->Find(j) << ' ';
 		}
@@ -104,9 +121,13 @@ void DoubleListOutput(List<List<double>> *list) {
 	cout << endl;
 }
 
+//TODO Везде, где есть size правильнее его сделать const параметром
 void CreateDoubleListList(List<List<double>> *list, int size) {
+	//TODO: Зачем разделил?
 	double *element;
+	//TODO auto
 	for (int i = 0; i < size; i++) {
+		//TODO auto
 		List<double> *list1 = new List<double>(nullptr);
 		for (int j = i; j < i + size; j++) {
 			element = new double;
@@ -118,8 +139,11 @@ void CreateDoubleListList(List<List<double>> *list, int size) {
 }
 
 void AddDoubleListElement(List<List<double>> *list) {
+	//TODO: Зачем разделил?
 	double *element;
+	//TODO auto
 	List<double> *list1 = new List<double>(nullptr);
+	//TODO auto
 	for (int j = 0; j < ARRAY_SIZE; j++) {
 		element = new double;
 		*element = j + 10;
