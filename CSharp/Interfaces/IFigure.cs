@@ -1,4 +1,6 @@
-﻿namespace Model.Interfaces
+﻿using System;
+
+namespace Model.Interfaces
 {
 	/// <summary>
 	/// Интерфейс для геометрических фигур
@@ -22,9 +24,6 @@
 		/// </summary>
 		string Description { get; }
 
-		/// <summary>
-		/// Вывод информации о фигуре
-		/// </summary>
-		void ShowDescription();
+
 	}
 }

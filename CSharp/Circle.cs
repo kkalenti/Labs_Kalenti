@@ -15,80 +15,68 @@ namespace Model
 	[DataContract]
 	public class Circle : IFigure
 	{
-		private double _surface;
+		private Lazy<double> _surface;
 		/// <summary>
 		/// Площадь фигуры
 		/// </summary>
-		[DataMember]
-		public double Surface
-		{
-			get => _surface;
-			set => _surface = value;
-		}
+		public double Surface => _surface.Value;
 
-		private double _perimeter;
+		private Lazy<double> _perimeter;
 		/// <summary>
 		/// Периметр фигуры
 		/// </summary>
-		[DataMember]
-		public double Perimeter
-		{
-			get => _perimeter;
-			set => _perimeter = value;
-		}
-
+		public double Perimeter => _perimeter.Value;
 
 		private double _radius;
-		[DataMember]
+
 		/// <summary>
 		/// Радиус фигуры
 		/// </summary>
+		[DataMember]
 		public double Radius
 		{
 			get => _radius;
-			set => _radius = value;
+			set
+			{
+				ValueValidation.IsPositive(value, "Radius");
+				_radius = value;
+				if (_surface == null || _perimeter == null)
+				{
+					_surface = new Lazy<double>(() => 2 * Math.PI * Radius);
+					_perimeter = new Lazy<double>(() => Math.PI * Radius * Radius);
+				}
+			}
 		}
 
 		/// <summary>
 		/// Описание фигуры
 		/// </summary>
-		public string Description { get; }
+		public string Description {
+			get
+			{
+				const int valueAlignment = 4;
+				return $"Круг, радиус: {Radius}," +
+				       $" площадь: {Surface,valueAlignment:F3}," +
+				       $" периметр: {Perimeter,valueAlignment:F3}";
+			}
+
+		}
 
 		//TODO: XML done
 		/// <summary>
 		/// Конструктор по-умолчанию для работы XML сериализации
 		/// </summary>
-		public Circle() { }
+		public Circle()
+		{}
 
 		//TODO: XML done
 		/// <summary>
-		/// Конструктор для объектов "Круг"
+		/// Конструктор класса <see cref="Circle"/>
 		/// </summary>
 		/// <param name="radius">Радиус круга</param>
 		public Circle(double radius)
 		{
-			const int valueAlignment = 4;
-			if (radius <= 0 || double.IsNaN(radius) || double.IsInfinity(radius))
-			{
-				//TODO: Сообщение некорректно, т.к. значение может и не вводиться. Done
-				throw new ArgumentException();
-			}
-
 			Radius = radius;
-			Surface = 2 * Math.PI * radius;
-			Perimeter = Math.PI * Radius * Radius;
-			Description = $"Круг, радиус: {Radius}, площадь: {Surface,valueAlignment:F3}," +
-			              $" периметр: {Perimeter,valueAlignment:F3}";
-		}
-
-		//TODO: Правильнее сделать свойством done
-		/// <summary>
-		/// Вывод информации о фигуре
-		/// </summary>
-		public void ShowDescription()
-		{
-			//TODO: Переделай в интерполяционную строку - лучше будет смотреться done
-			Console.WriteLine(Description);
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,21 +13,20 @@ using Model.Interfaces;
 using System.Windows.Forms;
 using System.IO;
 using  System.Runtime.Serialization;
+using System.Xml;
 
 namespace View
 {
 	/// <summary>
 	/// Основная форма
 	/// </summary>
-	[DataContract]
 	public partial class MainForm : Form
 	{
 		/// <summary>
 		/// Список фигур
 		/// </summary>
 		/// //TODO: RSDN done
-		[DataMember]
-		public List<IFigure> Figures = new List<IFigure>();
+		public List<IFigure> Figures { get; private set; } = new List<IFigure>();
 
 		/// <summary>
 		/// Конструктор главной формы
@@ -110,8 +110,8 @@ namespace View
 		/// <param name="figure">Фигура</param>
 		public void FigureToList(IFigure figure)
 		{
+			FigureGrid.DataSource = Figures;
 			Figures.Add(figure);
-			FigureToGrid(figure);
 		}
 
 		/// <summary>
@@ -146,8 +146,7 @@ namespace View
 			}
 			else
 			{
-				FigureToList(new Model.Rectangle(rand.Next(1, 20),
-					rand.Next(1, 20)));
+				FigureToList(new Model.Rectangle(rand.Next(1, 20), rand.Next(1, 20)));
 			}
 		}
 #endif
@@ -177,11 +176,13 @@ namespace View
 			if (saveFile.ShowDialog() == DialogResult.Cancel)
 				return;
 			var filename = saveFile.FileName;
-			
+
 			var writer = new DataContractSerializer(typeof(List<IFigure>), 
 				new List<Type> { typeof(Model.Rectangle), typeof(Model.Circle) });
 
-			using (var fs = new FileStream(filename, FileMode.Create))
+			var settings = new XmlWriterSettings {Indent = true};
+
+			using (var fs = XmlWriter.Create(filename, settings))
 			{
 				writer.WriteObject(fs, Figures);
 			}
@@ -239,7 +240,7 @@ namespace View
 			var reader = new DataContractSerializer(typeof(List<IFigure>),
 				new List<Type> { typeof(Model.Rectangle), typeof(Model.Circle) });
 
-			using (var fs = new FileStream(filename, FileMode.Open))
+			using (var fs = XmlReader.Create(filename))
 			{
 				Figures = (List<IFigure>)reader.ReadObject(fs);
 			}

@@ -13,27 +13,17 @@ namespace Model
 	[DataContract]
 	public class Rectangle : IFigure
 	{
-		private double _surface;
+		private Lazy<double> _surface;
 		/// <summary>
 		/// Площадь фигуры
 		/// </summary>
-		[DataMember]
-		public double Surface
-		{
-			get => _surface;
-			set => _surface = value;
-		}
+		public double Surface => _surface.Value;
 
-		private double _perimeter;
+		private Lazy<double> _perimeter;
 		/// <summary>
 		/// Периметр фигуры
 		/// </summary>
-		[DataMember]
-		public double Perimeter
-		{
-			get => _perimeter;
-			set => _perimeter = value;
-		}
+		public double Perimeter => _perimeter.Value;
 
 		private double _width;
 		/// <summary>
@@ -43,7 +33,13 @@ namespace Model
 		public double Width
 		{
 			get => _width;
-			set => _width = value;
+			set
+			{
+				ValueValidation.IsPositive(value, "Width");
+				_width = value;
+				CalculationInit();
+			}
+
 		}
 
 		private double _length;
@@ -54,53 +50,57 @@ namespace Model
 		public double Length
 		{
 			get => _length;
-			set => _length = value;
+			set
+			{
+				ValueValidation.IsPositive(value, "Length");
+				_length = value;
+				CalculationInit();
+			}
+		}
+
+		/// <summary>
+		/// Инициализация полей площади и периметра
+		/// </summary>
+		private void CalculationInit()
+		{
+			if (_surface == null || _perimeter == null)
+			{
+				_surface = new Lazy<double>(() => Width * Length);
+				_perimeter = new Lazy<double>(() => 2 * Width + 2 * Length);
+			}
 		}
 
 		/// <summary>
 		/// Описание фигуры
 		/// </summary>
-		public string Description { get; }
+		public string Description {
+			get
+			{
+				const int valueAlignment = 4;
+				return  $"Прямоугольник, ширина: {Width}," +
+							$" длина: {Length}," +
+							$" площадь: {Surface,valueAlignment:F3}," +
+							$" периметр: {Perimeter,valueAlignment:F3}";
+			}
+		}
 
 		//TODO: XML done
 		/// <summary>
 		/// Конструктор по-умолчанию для работы XML сериализации
 		/// </summary>
-		public Rectangle()	{}
+		public Rectangle()
+		{}
 
 		//TODO: XML done
 		/// <summary>
-		/// Конструктор для объекта "Прямоугольник"
+		/// Конструктор для объекта <see cref="Rectangle"/>
 		/// </summary>
 		/// <param name="width">Ширина прямоугольника</param>
 		/// <param name="length">Длина прямоугольника</param>
 		public Rectangle(double width, double length)
 		{
-			const int valueAlignment = 4;
-			if (width <= 0 || Double.IsNaN(width) || Double.IsInfinity(width)
-				|| length <= 0 || Double.IsNaN(length) || Double.IsInfinity(length))
-			{
-				//TODO: Сообщение некорректно, т.к. значение может и не вводиться. done
-				throw new ArgumentException();
-			}
-
 			Width = width;
 			Length = length;
-
-			Surface = width * length;
-			Perimeter = 2 * width + 2 * length;
-			Description = $"Прямоугольник, ширина: {Width}, длина: {Length}," +
-			              $" площадь: {Surface,valueAlignment:F3}, периметр: {Perimeter,valueAlignment:F3}";
-		}
-
-		//TODO: Правильнее сделать свойством done
-		/// <summary>
-		/// Вывод информации о фигуре
-		/// </summary>
-		public void ShowDescription()
-		{
-			//TODO: Переделай в интерполяционную строку - лучше будет смотреться done
-			Console.WriteLine(Description);
 		}
 	}
 }

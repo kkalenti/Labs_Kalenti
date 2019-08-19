@@ -80,7 +80,7 @@ namespace ConsoleLoader
 		{
 			foreach (IFigure i in figures)
 			{
-				i.ShowDescription();
+				Console.WriteLine(i.Description);
 			}
 			Console.ReadKey();
 		}
