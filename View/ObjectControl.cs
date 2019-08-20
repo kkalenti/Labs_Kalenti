@@ -43,9 +43,7 @@ namespace View
 					case Model.Rectangle rectangle:
 					{
 						RectangleRadioButton.Checked = true;
-						RectangleRadioButton.Enabled = false;
-						CircleRadioButton.Checked = false;
-						CircleRadioButton.Enabled = false;
+						EnableButton(false);
 
 						WidthTextBox.Text = rectangle.Width.ToString();
 						LengthTextBox.Text = rectangle.Length.ToString();
@@ -53,16 +51,20 @@ namespace View
 					}
 					case Model.Circle circle:
 					{
-						RectangleRadioButton.Checked = false;
-						RectangleRadioButton.Enabled = false;
+						EnableButton(false);
 						CircleRadioButton.Checked = true;
-						CircleRadioButton.Enabled = false;
 
 						RadiusTextBox.Text = circle.Radius.ToString();
 						break;
 					}
 				}
 			}
+		}
+
+		private void EnableButton(bool enable)
+		{
+			RectangleRadioButton.Enabled = enable;
+			CircleRadioButton.Enabled = enable;
 		}
 
 		/// <summary>
@@ -79,13 +81,18 @@ namespace View
 			set
 			{
 				_readOnly = value;
-				WidthTextBox.Enabled = !_readOnly;
-				LengthTextBox.Enabled = !_readOnly;
-				RadiusTextBox.Enabled = !_readOnly;
+				TextBoxesEnable(!_readOnly);
 			}
 		}
 
-		public void CleanFields()
+		private void TextBoxesEnable(bool enable)
+		{
+			WidthTextBox.Enabled = enable;
+			LengthTextBox.Enabled = enable;
+			RadiusTextBox.Enabled = enable;
+		}
+
+		public void ClearFields()
 		{
 			WidthTextBox.Text = "";
 			LengthTextBox.Text = "";
@@ -95,7 +102,7 @@ namespace View
 		/// <summary>
 		/// Разрешение на добавление элемента исходя из валидации
 		/// </summary>
-		public bool AddingEnable { get; private set; }
+		public bool IsAddingEnable { get; private set; }
 
 		/// <summary>
 		/// Конструктор контрола
@@ -114,10 +121,14 @@ namespace View
 		{
 			EnabledGroupBox(RectangleGroupBox, false);
 			EnabledGroupBox(CircleGroupBox, true);
-			WidthTextBox.Text = "";
-			LengthTextBox.Text = "";
-			this.errorProvider.SetError(WidthTextBox, "");
-			this.errorProvider.SetError(LengthTextBox, "");
+			ClearTextBoxError(WidthTextBox);
+			ClearTextBoxError(LengthTextBox);
+		}
+
+		private void ClearTextBoxError(Control textBox)
+		{
+			textBox.Text = "";
+			this.errorProvider.SetError(textBox, "");
 		}
 
 		/// <summary>
@@ -125,7 +136,7 @@ namespace View
 		/// </summary>
 		/// <param name="groupBox"> Выбранный GroupBox</param>
 		/// <param name="enable">Доступ</param>
-		public void EnabledGroupBox(GroupBox groupBox, bool enable)
+		private void EnabledGroupBox(GroupBox groupBox, bool enable)
 		{
 			groupBox.Enabled = enable;
 			groupBox.Visible = enable;
@@ -140,8 +151,7 @@ namespace View
 		{
 			EnabledGroupBox(RectangleGroupBox, true);
 			EnabledGroupBox(CircleGroupBox, false);
-			RadiusTextBox.Text = "";
-			this.errorProvider.SetError(RadiusTextBox, "");
+			ClearTextBoxError(RadiusTextBox);
 		}
 
 		/// <summary>
@@ -151,13 +161,12 @@ namespace View
 		/// <param name="e"></param>
 		private void RadiusTextBox_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			if (!char.IsDigit(e.KeyChar))
+			if (char.IsDigit(e.KeyChar)) return;
+
+			if (e.KeyChar != (char)Keys.Back &&
+			    (e.KeyChar != ',' || RadiusTextBox.Text.Contains(',')))
 			{
-				if (e.KeyChar != (char)Keys.Back &&
-				    (e.KeyChar != ',' || RadiusTextBox.Text.Contains(',')))
-				{
-					e.Handled = true;
-				}
+				e.Handled = true;
 			}
 		}
 
@@ -168,16 +177,13 @@ namespace View
 		/// <param name="e"></param>
 		private void RadiusTextBox_Validating(object sender, CancelEventArgs e)
 		{
-			if (IsZero(RadiusTextBox.Text, out var errorMsg))
+			if (string.IsNullOrEmpty(SetError(RadiusTextBox)))
 			{
-				AddingEnable = false;
-				this.errorProvider.SetError(RadiusTextBox, errorMsg);
+				IsAddingEnable = true;
 			}
 			else
 			{
-				AddingEnable = true;
-				errorMsg = "";
-				this.errorProvider.SetError(RadiusTextBox, errorMsg);
+				IsAddingEnable = false;
 			}
 		}
 
@@ -187,18 +193,14 @@ namespace View
 		/// <param name="field">Введенная строка</param>
 		/// <param name="errorMessage">Сообщение об ошибке</param>
 		/// <returns></returns>
-		public bool IsZero(string field, out string errorMessage)
+		private string EmptyFieldValidation(string field)
 		{
-			foreach (char letter in field)
+			double.TryParse(field, out var doubleValue);
+			if (string.IsNullOrEmpty(field) || doubleValue == 0)
 			{
-				if (letter != '0')
-				{
-					errorMessage = "";
-					return false;
-				}
+				return  "Value mustn't be equal 0 or empty";
 			}
-			errorMessage = "Value mustn't be equal 0 or empty";
-			return true;
+			return "";
 		}
 
 		/// <summary>
@@ -208,38 +210,29 @@ namespace View
 		/// <param name="e"></param>
 		private void WidthTextBox_Validating(object sender, CancelEventArgs e)
 		{
-			if (IsZero(WidthTextBox.Text, out var widthErrorMsg) 
-			    && IsZero(LengthTextBox.Text, out var lengthErrorMsg))
+			if (string.IsNullOrEmpty(SetError(WidthTextBox)) &&
+			    string.IsNullOrEmpty(SetError(LengthTextBox)))
 			{
-				SetError(false, widthErrorMsg, lengthErrorMsg);
-			}
-			else if (IsZero(WidthTextBox.Text, out widthErrorMsg) 
-			         && !IsZero(LengthTextBox.Text, out lengthErrorMsg))
-			{
-				SetError(false, widthErrorMsg, "");
-			}
-			else if (!IsZero(WidthTextBox.Text, out widthErrorMsg)
-			         && IsZero(LengthTextBox.Text, out lengthErrorMsg))
-			{
-				SetError(false, "", lengthErrorMsg);
+				IsAddingEnable = true;
 			}
 			else
 			{
-				SetError(true, "", "");
+				IsAddingEnable = false;
 			}
+
 		}
 
 		/// <summary>
-		/// Задать текст для ошибки
+		/// Возвращает текст ошибки для данного textbox-а
 		/// </summary>
-		/// <param name="buttonEnabled">Разрешение на добавление в список</param>
-		/// <param name="widthErr">Текст для ошибки поля ширины</param>
-		/// <param name="lengthErr">Текст для ошибки поля длины</param>
-		public void SetError(bool buttonEnabled, string widthErr, string lengthErr)
+		/// <param name="textBox">Проверяемый textbox</param>
+		/// <returns>Сообщение ошибки</returns>
+		private string SetError(Control textBox)
 		{
-			AddingEnable = buttonEnabled;
-			this.errorProvider.SetError(WidthTextBox, widthErr);
-			this.errorProvider.SetError(LengthTextBox, lengthErr);
+			var errorMsg = EmptyFieldValidation(textBox.Text);
+			this.errorProvider.SetError(textBox, errorMsg);
+
+			return errorMsg;
 		}
 	}
 }

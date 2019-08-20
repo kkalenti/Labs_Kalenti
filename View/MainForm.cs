@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using Model;
 using Model.Interfaces;
 using System.Windows.Forms;
-using System.IO;
 using  System.Runtime.Serialization;
 using System.Xml;
 
@@ -26,7 +17,7 @@ namespace View
 		/// Список фигур
 		/// </summary>
 		/// //TODO: RSDN done
-		public List<IFigure> Figures { get; private set; } = new List<IFigure>();
+		public BindingList<IFigure> Figures { get; private set; } = new BindingList<IFigure>();
 
 		/// <summary>
 		/// Конструктор главной формы
@@ -35,6 +26,8 @@ namespace View
 		public MainForm()
 		{
 			InitializeComponent();
+			FigureGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			FigureGrid.DataSource = Figures;
 		}
 
 		/// <summary>
@@ -44,7 +37,9 @@ namespace View
 		public MainForm(string[] args)
 		{
 			InitializeComponent();
-			OpenInputFile(args[0]);
+			FiguresDeserializing(args[0]);
+			FigureGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			FigureGrid.DataSource = Figures;
 		}
 
 		/// <summary>
@@ -54,11 +49,9 @@ namespace View
 		/// <param name="e"></param>
 		private void AddButton_Click(object sender, EventArgs e)
 		{
-			var adding = new AddingForm()
-			{
-				Owner = this
-			};
-			adding.Show();
+			var adding = new AddingForm();
+			adding.AddFigure += AddToListHandler;
+			adding.ShowDialog();
 		}
 
 		/// <summary>
@@ -70,12 +63,10 @@ namespace View
 		{
 			if (FigureGrid.SelectedRows.Count > 0)
 			{
-				IFigure figure = Figures[FigureGrid.SelectedRows[0].Index];
-				var modify = new AddingForm(figure)
-				{
-					Owner = this
-				};
-				modify.Show();
+				var figure = Figures[FigureGrid.SelectedRows[0].Index];
+				var modify = new AddingForm(figure);
+				modify.ModifyFigure += ModifyElementHandler;
+				modify.ShowDialog();
 			}
 		}
 
@@ -89,45 +80,18 @@ namespace View
 			foreach (DataGridViewRow row in FigureGrid.SelectedRows)
 			{
 				Figures.RemoveAt(row.Index);
-				FigureGrid.Rows.Remove(row);
 			}
 		}
 
 		/// <summary>
 		/// Изменение фигуры
 		/// </summary>
-		/// <param name="figure">Фигура</param>
-		public void ModifyElement(IFigure figure)
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		public void ModifyElementHandler(object sender, AddingEventArg e)
 		{
-			Figures.RemoveAt(FigureGrid.CurrentRow.Index);
-			FigureGrid.Rows.Remove(FigureGrid.CurrentRow);
-			FigureToList(figure);
-		}
-
-		/// <summary>
-		/// Добавление фигуры в список и таблицу
-		/// </summary>
-		/// <param name="figure">Фигура</param>
-		public void FigureToList(IFigure figure)
-		{
-			FigureGrid.DataSource = Figures;
-			Figures.Add(figure);
-		}
-
-		/// <summary>
-		/// Добавление фигуры в список
-		/// </summary>
-		/// <param name="figure">Фигура</param>
-		public void FigureToGrid(IFigure figure)
-		{
-			if (figure is Model.Circle)
-			{
-				FigureGrid.Rows.Add("Circle", figure.Surface, figure.Perimeter);
-			}
-			else
-			{
-				FigureGrid.Rows.Add("Rectangle", figure.Surface, figure.Perimeter);
-			}
+			Figures.RemoveAt(FigureGrid.SelectedRows[0].Index);
+			Figures.Add(e.Figure);
 		}
 
 #if DEBUG
@@ -139,14 +103,18 @@ namespace View
 		private void RandomObjectButton_Click(object sender, EventArgs e)
 		{
 			var rand = new Random();
-			bool flag = rand.Next(0, 2) == 1;
-			if(flag == true)
+			var figureNumber = rand.Next(0, 2);
+			switch (figureNumber)
 			{
-				FigureToList(new Model.Circle(rand.Next(1, 20)));
-			}
-			else
-			{
-				FigureToList(new Model.Rectangle(rand.Next(1, 20), rand.Next(1, 20)));
+				case 0:
+					Figures.Add(new Model.Circle(rand.Next(1, 20)));
+					break;
+
+				case 1:
+					Figures.Add(new Model.Rectangle(rand.Next(1, 20), rand.Next(1, 20)));
+					break;
+				default:
+					break;
 			}
 		}
 #endif
@@ -158,10 +126,7 @@ namespace View
 		/// <param name="e"></param>
 		private void FindObjectButton_Click(object sender, EventArgs e)
 		{
-			var finding = new FindingForm
-			{
-				Owner = this
-			};
+			var finding = new FindingForm();
 			finding.Show();
 		}
 
@@ -177,7 +142,7 @@ namespace View
 				return;
 			var filename = saveFile.FileName;
 
-			var writer = new DataContractSerializer(typeof(List<IFigure>), 
+			var writer = new DataContractSerializer(typeof(BindingList<IFigure>), 
 				new List<Type> { typeof(Model.Rectangle), typeof(Model.Circle) });
 
 			var settings = new XmlWriterSettings {Indent = true};
@@ -199,12 +164,12 @@ namespace View
 			if (FigureGrid.CurrentCell != null)
 			{
 				FigureGrid.Rows[FigureGrid.CurrentCell.RowIndex].Selected = true;
-				MyControl.Object = Figures[FigureGrid.CurrentRow.Index];
+				MyControl.Object = Figures[FigureGrid.SelectedRows[0].Index];
 				MyControl.ReadOnly = true;
 			}
 			else
 			{
-				MyControl.CleanFields();
+				MyControl.ClearFields();
 			}
 		}
 
@@ -223,13 +188,7 @@ namespace View
 			var filename = openFile.FileName;
 
 			FiguresDeserializing(filename);
-
-			foreach (IFigure figure in Figures)
-			{
-				FigureToGrid(figure);
-			}
 		}
-
 
 		/// <summary>
 		/// Десериализация данных из файла
@@ -237,27 +196,19 @@ namespace View
 		/// <param name="filename">Имя файла</param>
 		public void FiguresDeserializing(string filename)
 		{
-			var reader = new DataContractSerializer(typeof(List<IFigure>),
+			var reader = new DataContractSerializer(typeof(BindingList<IFigure>),
 				new List<Type> { typeof(Model.Rectangle), typeof(Model.Circle) });
 
 			using (var fs = XmlReader.Create(filename))
 			{
-				Figures = (List<IFigure>)reader.ReadObject(fs);
+				Figures = (BindingList<IFigure>)reader.ReadObject(fs);
 			}
+			FigureGrid.DataSource = Figures;
 		}
 
-		/// <summary>
-		/// Открытие входного файла
-		/// </summary>
-		/// <param name="filename">Имя файла</param>
-		public void OpenInputFile(string filename)
+		public void AddToListHandler(object sender, AddingEventArg e)
 		{
-			FiguresDeserializing(filename);
-
-			foreach (IFigure figure in Figures)
-			{
-				FigureToGrid(figure);
-			}
+			Figures.Add(e.Figure);
 		}
 	}
 }

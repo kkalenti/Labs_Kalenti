@@ -15,6 +15,11 @@ namespace Model
 	[DataContract]
 	public class Circle : IFigure
 	{
+		/// <summary>
+		/// Имя фигуры
+		/// </summary>
+		public string Name => "Circle";
+
 		private Lazy<double> _surface;
 		/// <summary>
 		/// Площадь фигуры

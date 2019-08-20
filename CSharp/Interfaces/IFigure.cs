@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace Model.Interfaces
 {
@@ -7,6 +8,11 @@ namespace Model.Interfaces
 	/// </summary>
 	public interface IFigure
 	{
+		/// <summary>
+		/// Название фигуры
+		/// </summary>
+		string Name { get; }
+
 		/// <summary>
 		/// Площадь фигуры
 		/// </summary>
@@ -22,6 +28,7 @@ namespace Model.Interfaces
 		/// <summary>
 		/// Описание фигуры
 		/// </summary>
+		[Browsable(false)]
 		string Description { get; }
 
 

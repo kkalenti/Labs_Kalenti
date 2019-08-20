@@ -13,6 +13,11 @@ namespace Model
 	[DataContract]
 	public class Rectangle : IFigure
 	{
+		/// <summary>
+		/// Имя фигуры
+		/// </summary>
+		public string Name => "Rectangle";
+
 		private Lazy<double> _surface;
 		/// <summary>
 		/// Площадь фигуры

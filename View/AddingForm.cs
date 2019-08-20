@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Model.Interfaces;
-using Model;
 
 namespace View
 {
@@ -17,6 +9,10 @@ namespace View
 	/// </summary>
 	public partial class AddingForm : Form
 	{
+		public event EventHandler<AddingEventArg> AddFigure;
+
+		public event EventHandler<AddingEventArg> ModifyFigure;
+
 		/// <summary>
 		/// Конструктор формы добавления элементоа
 		/// </summary>
@@ -43,6 +39,8 @@ namespace View
 			ModifyButton.Visible = true;
 		}
 
+		
+
 		/// <summary>
 		/// Обработка кнопки отмены
 		/// </summary>
@@ -60,10 +58,9 @@ namespace View
 		/// <param name="e"></param>
 		private void AddButton_Click(object sender, EventArgs e)
 		{
-			if (objectControl.AddingEnable)
+			if (objectControl.IsAddingEnable)
 			{
-				var mainForm = (MainForm) this.Owner;
-				mainForm.FigureToList(objectControl.Object);
+				AddFigure?.Invoke(this, new AddingEventArg(objectControl.Object));
 				this.Close();
 			}
 		}
@@ -75,10 +72,9 @@ namespace View
 		/// <param name="e"></param>
 		private void ModifyButton_Click(object sender, EventArgs e)
 		{
-			if (objectControl.AddingEnable)
+			if (objectControl.IsAddingEnable)
 			{
-				var mainForm = (MainForm)this.Owner;
-				mainForm.ModifyElement(objectControl.Object);
+				ModifyFigure?.Invoke(this, new AddingEventArg(objectControl.Object));
 				this.Close();
 			}
 		}

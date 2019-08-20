@@ -33,14 +33,9 @@
 			this.MyControl = new View.ObjectControl();
 			this.ModifyButton = new System.Windows.Forms.Button();
 			this.SaveButton = new System.Windows.Forms.Button();
-#if DEBUG
 			this.RandomObjectButton = new System.Windows.Forms.Button();
-#endif
 			this.FindObjectButton = new System.Windows.Forms.Button();
 			this.FigureGrid = new System.Windows.Forms.DataGridView();
-			this.Figure = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Surface = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Perimeter = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.RemoveButton = new System.Windows.Forms.Button();
 			this.AddButton = new System.Windows.Forms.Button();
 			this.saveFile = new System.Windows.Forms.SaveFileDialog();
@@ -58,10 +53,7 @@
 			this.FigureGroupBox.Controls.Add(this.MyControl);
 			this.FigureGroupBox.Controls.Add(this.ModifyButton);
 			this.FigureGroupBox.Controls.Add(this.SaveButton);
-#if DEBUG
-						this.FigureGroupBox.Controls.Add(this.RandomObjectButton);
-
-#endif
+			this.FigureGroupBox.Controls.Add(this.RandomObjectButton);
 			this.FigureGroupBox.Controls.Add(this.FindObjectButton);
 			this.FigureGroupBox.Controls.Add(this.FigureGrid);
 			this.FigureGroupBox.Controls.Add(this.RemoveButton);
@@ -113,7 +105,6 @@
 			this.SaveButton.Text = "Save data";
 			this.SaveButton.UseVisualStyleBackColor = true;
 			this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
-#if DEBUG
 			// 
 			// RandomObjectButton
 			// 
@@ -125,8 +116,6 @@
 			this.RandomObjectButton.Text = "Random";
 			this.RandomObjectButton.UseVisualStyleBackColor = true;
 			this.RandomObjectButton.Click += new System.EventHandler(this.RandomObjectButton_Click);
-#endif
-
 			// 
 			// FindObjectButton
 			// 
@@ -144,10 +133,6 @@
 			this.FigureGrid.AllowUserToAddRows = false;
 			this.FigureGrid.AllowUserToDeleteRows = false;
 			this.FigureGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.FigureGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Figure,
-            this.Surface,
-            this.Perimeter});
 			this.FigureGrid.GridColor = System.Drawing.Color.White;
 			this.FigureGrid.Location = new System.Drawing.Point(7, 20);
 			this.FigureGrid.Name = "FigureGrid";
@@ -155,27 +140,6 @@
 			this.FigureGrid.Size = new System.Drawing.Size(502, 232);
 			this.FigureGrid.TabIndex = 0;
 			this.FigureGrid.SelectionChanged += new System.EventHandler(this.FigureGrid_SelectionChanged);
-			// 
-			// Figure
-			// 
-			this.Figure.HeaderText = "Figure";
-			this.Figure.Name = "Figure";
-			this.Figure.ReadOnly = true;
-			this.Figure.Width = 75;
-			// 
-			// Surface
-			// 
-			this.Surface.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.Surface.HeaderText = "Surface";
-			this.Surface.Name = "Surface";
-			this.Surface.ReadOnly = true;
-			// 
-			// Perimeter
-			// 
-			this.Perimeter.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.Perimeter.HeaderText = "Perimeter";
-			this.Perimeter.Name = "Perimeter";
-			this.Perimeter.ReadOnly = true;
 			// 
 			// RemoveButton
 			// 
@@ -225,9 +189,6 @@
 		private System.Windows.Forms.Button RemoveButton;
 		private System.Windows.Forms.Button AddButton;
 		private System.Windows.Forms.DataGridView FigureGrid;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Figure;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Surface;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Perimeter;
 		private System.Windows.Forms.Button FindObjectButton;
 #if DEBUG
 		private System.Windows.Forms.Button RandomObjectButton;
