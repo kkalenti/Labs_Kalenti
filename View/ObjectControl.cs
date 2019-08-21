@@ -14,12 +14,11 @@ namespace View
 {
 	public partial class ObjectControl : UserControl
 	{
-		public IFigure Object
 		/// <summary>
 		/// Свойство для хранения используемой фигуры
 		/// </summary>
+		public IFigure Object
 		{
-
 			get
 			{
 				if (RectangleRadioButton.Checked)
@@ -61,6 +60,10 @@ namespace View
 			}
 		}
 
+		/// <summary>
+		/// Отключает или включает radiobutton-ы
+		/// </summary>
+		/// <param name="enable"></param>
 		private void EnableButton(bool enable)
 		{
 			RectangleRadioButton.Enabled = enable;
@@ -85,6 +88,10 @@ namespace View
 			}
 		}
 
+		/// <summary>
+		/// Отключает или включает textbox-ы
+		/// </summary>
+		/// <param name="enable"></param>
 		private void TextBoxesEnable(bool enable)
 		{
 			WidthTextBox.Enabled = enable;
@@ -92,6 +99,9 @@ namespace View
 			RadiusTextBox.Enabled = enable;
 		}
 
+		/// <summary>
+		/// Очистить все textbox-ы
+		/// </summary>
 		public void ClearFields()
 		{
 			WidthTextBox.Text = "";
@@ -125,10 +135,14 @@ namespace View
 			ClearTextBoxError(LengthTextBox);
 		}
 
+		/// <summary>
+		/// Очищает текст ошибки для textbox-а
+		/// </summary>
+		/// <param name="textBox"></param>
 		private void ClearTextBoxError(Control textBox)
 		{
 			textBox.Text = "";
-			this.errorProvider.SetError(textBox, "");
+			errorProvider.SetError(textBox, "");
 		}
 
 		/// <summary>
@@ -191,7 +205,6 @@ namespace View
 		/// Проверка стрки на отсутствие символов
 		/// </summary>
 		/// <param name="field">Введенная строка</param>
-		/// <param name="errorMessage">Сообщение об ошибке</param>
 		/// <returns></returns>
 		private string EmptyFieldValidation(string field)
 		{

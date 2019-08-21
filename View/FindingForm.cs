@@ -17,14 +17,28 @@ namespace View
 	/// </summary>
 	public partial class FindingForm : Form
 	{
+		/// <summary>
+		/// Ссылка на список фигур из  MainForm
+		/// </summary>
+		private BindingList<IFigure> Figures { get; }
+
+		/// <summary>
+		/// Список найденых фигур
+		/// </summary>
+		private BindingList<IFigure> FindingList { get; } = new BindingList<IFigure>();
+
 		//TODO: Неправильно в дочерней форме хранить указатель на родительскую! Убирай нах. done
 		//TODO: XML done
 		/// <summary>
 		/// Конструктор формы поиска
 		/// </summary>
-		public FindingForm()
+		public FindingForm(BindingList<IFigure> figures)
 		{
 			InitializeComponent();
+			Figures = figures;
+
+			FigureGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			FigureGrid.DataSource = FindingList;
 		}
 
 		/// <summary>
@@ -39,23 +53,18 @@ namespace View
 		/// <param name="e"></param>
 		private void SearchButton_Click(object sender, EventArgs e)
 		{
-			if (IsValidated)
+			if (!IsValidated) return;
+
+			
+			if (!RectangleCheckBox.Checked && !CircleCheckBox.Checked) return;
+
+			FindingList.Clear();
+			foreach (var figure in Figures)
 			{
-				var mainForm = (MainForm) this.Owner;
-				FigureGrid.Rows.Clear();
-				if (RectangleCheckBox.Checked || CircleCheckBox.Checked)
+				if (figure is Model.Rectangle && RectangleCheckBox.Checked ||
+				    figure is Model.Circle && CircleCheckBox.Checked)
 				{
-					foreach (IFigure figure in mainForm.Figures)
-					{
-						if (figure is Model.Rectangle && RectangleCheckBox.Checked)
-						{
-							AddToGrid("Rectangle", figure);
-						}
-						else if (figure is Model.Circle && CircleCheckBox.Checked)
-						{
-							AddToGrid("Circle", figure);
-						}
-					}
+					AddToGrid(figure);
 				}
 			}
 		}
@@ -63,16 +72,15 @@ namespace View
 		/// <summary>
 		/// Добавление фигуры в список
 		/// </summary>
-		/// <param name="name">Название фигуры</param>
 		/// <param name="figure">Фигура</param>
-		public void AddToGrid(string name, IFigure figure)
+		private void AddToGrid(IFigure figure)
 		{
 			if (IsBetween(Convert.ToDouble(SurfaceFirstTextBox.Text),
 				Convert.ToDouble(SurfaceSecondTextBox.Text), figure.Surface) &&
 				IsBetween(Convert.ToDouble(PerimeterFirstTextBox.Text),
 				Convert.ToDouble(PerimeterSecondTextBox.Text), figure.Perimeter))
 			{
-				FigureGrid.Rows.Add(name, figure.Surface, figure.Perimeter);
+				FindingList.Add(figure);
 			}
 		}
 
@@ -83,7 +91,7 @@ namespace View
 		/// <param name="max">Максимум</param>
 		/// <param name="argument">Аргумент для проверки</param>
 		/// <returns></returns>
-		public bool IsBetween(double min, double max, double argument)
+		private bool IsBetween(double min, double max, double argument)
 		{
 			return argument >= min && argument <= max;
 		}
@@ -96,7 +104,14 @@ namespace View
 		private void SurfaceFirstTextBox_Validating(object sender, CancelEventArgs e)
 		{
 			//TODO: Дубль done
-			CheckFields(SurfaceFirstTextBox, SurfaceSecondTextBox, sender, e);
+			
+			e.Cancel = IsCanceled(SurfaceFirstTextBox, SurfaceSecondTextBox,
+			out var errorMsg);
+
+			if (sender is TextBox selectedTextBox)
+			{
+				SetError(selectedTextBox, errorMsg);
+			}
 		}
 
 		/// <summary>
@@ -107,29 +122,46 @@ namespace View
 		private void PerimeterFirstTextBox_Validating(object sender, CancelEventArgs e)
 		{
 			//TODO: Дубль done
-			CheckFields(PerimeterFirstTextBox, PerimeterSecondTextBox, sender, e);
+			e.Cancel = IsCanceled(PerimeterFirstTextBox, PerimeterSecondTextBox,
+				out var errorMsg);
+
+			if (sender is TextBox selectedTextBox)
+			{
+				SetError(selectedTextBox, errorMsg);
+			}
+
 		}
 
 		/// <summary>
-		/// Полная проверка полей периметра
+		/// Устанавливает ошибку для текстбокса
+		/// </summary>
+		/// <param name="selectedTextBox"></param>
+		/// <param name="errorMsg"></param>
+		private void SetError(TextBox selectedTextBox, string errorMsg)
+		{
+			selectedTextBox.Select(0, selectedTextBox.Text.Length);
+			errorProvider.SetError(selectedTextBox, errorMsg);
+		}
+
+		/// <summary>
+		/// Возвращает true если все поля заполнены правильно
 		/// </summary>
 		/// <param name="firstField">Первое поле</param>
 		/// <param name="secondField">Второе поле</param>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void CheckFields(TextBox firstField, TextBox secondField, object sender, CancelEventArgs e)
+		/// <param name="errorMsg"></param>
+		private bool IsCanceled(TextBox firstField, TextBox secondField, out string errorMsg)
 		{
-			if (!BlankFieldChecking(out var errorMsg))
+			var isFilled = IsFieldsFilled(out errorMsg);
+			SetErrorForAll(errorMsg);
+
+			if (isFilled)
 			{
-				IsValidated = false;
-				SetError(firstField, secondField, errorMsg, sender, e);
+				IsValidated = IsValueGapValid(firstField.Text, secondField.Text, out errorMsg);
+				return !IsValidated;
 			}
-			else
-			{
-				IsValidated = true;
-				errorMsg = "";
-				SetError(firstField, secondField, errorMsg, sender, e);
-			}
+
+			IsValidated = false;
+			return false;
 		}
 
 		/// <summary>
@@ -139,47 +171,38 @@ namespace View
 		/// <param name="e"></param>
 		private void SurfaceFirstTextBox_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			if (!(char.IsDigit(e.KeyChar)))
+			if (char.IsDigit(e.KeyChar)) return;
+
+			if (e.KeyChar != (char)Keys.Back)
 			{
-				if (e.KeyChar != (char)Keys.Back)
-				{
-					e.Handled = true;
-				}
+				e.Handled = true;
 			}
 		}
 
+
 		/// <summary>
-		/// Установить ошибки для полей
+		/// Устанавливает текст ошибки для всех текствоксов
 		/// </summary>
-		/// <param name="firstStr">Первое поле</param>
-		/// <param name="secondStr">Второе поле</param>
-		/// <param name="errorMsg">Сообщение об ошибке</param>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		public void SetError(TextBox firstStr, TextBox secondStr,
-			string errorMsg, object sender, CancelEventArgs e)
+		/// <param name="errorMsg">Сообщение ошибки</param>
+		private void SetErrorForAll(string errorMsg)
 		{
 			this.errorProvider.SetError(SurfaceFirstTextBox, errorMsg);
 			this.errorProvider.SetError(SurfaceSecondTextBox, errorMsg);
 			this.errorProvider.SetError(PerimeterFirstTextBox, errorMsg);
 			this.errorProvider.SetError(PerimeterSecondTextBox, errorMsg);
-			if (!ValidValueGap(firstStr.Text, secondStr.Text, out errorMsg))
-			{
-				e.Cancel = true;
-				(sender as TextBox).Select(0, (sender as TextBox).Text.Length);
-				this.errorProvider.SetError((sender as TextBox), errorMsg);
-			}
 		}
 
 		/// <summary>
-		/// Проверка на пустую строку
+		/// Возвращает false если один из textbox-ов не заполнен
 		/// </summary>
 		/// <param name="errorMessage">Текст ошибки</param>
 		/// <returns></returns>
-		public bool BlankFieldChecking(out string errorMessage)
+		private bool IsFieldsFilled(out string errorMessage)
 		{
-			if (SurfaceFirstTextBox.Text.Length == 0 || SurfaceSecondTextBox.Text.Length == 0 ||
-				PerimeterFirstTextBox.Text.Length == 0 || PerimeterSecondTextBox.Text.Length == 0)
+			if (string.IsNullOrEmpty(SurfaceFirstTextBox.Text) ||
+			    string.IsNullOrEmpty(SurfaceSecondTextBox.Text) ||
+			    string.IsNullOrEmpty(PerimeterFirstTextBox.Text) ||
+			    string.IsNullOrEmpty(PerimeterSecondTextBox.Text))
 			{
 				errorMessage = "All fields must be filled in";
 				return false;
@@ -189,25 +212,30 @@ namespace View
 		}
 
 		/// <summary>
-		/// Проверка на соответствие условию
+		/// Возвращает true если
 		/// значение первой строки меньше или равно значению второй
 		/// </summary>
 		/// <param name="firstStr">Первая строка</param>
 		/// <param name="secondStr">Вторая строка</param>
 		/// <param name="errorMessage">Текст ошибки</param>
 		/// <returns></returns>
-		public bool ValidValueGap(string firstStr, string secondStr, out string errorMessage)
+		private static bool IsValueGapValid(string firstStr, string secondStr, out string errorMessage)
 		{
-			if (firstStr.Length != 0 && secondStr.Length != 0)
+			if (double.TryParse(firstStr, out var firstResult)
+			    && double.TryParse(secondStr, out var secondResult))
 			{
-				if (Convert.ToDouble(firstStr) > Convert.ToDouble(secondStr))
+				if (firstResult > secondResult)
 				{
 					errorMessage = "Second value must be more or equal to the first";
 					return false;
 				}
+
+				errorMessage = "";
+				return true;
 			}
-			errorMessage = "";
-			return true;
+
+			errorMessage = "Values are incorrect";
+			return false;
 		}
 	}
 }

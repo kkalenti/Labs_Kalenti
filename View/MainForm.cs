@@ -17,7 +17,7 @@ namespace View
 		/// Список фигур
 		/// </summary>
 		/// //TODO: RSDN done
-		public BindingList<IFigure> Figures { get; private set; } = new BindingList<IFigure>();
+		private BindingList<IFigure> Figures { get; set; } = new BindingList<IFigure>();
 
 		/// <summary>
 		/// Конструктор главной формы
@@ -88,10 +88,11 @@ namespace View
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public void ModifyElementHandler(object sender, AddingEventArg e)
+		private void ModifyElementHandler(object sender, AddingEventArg e)
 		{
-			Figures.RemoveAt(FigureGrid.SelectedRows[0].Index);
-			Figures.Add(e.Figure);
+			var elementIndex = FigureGrid.SelectedRows[0].Index;
+			Figures.RemoveAt(elementIndex);
+			Figures.Insert(elementIndex, e.Figure);
 		}
 
 #if DEBUG
@@ -126,7 +127,7 @@ namespace View
 		/// <param name="e"></param>
 		private void FindObjectButton_Click(object sender, EventArgs e)
 		{
-			var finding = new FindingForm();
+			var finding = new FindingForm(Figures);
 			finding.Show();
 		}
 
@@ -144,7 +145,6 @@ namespace View
 
 			var writer = new DataContractSerializer(typeof(BindingList<IFigure>), 
 				new List<Type> { typeof(Model.Rectangle), typeof(Model.Circle) });
-
 			var settings = new XmlWriterSettings {Indent = true};
 
 			using (var fs = XmlWriter.Create(filename, settings))
@@ -194,7 +194,7 @@ namespace View
 		/// Десериализация данных из файла
 		/// </summary>
 		/// <param name="filename">Имя файла</param>
-		public void FiguresDeserializing(string filename)
+		private void FiguresDeserializing(string filename)
 		{
 			var reader = new DataContractSerializer(typeof(BindingList<IFigure>),
 				new List<Type> { typeof(Model.Rectangle), typeof(Model.Circle) });
@@ -206,7 +206,7 @@ namespace View
 			FigureGrid.DataSource = Figures;
 		}
 
-		public void AddToListHandler(object sender, AddingEventArg e)
+		private void AddToListHandler(object sender, AddingEventArg e)
 		{
 			Figures.Add(e.Figure);
 		}

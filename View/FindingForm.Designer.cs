@@ -43,9 +43,6 @@
 			this.label3 = new System.Windows.Forms.Label();
 			this.SurfaceSecondTextBox = new System.Windows.Forms.TextBox();
 			this.FigureGrid = new System.Windows.Forms.DataGridView();
-			this.Figure = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Surface = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Perimeter = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
 			this.FindingGroupBox.SuspendLayout();
 			this.InputGroupBox.SuspendLayout();
@@ -199,37 +196,12 @@
 			this.FigureGrid.AllowUserToAddRows = false;
 			this.FigureGrid.AllowUserToDeleteRows = false;
 			this.FigureGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.FigureGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Figure,
-            this.Surface,
-            this.Perimeter});
 			this.FigureGrid.GridColor = System.Drawing.Color.White;
 			this.FigureGrid.Location = new System.Drawing.Point(6, 129);
 			this.FigureGrid.Name = "FigureGrid";
 			this.FigureGrid.ReadOnly = true;
 			this.FigureGrid.Size = new System.Drawing.Size(384, 172);
 			this.FigureGrid.TabIndex = 1;
-			// 
-			// Figure
-			// 
-			this.Figure.HeaderText = "Figure";
-			this.Figure.Name = "Figure";
-			this.Figure.ReadOnly = true;
-			this.Figure.Width = 75;
-			// 
-			// Surface
-			// 
-			this.Surface.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.Surface.HeaderText = "Surface";
-			this.Surface.Name = "Surface";
-			this.Surface.ReadOnly = true;
-			// 
-			// Perimeter
-			// 
-			this.Perimeter.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.Perimeter.HeaderText = "Perimeter";
-			this.Perimeter.Name = "Perimeter";
-			this.Perimeter.ReadOnly = true;
 			// 
 			// errorProvider
 			// 
@@ -258,9 +230,6 @@
 
 		private System.Windows.Forms.GroupBox FindingGroupBox;
 		private System.Windows.Forms.DataGridView FigureGrid;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Figure;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Surface;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Perimeter;
 		private System.Windows.Forms.Button SearchButton;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.CheckBox CircleCheckBox;

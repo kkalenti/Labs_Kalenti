@@ -9,8 +9,14 @@ namespace View
 	/// </summary>
 	public partial class AddingForm : Form
 	{
+		/// <summary>
+		/// Событие на добавление фигуры в список
+		/// </summary>
 		public event EventHandler<AddingEventArg> AddFigure;
 
+		/// <summary>
+		/// Событие на изменение фигуры в списке
+		/// </summary>
 		public event EventHandler<AddingEventArg> ModifyFigure;
 
 		/// <summary>
@@ -30,16 +36,26 @@ namespace View
 		public AddingForm(IFigure figure)
 		{
 			InitializeComponent();
-			this.Text = "Modifying";
+			Text = "Modifying";
+
 			objectControl.Object = figure;
-			objectControl.ReadOnly = false;
-			AddButton.Enabled = false;
-			AddButton.Visible = false;
-			ModifyButton.Enabled = true;
-			ModifyButton.Visible = true;
+				//objectControl.ReadOnly = false;
+
+			EnableButton(AddButton, false);
+
+			EnableButton(ModifyButton, true);
 		}
 
-		
+		/// <summary>
+		/// Отключает кнопку
+		/// </summary>
+		/// <param name="button"></param>
+		/// <param name="enabled"></param>
+		private void EnableButton(Button button, bool enabled)
+		{
+			button.Enabled = enabled;
+			button.Visible = enabled;
+		}
 
 		/// <summary>
 		/// Обработка кнопки отмены
