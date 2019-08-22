@@ -120,5 +120,9 @@
   <ItemGroup>
     <Folder Include="Xml\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Installers\figureGrid_setup.exe" />
+    <Content Include="Installers\Script.iss" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
