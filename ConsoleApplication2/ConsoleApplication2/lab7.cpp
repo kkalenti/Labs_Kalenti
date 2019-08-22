@@ -10,7 +10,9 @@
 using namespace std;
 
 template<typename T>
-void lab7(void(*CreateFnc)(List<T>*, const int), void(*OutputFnc)(List<T>*), void(*AddFnc)(List<T>*, const int)) {
+void lab7(void(*CreateFnc)(List<T>*, const int), 
+	void(*OutputFnc)(List<T>*), 
+	void(*AddFnc)(List<T>*, const int)) {
 	List<T> *list = new List<T>(nullptr);
 	CreateFnc(list,5);
 	OutputFnc(list);
@@ -26,7 +28,6 @@ void lab7(void(*CreateFnc)(List<T>*, const int), void(*OutputFnc)(List<T>*), voi
 }
 
 void LabSevenMain() {
-	//TODO: Ќазвание плохое, зачем така€ конкретика в названии? done
 	bool is_exit = true;
 	do {
 		system("cls");
@@ -64,5 +65,5 @@ void LabSevenMain() {
 			break;
 		}
 		}
-	} while (is_exit == true);
+	} while (is_exit);
 }
