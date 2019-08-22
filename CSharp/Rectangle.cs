@@ -1,4 +1,5 @@
 ﻿using System;
+//TODO: using
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -10,26 +11,28 @@ using System.Runtime.Serialization;
 
 namespace Model
 {
+	//TODO: XML
 	[DataContract]
 	public class Rectangle : IFigure
 	{
+		// TODO: nameof
 		/// <summary>
 		/// Имя фигуры
 		/// </summary>
 		public string Name => "Rectangle";
-
+		//TODO: XML
 		private Lazy<double> _surface;
 		/// <summary>
 		/// Площадь фигуры
 		/// </summary>
 		public double Surface => _surface.Value;
-
+		//TODO: XML
 		private Lazy<double> _perimeter;
 		/// <summary>
 		/// Периметр фигуры
 		/// </summary>
 		public double Perimeter => _perimeter.Value;
-
+		//TODO: XML
 		private double _width;
 		/// <summary>
 		/// Ширина
@@ -40,13 +43,14 @@ namespace Model
 			get => _width;
 			set
 			{
+				// TODO: nameof
 				ValueValidation.IsPositive(value, "Width");
 				_width = value;
 				CalculationInit();
 			}
 
 		}
-
+		//TODO: XML
 		private double _length;
 		/// <summary>
 		/// Длинна
@@ -57,12 +61,14 @@ namespace Model
 			get => _length;
 			set
 			{
+				// TODO: nameof
 				ValueValidation.IsPositive(value, "Length");
 				_length = value;
 				CalculationInit();
 			}
 		}
 
+		//TODO: Название метода не отражает назначения
 		/// <summary>
 		/// Инициализация полей площади и периметра
 		/// </summary>
@@ -78,6 +84,7 @@ namespace Model
 		/// <summary>
 		/// Описание фигуры
 		/// </summary>
+		/// // TODO: RSDN
 		public string Description {
 			get
 			{
@@ -89,14 +96,14 @@ namespace Model
 			}
 		}
 
-		//TODO: XML done
+		//TODO: XML <see cref...
 		/// <summary>
 		/// Конструктор по-умолчанию для работы XML сериализации
 		/// </summary>
 		public Rectangle()
 		{}
 
-		//TODO: XML done
+		//TODO: Нужен ли этот конструктор, если можно сразу инициализировать свойства
 		/// <summary>
 		/// Конструктор для объекта <see cref="Rectangle"/>
 		/// </summary>

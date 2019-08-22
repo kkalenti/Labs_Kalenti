@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
+//TODO: using
 using System.Text;
 using System.Threading.Tasks;
 using Model.Interfaces;
@@ -8,23 +10,20 @@ using Model;
 
 namespace ConsoleLoader
 {
-	// TODO: RSDN, XML done
 	/// <summary>
 	/// Класс для основной функциональности программы 
 	/// </summary>
 	internal class Program
 	{
-		//TODO: Используй var, там, где понятен тип, так получается код чище done
 		/// <summary>
 		/// Добавление круга в список
 		/// </summary>
 		/// <param name="figures"> Список фигур </param>
 		public static void CircleToList(List<IFigure> figures)
 		{
-			//TODO: Дубль done
 			var radius = DoubleInput("Введите радиус круга:");
 
-			IFigure circle = new Circle(radius);
+			IFigure circle = new Circle();
 			figures.Add(circle);
 		}
 
@@ -41,16 +40,13 @@ namespace ConsoleLoader
 			figures.Add(rectangle);
 		}
 
+		//TODO: XML
 		public static double DoubleInput(string message)
 		{
 			while (true)
 			{
 				try
 				{
-					//TODO: Неправильно сделан ввод, получается, что если пользователь накосячит
-					//TODO: во втором параметре, то придётся вводить и первый, а это не правильно! done
-
-					//TODO: Дубль done
 					Console.WriteLine(message);
 					var value = Convert.ToDouble(Console.ReadLine());
 
@@ -60,7 +56,8 @@ namespace ConsoleLoader
 					}
 
 					return value;
-				} //TODO: Неправильно обрабатывать по базовому исключению - надо конкретизировать тип исключения done
+				}
+				//TODO: Почему в одном случае сообщение формируешь в исключении, а во втором тут?
 				catch (ArgumentException)
 				{
 					Console.WriteLine("Введенное значение меньше или равно 0");
@@ -78,6 +75,7 @@ namespace ConsoleLoader
 		/// <param name="figures"> Список фигур </param>
 		public static void ShowList(List<IFigure> figures)
 		{
+			//TODO: var
 			foreach (IFigure i in figures)
 			{
 				Console.WriteLine(i.Description);
@@ -118,7 +116,6 @@ namespace ConsoleLoader
 			Console.WriteLine("Esc.Выйти из программы");
 		}
 
-		//TODO: RSDN done
 		private static void Main(string[] args)
 		{
 			var figures = new List<IFigure>();
@@ -129,7 +126,6 @@ namespace ConsoleLoader
 				var key = Console.ReadKey(false).Key;
 				switch (key)
 				{
-					//TODO: Работает только с NumPad-овскими клавишами done
 					case ConsoleKey.NumPad1:
 					case ConsoleKey.D1:
 						Console.Clear();

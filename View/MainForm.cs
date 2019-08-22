@@ -16,13 +16,12 @@ namespace View
 		/// <summary>
 		/// Список фигур
 		/// </summary>
-		/// //TODO: RSDN done
+		/// //TODO: зачем свойство?
 		private BindingList<IFigure> Figures { get; set; } = new BindingList<IFigure>();
 
 		/// <summary>
 		/// Конструктор главной формы
 		/// </summary>
-		//TODO: XML done
 		public MainForm()
 		{
 			InitializeComponent();
@@ -61,6 +60,7 @@ namespace View
 		/// <param name="e"></param>
 		private void ModifyButton_Click(object sender, EventArgs e)
 		{
+			//TODO: invert
 			if (FigureGrid.SelectedRows.Count > 0)
 			{
 				var figure = Figures[FigureGrid.SelectedRows[0].Index];
@@ -138,6 +138,8 @@ namespace View
 		/// <param name="e"></param>
 		private void SaveButton_Click(object sender, EventArgs e)
 		{
+			// TODO: Дубль
+			//TODO: Нахрен тебе на уровне формы всё время его хранить?
 			saveFile.Filter = "Xml file|*.kk";
 			if (saveFile.ShowDialog() == DialogResult.Cancel)
 				return;
@@ -180,7 +182,10 @@ namespace View
 		/// <param name="e"></param>
 		private void OpenFileButton_Click(object sender, EventArgs e)
 		{
+			//TODO: Дубль
 			openFile.Filter = "Xml file|*.kk";
+			//TODO: Нахрен тебе на уровне формы всё время его хранить?
+			//TODO: При открытии файла в имени написан openFileDialog1 - это не правильно.
 			if (openFile.ShowDialog() == DialogResult.Cancel)
 			{
 				return;
@@ -201,11 +206,13 @@ namespace View
 
 			using (var fs = XmlReader.Create(filename))
 			{
+				//TODO:Не отработана десериализация сломанного файла
 				Figures = (BindingList<IFigure>)reader.ReadObject(fs);
 			}
 			FigureGrid.DataSource = Figures;
 		}
 
+		//TODO: XML
 		private void AddToListHandler(object sender, AddingEventArg e)
 		{
 			Figures.Add(e.Figure);

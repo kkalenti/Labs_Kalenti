@@ -1,4 +1,5 @@
 ﻿using System;
+//TODO: using
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace UnitTests.Model
 		[Test]
 		[TestCase(1, 1, TestName = "Тестирование конструктора при присваивании 1")]
 		[TestCase(4, 4, TestName = "Тестирование конструктора при присваивании 4")]
+		//TODO: RSDN
 		[TestCase(Double.MaxValue, Double.MaxValue, TestName = "Тестирование конструктора при присваивании Double.MaxValue")]
 		[TestCase(Double.MaxValue - 1, Double.MaxValue - 1, TestName = "Тестирование конструктора при присваивании Double.MaxValue - 1")]
 		public void RectanglePositiveTest(double width, double length)

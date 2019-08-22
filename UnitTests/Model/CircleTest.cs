@@ -1,4 +1,5 @@
 ﻿using System;
+//TODO: using
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,8 @@ namespace UnitTests.Model
 			"Тестирование конструктора при присваивании Double.MaxValue - 1")]
 		public void ConstructorPositiveTest(double radius)
 		{
+			//TODO: triple A testing structure
+
 			new Circle(radius);
 		}
 

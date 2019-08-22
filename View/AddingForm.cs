@@ -22,7 +22,6 @@ namespace View
 		/// <summary>
 		/// Конструктор формы добавления элементоа
 		/// </summary>
-		//TODO: Неправильно в дочерней форме хранить указатель на родительскую! Убирай нах. done
 		public AddingForm()
 		{
 			InitializeComponent();
@@ -74,6 +73,7 @@ namespace View
 		/// <param name="e"></param>
 		private void AddButton_Click(object sender, EventArgs e)
 		{
+			//TODO: invert
 			if (objectControl.IsAddingEnable)
 			{
 				AddFigure?.Invoke(this, new AddingEventArg(objectControl.Object));
@@ -88,6 +88,7 @@ namespace View
 		/// <param name="e"></param>
 		private void ModifyButton_Click(object sender, EventArgs e)
 		{
+			//TODO: invert
 			if (objectControl.IsAddingEnable)
 			{
 				ModifyFigure?.Invoke(this, new AddingEventArg(objectControl.Object));

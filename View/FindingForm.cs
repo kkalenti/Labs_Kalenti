@@ -27,8 +27,6 @@ namespace View
 		/// </summary>
 		private BindingList<IFigure> FindingList { get; } = new BindingList<IFigure>();
 
-		//TODO: Неправильно в дочерней форме хранить указатель на родительскую! Убирай нах. done
-		//TODO: XML done
 		/// <summary>
 		/// Конструктор формы поиска
 		/// </summary>
@@ -41,6 +39,7 @@ namespace View
 			FigureGrid.DataSource = FindingList;
 		}
 
+		//TODO: Зачем свойство?
 		/// <summary>
 		/// Все поля прошли валидацию
 		/// </summary>
@@ -75,6 +74,7 @@ namespace View
 		/// <param name="figure">Фигура</param>
 		private void AddToGrid(IFigure figure)
 		{
+			//TODO: Возможна генерация исключения при конвертации
 			if (IsBetween(Convert.ToDouble(SurfaceFirstTextBox.Text),
 				Convert.ToDouble(SurfaceSecondTextBox.Text), figure.Surface) &&
 				IsBetween(Convert.ToDouble(PerimeterFirstTextBox.Text),
@@ -90,7 +90,7 @@ namespace View
 		/// <param name="min">Минимум</param>
 		/// <param name="max">Максимум</param>
 		/// <param name="argument">Аргумент для проверки</param>
-		/// <returns></returns>
+		/// <returns>TODO</returns>
 		private bool IsBetween(double min, double max, double argument)
 		{
 			return argument >= min && argument <= max;
@@ -103,8 +103,19 @@ namespace View
 		/// <param name="e"></param>
 		private void SurfaceFirstTextBox_Validating(object sender, CancelEventArgs e)
 		{
-			//TODO: Дубль done
-			
+			//TODO: Дубль, решается следующим образом:
+			//На уровне класса создаёшь словарь
+			//readonly Dictionary<TextBox, Tuple<TextBox, TextBox>> _textBoxesDictionary =
+			//	new Dictionary<TextBox, Tuple<TextBox, TextBox>>
+			//	{
+			//		[PerimeterFirstTextBox] =
+			//			new Tuple<TextBox, TextBox>(PerimeterFirstTextBox, PerimeterSecondTextBox),
+			//		[SurfaceFirstTextBox] = new Tuple<TextBox, TextBox>(SurfaceFirstTextBox, SurfaceSecondTextBox),
+			//	};
+			//TODO: Дальше подписываешь оба текстбокса на один обработчик, а в обработчике
+			//TODO: дёргаешь текстбоксы из словаря по sender-y
+
+			// TODO: RSDN
 			e.Cancel = IsCanceled(SurfaceFirstTextBox, SurfaceSecondTextBox,
 			out var errorMsg);
 
@@ -121,7 +132,7 @@ namespace View
 		/// <param name="e"></param>
 		private void PerimeterFirstTextBox_Validating(object sender, CancelEventArgs e)
 		{
-			//TODO: Дубль done
+			
 			e.Cancel = IsCanceled(PerimeterFirstTextBox, PerimeterSecondTextBox,
 				out var errorMsg);
 
@@ -218,7 +229,8 @@ namespace View
 		/// <param name="firstStr">Первая строка</param>
 		/// <param name="secondStr">Вторая строка</param>
 		/// <param name="errorMessage">Текст ошибки</param>
-		/// <returns></returns>
+		/// <returns>TODO</returns>
+		/// TODO: RSDN
 		private static bool IsValueGapValid(string firstStr, string secondStr, out string errorMessage)
 		{
 			if (double.TryParse(firstStr, out var firstResult)

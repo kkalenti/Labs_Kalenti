@@ -1,4 +1,5 @@
 ﻿using System;
+//TODO: using
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,7 @@ using Model.Interfaces;
 
 namespace View
 {
+	//TODO: XML КО ВСЕМУ БЛ...!
 	public class AddingEventArg : EventArgs
 	{
 		public IFigure Figure { get; }

@@ -1,4 +1,5 @@
 ﻿using System;
+//TODO: using
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -12,6 +13,7 @@ using Model.Interfaces;
 
 namespace View
 {
+	//TODO: XML
 	public partial class ObjectControl : UserControl
 	{
 		/// <summary>
@@ -191,6 +193,7 @@ namespace View
 		/// <param name="e"></param>
 		private void RadiusTextBox_Validating(object sender, CancelEventArgs e)
 		{
+			//TODO:Можно упростить
 			if (string.IsNullOrEmpty(SetError(RadiusTextBox)))
 			{
 				IsAddingEnable = true;
@@ -205,7 +208,8 @@ namespace View
 		/// Проверка стрки на отсутствие символов
 		/// </summary>
 		/// <param name="field">Введенная строка</param>
-		/// <returns></returns>
+		/// <returns>TODO</returns>
+		/// TODO: Лучше сделать статическим
 		private string EmptyFieldValidation(string field)
 		{
 			double.TryParse(field, out var doubleValue);
@@ -223,6 +227,7 @@ namespace View
 		/// <param name="e"></param>
 		private void WidthTextBox_Validating(object sender, CancelEventArgs e)
 		{
+			//TODO:Можно упростить
 			if (string.IsNullOrEmpty(SetError(WidthTextBox)) &&
 			    string.IsNullOrEmpty(SetError(LengthTextBox)))
 			{
