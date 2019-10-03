@@ -1,19 +1,16 @@
 ﻿using System;
-//TODO: using
-using System.Collections.Generic;
+//TODO: using done 
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Model;
 using Model.Interfaces;
 
 namespace View
 {
-	//TODO: XML
+	//TODO: XML done 
+	/// <summary>
+	/// Контролл для отображения данных об объектах
+	/// </summary>
 	public partial class ObjectControl : UserControl
 	{
 		/// <summary>
@@ -27,13 +24,20 @@ namespace View
 				{
 					var width = Convert.ToDouble(WidthTextBox.Text);
 					var length = Convert.ToDouble(LengthTextBox.Text);
-					IFigure rectangle = new Model.Rectangle(width, length);
+					IFigure rectangle = new Model.Rectangle()
+					{
+						Width = width,
+						Length = length
+					};
 					return rectangle;
 				}
 				else
 				{
 					var radius = Convert.ToDouble(RadiusTextBox.Text);
-					IFigure circle = new Model.Circle(radius);
+					IFigure circle = new Model.Circle()
+					{
+						Radius = radius
+					};
 					return circle;
 				}
 			}
@@ -44,9 +48,9 @@ namespace View
 					case Model.Rectangle rectangle:
 					{
 						RectangleRadioButton.Checked = true;
-						EnableButton(false);
+                        EnableButton(false);
 
-						WidthTextBox.Text = rectangle.Width.ToString();
+                        WidthTextBox.Text = rectangle.Width.ToString();
 						LengthTextBox.Text = rectangle.Length.ToString();
 						break;
 					}
@@ -59,7 +63,7 @@ namespace View
 						break;
 					}
 				}
-			}
+            }
 		}
 
 		/// <summary>
@@ -193,24 +197,17 @@ namespace View
 		/// <param name="e"></param>
 		private void RadiusTextBox_Validating(object sender, CancelEventArgs e)
 		{
-			//TODO:Можно упростить
-			if (string.IsNullOrEmpty(SetError(RadiusTextBox)))
-			{
-				IsAddingEnable = true;
-			}
-			else
-			{
-				IsAddingEnable = false;
-			}
+			//TODO:Можно упростить done
+			IsAddingEnable = string.IsNullOrEmpty(SetError(RadiusTextBox));
 		}
 
 		/// <summary>
 		/// Проверка стрки на отсутствие символов
 		/// </summary>
 		/// <param name="field">Введенная строка</param>
-		/// <returns>TODO</returns>
-		/// TODO: Лучше сделать статическим
-		private string EmptyFieldValidation(string field)
+		/// <returns>Сообщение ошиби</returns>
+		/// TODO: Лучше сделать статическим done 
+		private static string EmptyFieldValidation(string field)
 		{
 			double.TryParse(field, out var doubleValue);
 			if (string.IsNullOrEmpty(field) || doubleValue == 0)
@@ -227,17 +224,9 @@ namespace View
 		/// <param name="e"></param>
 		private void WidthTextBox_Validating(object sender, CancelEventArgs e)
 		{
-			//TODO:Можно упростить
-			if (string.IsNullOrEmpty(SetError(WidthTextBox)) &&
-			    string.IsNullOrEmpty(SetError(LengthTextBox)))
-			{
-				IsAddingEnable = true;
-			}
-			else
-			{
-				IsAddingEnable = false;
-			}
-
+			//TODO:Можно упростить done
+			IsAddingEnable = string.IsNullOrEmpty(SetError(WidthTextBox)) &&
+			                 string.IsNullOrEmpty(SetError(LengthTextBox));
 		}
 
 		/// <summary>

@@ -38,7 +38,7 @@ namespace View
 			Text = "Modifying";
 
 			objectControl.Object = figure;
-				//objectControl.ReadOnly = false;
+            objectControl.ReadOnly = false;
 
 			EnableButton(AddButton, false);
 
@@ -73,12 +73,11 @@ namespace View
 		/// <param name="e"></param>
 		private void AddButton_Click(object sender, EventArgs e)
 		{
-			//TODO: invert
-			if (objectControl.IsAddingEnable)
-			{
-				AddFigure?.Invoke(this, new AddingEventArg(objectControl.Object));
-				this.Close();
-			}
+			//TODO: invert done 
+			if (!objectControl.IsAddingEnable) return;
+
+			AddFigure?.Invoke(this, new AddingEventArg(objectControl.Object));
+			this.Close();
 		}
 
 		/// <summary>
@@ -88,12 +87,11 @@ namespace View
 		/// <param name="e"></param>
 		private void ModifyButton_Click(object sender, EventArgs e)
 		{
-			//TODO: invert
-			if (objectControl.IsAddingEnable)
-			{
-				ModifyFigure?.Invoke(this, new AddingEventArg(objectControl.Object));
-				this.Close();
-			}
+			//TODO: invert done
+			if (!objectControl.IsAddingEnable) return;
+
+			ModifyFigure?.Invoke(this, new AddingEventArg(objectControl.Object));
+			this.Close();
 		}
 	}
 }

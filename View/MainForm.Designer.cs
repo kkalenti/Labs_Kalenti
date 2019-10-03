@@ -38,8 +38,6 @@
 			this.FigureGrid = new System.Windows.Forms.DataGridView();
 			this.RemoveButton = new System.Windows.Forms.Button();
 			this.AddButton = new System.Windows.Forms.Button();
-			this.saveFile = new System.Windows.Forms.SaveFileDialog();
-			this.openFile = new System.Windows.Forms.OpenFileDialog();
 			this.FigureGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.FigureGrid)).BeginInit();
 			this.SuspendLayout();
@@ -163,10 +161,6 @@
 			this.AddButton.UseVisualStyleBackColor = true;
 			this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
 			// 
-			// openFile
-			// 
-			this.openFile.FileName = "openFileDialog1";
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -196,9 +190,7 @@
 		private System.Windows.Forms.Button SaveButton;
 		private System.Windows.Forms.Button ModifyButton;
 		private ObjectControl MyControl;
-		private System.Windows.Forms.SaveFileDialog saveFile;
 		private System.Windows.Forms.Button OpenFileButton;
-		private System.Windows.Forms.OpenFileDialog openFile;
 	}
 }
 

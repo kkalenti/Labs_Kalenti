@@ -16,8 +16,8 @@ namespace View
 		/// <summary>
 		/// Список фигур
 		/// </summary>
-		/// //TODO: зачем свойство?
-		private BindingList<IFigure> Figures { get; set; } = new BindingList<IFigure>();
+		/// //TODO: зачем свойство? done
+		private BindingList<IFigure> _figures = new BindingList<IFigure>();
 
 		/// <summary>
 		/// Конструктор главной формы
@@ -26,7 +26,7 @@ namespace View
 		{
 			InitializeComponent();
 			FigureGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-			FigureGrid.DataSource = Figures;
+			FigureGrid.DataSource = _figures;
 		}
 
 		/// <summary>
@@ -38,7 +38,7 @@ namespace View
 			InitializeComponent();
 			FiguresDeserializing(args[0]);
 			FigureGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-			FigureGrid.DataSource = Figures;
+			FigureGrid.DataSource = _figures;
 		}
 
 		/// <summary>
@@ -60,14 +60,13 @@ namespace View
 		/// <param name="e"></param>
 		private void ModifyButton_Click(object sender, EventArgs e)
 		{
-			//TODO: invert
-			if (FigureGrid.SelectedRows.Count > 0)
-			{
-				var figure = Figures[FigureGrid.SelectedRows[0].Index];
-				var modify = new AddingForm(figure);
-				modify.ModifyFigure += ModifyElementHandler;
-				modify.ShowDialog();
-			}
+			//TODO: invert done
+			if (FigureGrid.SelectedRows.Count <= 0) return;
+
+			var figure = _figures[FigureGrid.SelectedRows[0].Index];
+			var modify = new AddingForm(figure);
+			modify.ModifyFigure += ModifyElementHandler;
+			modify.ShowDialog();
 		}
 
 		/// <summary>
@@ -79,7 +78,7 @@ namespace View
 		{
 			foreach (DataGridViewRow row in FigureGrid.SelectedRows)
 			{
-				Figures.RemoveAt(row.Index);
+				_figures.RemoveAt(row.Index);
 			}
 		}
 
@@ -91,8 +90,8 @@ namespace View
 		private void ModifyElementHandler(object sender, AddingEventArg e)
 		{
 			var elementIndex = FigureGrid.SelectedRows[0].Index;
-			Figures.RemoveAt(elementIndex);
-			Figures.Insert(elementIndex, e.Figure);
+			_figures.RemoveAt(elementIndex);
+			_figures.Insert(elementIndex, e.Figure);
 		}
 
 #if DEBUG
@@ -108,11 +107,18 @@ namespace View
 			switch (figureNumber)
 			{
 				case 0:
-					Figures.Add(new Model.Circle(rand.Next(1, 20)));
+					_figures.Add(new Model.Circle()
+					{
+						Radius = rand.Next(1, 20)
+					});
 					break;
 
 				case 1:
-					Figures.Add(new Model.Rectangle(rand.Next(1, 20), rand.Next(1, 20)));
+					_figures.Add(new Model.Rectangle()
+					{
+						Width = rand.Next(1, 20),
+						Length = rand.Next(1, 20)
+					});
 					break;
 				default:
 					break;
@@ -127,7 +133,7 @@ namespace View
 		/// <param name="e"></param>
 		private void FindObjectButton_Click(object sender, EventArgs e)
 		{
-			var finding = new FindingForm(Figures);
+			var finding = new FindingForm(_figures);
 			finding.Show();
 		}
 
@@ -139,10 +145,12 @@ namespace View
 		private void SaveButton_Click(object sender, EventArgs e)
 		{
 			// TODO: Дубль
-			//TODO: Нахрен тебе на уровне формы всё время его хранить?
-			saveFile.Filter = "Xml file|*.kk";
+			//TODO: Нахрен тебе на уровне формы всё время его хранить? done
+
+			var saveFile = new SaveFileDialog {Filter = "Xml file|*.kk"};
 			if (saveFile.ShowDialog() == DialogResult.Cancel)
 				return;
+
 			var filename = saveFile.FileName;
 
 			var writer = new DataContractSerializer(typeof(BindingList<IFigure>), 
@@ -151,7 +159,7 @@ namespace View
 
 			using (var fs = XmlWriter.Create(filename, settings))
 			{
-				writer.WriteObject(fs, Figures);
+				writer.WriteObject(fs, _figures);
 			}
 
 		}
@@ -166,7 +174,7 @@ namespace View
 			if (FigureGrid.CurrentCell != null)
 			{
 				FigureGrid.Rows[FigureGrid.CurrentCell.RowIndex].Selected = true;
-				MyControl.Object = Figures[FigureGrid.SelectedRows[0].Index];
+				MyControl.Object = _figures[FigureGrid.SelectedRows[0].Index];
 				MyControl.ReadOnly = true;
 			}
 			else
@@ -183,13 +191,12 @@ namespace View
 		private void OpenFileButton_Click(object sender, EventArgs e)
 		{
 			//TODO: Дубль
-			openFile.Filter = "Xml file|*.kk";
-			//TODO: Нахрен тебе на уровне формы всё время его хранить?
+			var openFile = new OpenFileDialog {Filter = "Xml file|*.*"};
+			//TODO: Нахрен тебе на уровне формы всё время его хранить? done
 			//TODO: При открытии файла в имени написан openFileDialog1 - это не правильно.
 			if (openFile.ShowDialog() == DialogResult.Cancel)
-			{
 				return;
-			}
+
 			var filename = openFile.FileName;
 
 			FiguresDeserializing(filename);
@@ -204,18 +211,32 @@ namespace View
 			var reader = new DataContractSerializer(typeof(BindingList<IFigure>),
 				new List<Type> { typeof(Model.Rectangle), typeof(Model.Circle) });
 
-			using (var fs = XmlReader.Create(filename))
+			try
 			{
-				//TODO:Не отработана десериализация сломанного файла
-				Figures = (BindingList<IFigure>)reader.ReadObject(fs);
+				using (var fs = XmlReader.Create(filename))
+				{
+					//TODO:Не отработана десериализация сломанного файла done
+					_figures = (BindingList<IFigure>) reader.ReadObject(fs);
+				}
 			}
-			FigureGrid.DataSource = Figures;
+			catch (SerializationException exception)
+			{
+				MessageBox.Show("Недопустимый для чтения файл", "Ошибка!",
+					MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			
+			FigureGrid.DataSource = _figures;
 		}
 
-		//TODO: XML
+		//TODO: XML done
+		/// <summary>
+		/// Обработчик для добавления файла в список
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void AddToListHandler(object sender, AddingEventArg e)
 		{
-			Figures.Add(e.Figure);
+			_figures.Add(e.Figure);
 		}
 	}
 }

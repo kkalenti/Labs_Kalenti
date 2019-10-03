@@ -121,7 +121,7 @@
 			this.PerimeterSecondTextBox.TabIndex = 13;
 			this.PerimeterSecondTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.PerimeterSecondTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SurfaceFirstTextBox_KeyPress);
-			this.PerimeterSecondTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.PerimeterFirstTextBox_Validating);
+			this.PerimeterSecondTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.SurfaceFirstTextBox_Validating);
 			// 
 			// RectangleCheckBox
 			// 
@@ -169,7 +169,7 @@
 			this.PerimeterFirstTextBox.TabIndex = 11;
 			this.PerimeterFirstTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.PerimeterFirstTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SurfaceFirstTextBox_KeyPress);
-			this.PerimeterFirstTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.PerimeterFirstTextBox_Validating);
+			this.PerimeterFirstTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.SurfaceFirstTextBox_Validating);
 			// 
 			// label3
 			// 

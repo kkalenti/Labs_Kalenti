@@ -1,12 +1,7 @@
 ﻿using System;
-//TODO: using
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+//TODO: using done 
 using Model;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 
 namespace UnitTests.Model
 {
@@ -25,9 +20,121 @@ namespace UnitTests.Model
 			"Тестирование конструктора при присваивании Double.MaxValue - 1")]
 		public void ConstructorPositiveTest(double radius)
 		{
-			//TODO: triple A testing structure
+			// arrange
+			new Circle()
+			{
+				Radius = radius
+			};
+			// act
 
-			new Circle(radius);
+			// assert
+
+		}
+
+
+		[Test]
+		[TestCase(1, TestName = "Тестирование радиуса при присваивании 1")]
+		[TestCase(4, TestName = "Тестирование радиуса при присваивании 4")]
+		[TestCase(double.MaxValue,TestName =
+			"Тестирование радиуса при присваивании Double.MaxValue")]
+		[TestCase(double.MaxValue - 1, TestName =
+			"Тестирование радиуса при присваивании Double.MaxValue - 1")]
+		public void RadiusTest(double radius)
+		{
+			// arrange
+			var circle = new Circle()
+			{
+				Radius = radius
+			};
+
+			// act
+			var localRadius = circle.Radius;
+
+			// assert
+			Assert.AreEqual(radius, circle.Radius);
+		}
+
+		[Test]
+		[TestCase(1, TestName = "Тестирование описания круга при присваивании 1")]
+		[TestCase(4, TestName = "Тестирование описания круга при присваивании 4")]
+		[TestCase(double.MaxValue, TestName =
+			"Тестирование описания круга при присваивании Double.MaxValue")]
+		[TestCase(double.MaxValue - 1, TestName =
+			"Тестирование описания круга при присваивании Double.MaxValue - 1")]
+		public void DescriptionTest(double radius)
+		{
+			// arrange
+			var circle = new Circle()
+			{
+				Radius = radius
+			};
+
+			// act
+			var surface = 2 * Math.PI * radius;
+			var perimeter = Math.PI * radius * radius;
+
+			// assert
+			Assert.AreEqual($"Круг, радиус: {radius}," + 
+			                $" площадь: {surface,4:F3}," +
+			                $" периметр: {perimeter,4:F3}",
+				circle.Description);
+		}
+
+		[Test]
+		[TestCase(1, TestName = "Тестирование площади при присваивании 1")]
+		[TestCase(4, TestName = "Тестирование площади при присваивании 4")]
+		[TestCase(double.MaxValue, TestName =
+			"Тестирование площади при присваивании Double.MaxValue")]
+		[TestCase(double.MaxValue - 1, TestName =
+			"Тестирование площади при присваивании Double.MaxValue - 1")]
+		public void SurfaceTest(double radius)
+		{
+			// arrange
+			var circle = new Circle()
+			{
+				Radius = radius
+			};
+
+			// act
+			var surface = 2 * Math.PI * radius;
+
+			// assert
+			Assert.AreEqual(surface,circle.Surface);
+		}
+
+		[Test]
+		[TestCase(1, TestName = "Тестирование периметра при присваивании 1")]
+		[TestCase(4, TestName = "Тестирование периметра при присваивании 4")]
+		[TestCase(double.MaxValue, TestName =
+			"Тестирование периметра при присваивании Double.MaxValue")]
+		[TestCase(double.MaxValue - 1, TestName =
+			"Тестирование периметра при присваивании Double.MaxValue - 1")]
+		public void PerimeterTest(double radius)
+		{
+			// arrange
+			var circle = new Circle()
+			{
+				Radius = radius
+			};
+
+			// act
+			var perimeter = Math.PI * radius * radius;
+
+			// assert
+			Assert.AreEqual(perimeter, circle.Perimeter);
+		}
+
+		[Test]
+		[TestCase(TestName = "Тестирование возврата имени класса")]
+		public void NameTest()
+		{
+			// arrange
+			var circle = new Circle();
+
+			// act
+
+			// assert
+			Assert.AreEqual("Circle", circle.Name);
 		}
 
 		[Test]
@@ -42,7 +149,10 @@ namespace UnitTests.Model
 			"Тестирование конструктора при присваивании Double.PositiveInfinity")]
 		public void ConstructorNegativeTest(double radius)
 		{
-			Assert.That(() => new Circle(radius),
+			Assert.That(() => new Circle()
+				{
+					Radius = radius
+				},
 				Throws.TypeOf<ArgumentException>());
 		}
 	}

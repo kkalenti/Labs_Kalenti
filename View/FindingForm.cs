@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Model.Interfaces;
 using System.Windows.Forms;
-using Model;
 
 namespace View
 {
@@ -17,6 +11,9 @@ namespace View
 	/// </summary>
 	public partial class FindingForm : Form
 	{
+
+		private readonly Dictionary<TextBox, Tuple<TextBox, TextBox>> _textBoxesDictionary;
+
 		/// <summary>
 		/// Ссылка на список фигур из  MainForm
 		/// </summary>
@@ -37,13 +34,21 @@ namespace View
 
 			FigureGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			FigureGrid.DataSource = FindingList;
+
+			_textBoxesDictionary = new Dictionary<TextBox, Tuple<TextBox, TextBox>>
+			{
+				[PerimeterFirstTextBox] = 
+					new Tuple<TextBox, TextBox>(PerimeterFirstTextBox, PerimeterSecondTextBox),
+				[SurfaceFirstTextBox] = 
+					new Tuple<TextBox, TextBox>(SurfaceFirstTextBox, SurfaceSecondTextBox)
+			};
 		}
 
-		//TODO: Зачем свойство?
+		//TODO: Зачем свойство? done
 		/// <summary>
 		/// Все поля прошли валидацию
 		/// </summary>
-		private bool IsValidated { get; set; }
+		private bool _isValidated;
 
 		/// <summary>
 		/// Обработка кнопки поиска подходящих объектов
@@ -52,7 +57,7 @@ namespace View
 		/// <param name="e"></param>
 		private void SearchButton_Click(object sender, EventArgs e)
 		{
-			if (!IsValidated) return;
+			if (!_isValidated) return;
 
 			
 			if (!RectangleCheckBox.Checked && !CircleCheckBox.Checked) return;
@@ -74,11 +79,14 @@ namespace View
 		/// <param name="figure">Фигура</param>
 		private void AddToGrid(IFigure figure)
 		{
-			//TODO: Возможна генерация исключения при конвертации
-			if (IsBetween(Convert.ToDouble(SurfaceFirstTextBox.Text),
-				Convert.ToDouble(SurfaceSecondTextBox.Text), figure.Surface) &&
-				IsBetween(Convert.ToDouble(PerimeterFirstTextBox.Text),
-				Convert.ToDouble(PerimeterSecondTextBox.Text), figure.Perimeter))
+			//TODO: Возможна генерация исключения при конвертации done
+			if (!double.TryParse(SurfaceFirstTextBox.Text, out var surfaceFirst) ||
+			    !double.TryParse(SurfaceSecondTextBox.Text, out var surfaceSecond) ||
+			    !double.TryParse(PerimeterFirstTextBox.Text, out var perimeterFirst) ||
+			    !double.TryParse(PerimeterSecondTextBox.Text, out var perimeterSecond)) return;
+
+			if (IsBetween(surfaceFirst, surfaceSecond, figure.Surface) &&
+			    IsBetween(perimeterFirst, perimeterSecond, figure.Perimeter))
 			{
 				FindingList.Add(figure);
 			}
@@ -90,7 +98,7 @@ namespace View
 		/// <param name="min">Минимум</param>
 		/// <param name="max">Максимум</param>
 		/// <param name="argument">Аргумент для проверки</param>
-		/// <returns>TODO</returns>
+		/// <returns>true если <see cref="argument"/> пренадлежит промежутку</returns>
 		private bool IsBetween(double min, double max, double argument)
 		{
 			return argument >= min && argument <= max;
@@ -113,34 +121,16 @@ namespace View
 			//		[SurfaceFirstTextBox] = new Tuple<TextBox, TextBox>(SurfaceFirstTextBox, SurfaceSecondTextBox),
 			//	};
 			//TODO: Дальше подписываешь оба текстбокса на один обработчик, а в обработчике
-			//TODO: дёргаешь текстбоксы из словаря по sender-y
+			//TODO: дёргаешь текстбоксы из словаря по sender-y done
 
 			// TODO: RSDN
-			e.Cancel = IsCanceled(SurfaceFirstTextBox, SurfaceSecondTextBox,
-			out var errorMsg);
-
 			if (sender is TextBox selectedTextBox)
 			{
+				e.Cancel = IsCanceled(_textBoxesDictionary[selectedTextBox].Item1, 
+					_textBoxesDictionary[selectedTextBox].Item2, out var errorMsg);
+
 				SetError(selectedTextBox, errorMsg);
 			}
-		}
-
-		/// <summary>
-		/// Валидация для полей периметра
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void PerimeterFirstTextBox_Validating(object sender, CancelEventArgs e)
-		{
-			
-			e.Cancel = IsCanceled(PerimeterFirstTextBox, PerimeterSecondTextBox,
-				out var errorMsg);
-
-			if (sender is TextBox selectedTextBox)
-			{
-				SetError(selectedTextBox, errorMsg);
-			}
-
 		}
 
 		/// <summary>
@@ -167,11 +157,11 @@ namespace View
 
 			if (isFilled)
 			{
-				IsValidated = IsValueGapValid(firstField.Text, secondField.Text, out errorMsg);
-				return !IsValidated;
+				_isValidated = IsValueGapValid(firstField.Text, secondField.Text, out errorMsg);
+				return !_isValidated;
 			}
 
-			IsValidated = false;
+			_isValidated = false;
 			return false;
 		}
 
@@ -229,7 +219,8 @@ namespace View
 		/// <param name="firstStr">Первая строка</param>
 		/// <param name="secondStr">Вторая строка</param>
 		/// <param name="errorMessage">Текст ошибки</param>
-		/// <returns>TODO</returns>
+		/// <returns>true если значение первой строки меньше
+		/// или равно значению второй строки</returns>
 		/// TODO: RSDN
 		private static bool IsValueGapValid(string firstStr, string secondStr, out string errorMessage)
 		{

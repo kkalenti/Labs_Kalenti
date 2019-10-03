@@ -1,13 +1,12 @@
 ﻿using System;
-//TODO: using
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+//TODO: using done
 
 namespace Model
 {
-	//TODO: XML
+	//TODO: XML done
+	/// <summary>
+	/// Класс для проверок
+	/// </summary>
 	public class ValueValidation
 	{
 		/// <summary>

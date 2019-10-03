@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-//TODO: using
-using System.Text;
-using System.Threading.Tasks;
+//TODO: using done 
 using Model.Interfaces;
 using Model;
 
@@ -19,7 +17,7 @@ namespace ConsoleLoader
 		/// Добавление круга в список
 		/// </summary>
 		/// <param name="figures"> Список фигур </param>
-		public static void CircleToList(List<IFigure> figures)
+		private static void CircleToList(List<IFigure> figures)
 		{
 			var radius = DoubleInput("Введите радиус круга:");
 
@@ -31,17 +29,26 @@ namespace ConsoleLoader
 		/// Добавление прямугольника в список
 		/// </summary>
 		/// <param name="figures"> Список фигур </param>
-		public static void RectangleToList(List<IFigure> figures)
+		private static void RectangleToList(List<IFigure> figures)
 		{
 			var width = DoubleInput("Введите ширину прямоугольника:");
 			var length = DoubleInput("Введите длину прямоугольника:");
 
-			IFigure rectangle = new Rectangle(width, length);
+			IFigure rectangle = new Rectangle()
+			{
+				Width = width,
+				Length = length
+			};
 			figures.Add(rectangle);
 		}
 
-		//TODO: XML
-		public static double DoubleInput(string message)
+		//TODO: XML done
+		/// <summary>
+		/// Метод для ввода double
+		/// </summary>
+		/// <param name="message"></param>
+		/// <returns>Введенное значение</returns>
+		private static double DoubleInput(string message)
 		{
 			while (true)
 			{
@@ -73,10 +80,10 @@ namespace ConsoleLoader
 		/// Вывод элементов списка
 		/// </summary>
 		/// <param name="figures"> Список фигур </param>
-		public static void ShowList(List<IFigure> figures)
+		private static void ShowList(List<IFigure> figures)
 		{
-			//TODO: var
-			foreach (IFigure i in figures)
+			//TODO: var done
+			foreach (var i in figures)
 			{
 				Console.WriteLine(i.Description);
 			}
@@ -87,7 +94,7 @@ namespace ConsoleLoader
 		/// Удаление элемента списка
 		/// </summary>
 		/// <param name="figures">Список фигур </param>
-		public static void DeleteElement(List<IFigure> figures)
+		private static void DeleteElement(List<IFigure> figures)
 		{
 			try
 			{
@@ -106,7 +113,7 @@ namespace ConsoleLoader
 		/// <summary>
 		/// Вывод меню программы
 		/// </summary>
-		public static void ShowMenu()
+		private static void ShowMenu()
 		{
 			Console.WriteLine("Выберите действие:");
 			Console.WriteLine("1.Добавить круг в список");
