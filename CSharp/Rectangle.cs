@@ -1,11 +1,9 @@
 ﻿using System;
-//TODO: using done
 using Model.Interfaces;
 using System.Runtime.Serialization;
 
 namespace Model
 {
-	//TODO: XML done
 	/// <summary>
 	/// Класс определяет <see cref="Width"/> и <see cref="Length"/> прямоугольника,
 	/// считает <see cref="Surface"/> и <see cref="Perimeter"/>
@@ -13,13 +11,6 @@ namespace Model
 	[DataContract]
 	public class Rectangle : IFigure
 	{
-		// TODO: nameof done
-		/// <summary>
-		/// Имя фигуры
-		/// </summary>
-		public string Name => nameof(Rectangle);
-
-		//TODO: XML done
 		/// <summary>
 		/// Поле для площади прямоугольника
 		/// </summary>
@@ -30,7 +21,6 @@ namespace Model
 		/// </summary>
 		public double Surface => _surface.Value;
 
-		//TODO: XML done
 		/// <summary>
 		/// Поле для периметра прямоугольника
 		/// </summary>
@@ -41,7 +31,6 @@ namespace Model
 		/// </summary>
 		public double Perimeter => _perimeter.Value;
 
-		//TODO: XML done
 		/// <summary>
 		/// Поле для ширины прямоугольника
 		/// </summary>
@@ -56,15 +45,12 @@ namespace Model
 			get => _width;
 			set
 			{
-				// TODO: nameof done
 				ValueValidation.IsPositive(value, nameof(Width));
 				_width = value;
 				CalculationInit();
 			}
 
 		}
-
-		//TODO: XML done
 		/// <summary>
 		/// Поле для длины прямоугольника
 		/// </summary>
@@ -79,14 +65,12 @@ namespace Model
 			get => _length;
 			set
 			{
-				// TODO: nameof done
 				ValueValidation.IsPositive(value, nameof(Length));
 				_length = value;
 				CalculationInit();
 			}
 		}
 
-		//TODO: Название метода не отражает назначения done
 		/// <summary>
 		/// Если поле <see cref="_surface"/> или <see cref="_perimeter"/>
 		/// равны null, они инициализуются формулами для рассчета
@@ -103,8 +87,7 @@ namespace Model
 		/// <summary>
 		/// Описание фигуры
 		/// </summary>
-		/// // TODO: RSDN done
-		public string Description
+		public string FigureDescription
 		{
 			get
 			{
@@ -116,7 +99,6 @@ namespace Model
 			}
 		}
 
-		//TODO: XML <see cref... done
 		/// <summary>
 		/// Конструктор для класса <see cref="Rectangle"/>
 		/// необходим для работы XML сериализации

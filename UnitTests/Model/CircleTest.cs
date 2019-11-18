@@ -1,5 +1,4 @@
 ﻿using System;
-//TODO: using done 
 using Model;
 using NUnit.Framework;
 
@@ -77,7 +76,7 @@ namespace UnitTests.Model
 			Assert.AreEqual($"Круг, радиус: {radius}," + 
 			                $" площадь: {surface,4:F3}," +
 			                $" периметр: {perimeter,4:F3}",
-				circle.Description);
+				circle.FigureDescription);
 		}
 
 		[Test]
@@ -134,7 +133,7 @@ namespace UnitTests.Model
 			// act
 
 			// assert
-			Assert.AreEqual("Circle", circle.Name);
+			Assert.AreEqual("Circle", nameof(Circle));
 		}
 
 		[Test]

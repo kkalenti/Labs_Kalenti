@@ -1,11 +1,9 @@
 ﻿using System;
-//TODO: using done
 
 namespace Model
 {
-	//TODO: XML done
 	/// <summary>
-	/// Класс для проверок
+	/// Вспомогательный класс для валидации
 	/// </summary>
 	public class ValueValidation
 	{

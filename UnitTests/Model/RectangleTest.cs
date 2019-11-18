@@ -1,5 +1,4 @@
 ﻿using System;
-//TODO: using done 
 using Model;
 using NUnit.Framework;
 
@@ -11,7 +10,6 @@ namespace UnitTests.Model
 		[Test]
 		[TestCase(1, 1, TestName = "Тестирование конструктора при присваивании 1")]
 		[TestCase(4, 4, TestName = "Тестирование конструктора при присваивании 4")]
-		//TODO: RSDN done
 		[TestCase(double.MaxValue, double.MaxValue, 
 			TestName = "Тестирование конструктора при присваивании Double.MaxValue")]
 		[TestCase(double.MaxValue - 1, double.MaxValue - 1, 
@@ -97,7 +95,7 @@ namespace UnitTests.Model
 				$" длина: {length}," +
 				$" площадь: {surface,4:F3}," +
 				$" периметр: {perimeter,4:F3}",
-				rectangle.Description);
+				rectangle.FigureDescription);
 		}
 
 		[Test]
@@ -156,7 +154,7 @@ namespace UnitTests.Model
 			// act
 
 			// assert
-			Assert.AreEqual("Rectangle",rectangle.Name);
+			Assert.AreEqual("Rectangle",nameof(Rectangle));
 		}
 
 		[Test]

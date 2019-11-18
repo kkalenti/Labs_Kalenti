@@ -1,12 +1,10 @@
 ﻿using System;
-//TODO: using done
 using Model.Interfaces;
 
 namespace View
 {
-	//TODO: XML КО ВСЕМУ БЛ...! done
 	/// <summary>
-	/// Снабэает данными события в форме добавления объектов
+	/// Снабжает данными события в форме добавления объектов
 	/// </summary>
 	public class AddingEventArg : EventArgs
 	{

@@ -1,6 +1,4 @@
-﻿//TODO: using done
-
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace Model.Interfaces
 {
@@ -8,17 +6,12 @@ namespace Model.Interfaces
 	/// Интерфейс для геометрических фигур
 	/// </summary>
 	public interface IFigure
-	{
-		/// <summary>
-		/// Название фигуры
-		/// </summary>
-		string Name { get; }
-
-		/// <summary>
-		/// Площадь фигуры
-		/// </summary>
-		/// <returns></returns>
-		double Surface { get; }
+    {
+        /// <summary>
+        /// Площадь фигуры
+        /// </summary>
+        /// <returns></returns>
+        double Surface { get; }
 
 		/// <summary>
 		/// Периметр фигуры
@@ -30,7 +23,7 @@ namespace Model.Interfaces
 		/// Описание фигуры
 		/// </summary>
 		[Browsable(false)]
-		string Description { get; }
+		string FigureDescription { get; }
 
 
 	}

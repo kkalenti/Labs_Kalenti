@@ -1,40 +1,38 @@
 ﻿using System;
-//TODO: using
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Model.Interfaces;
-using System.Xml.Serialization;
 using System.Runtime.Serialization;
 
 namespace Model
 {
-	//TODO: Комментарий не описывает назначение класса
 	/// <summary>
-	/// Класс для кругов
+	/// Представляет геометрическую фигуру типа круг
 	/// </summary>
 	[DataContract]
 	public class Circle : IFigure
 	{
-		/// <summary>
-		/// Имя фигуры
-		/// </summary>
-		/// TODO: nameof
-		public string Name => "Circle";
-		//TODO: XML
+        /// <summary>
+        /// Lazy поле для свойства <see cref="Surface"/>
+        /// </summary>
 		private Lazy<double> _surface;
+
 		/// <summary>
 		/// Площадь фигуры
 		/// </summary>
 		public double Surface => _surface.Value;
-		//TODO: XML
-		private Lazy<double> _perimeter;
+
+        /// <summary>
+        /// Lazy поле для свойства <see cref="Perimeter"/>
+        /// </summary>
+        private Lazy<double> _perimeter;
+
 		/// <summary>
 		/// Периметр фигуры
 		/// </summary>
 		public double Perimeter => _perimeter.Value;
-		//TODO: XML
+
+        /// <summary>
+        /// Приватное поле для свойства <see cref="Radius"/>
+        /// </summary>
 		private double _radius;
 
 		/// <summary>
@@ -46,23 +44,20 @@ namespace Model
 			get => _radius;
 			set
 			{
-				// TODO: nameof
-				ValueValidation.IsPositive(value, "Radius");
+				ValueValidation.IsPositive(value, nameof(Radius));
 				_radius = value;
-				//TODO: invert
-				if (_surface == null || _perimeter == null)
-				{
-					_surface = new Lazy<double>(() => 2 * Math.PI * Radius);
-					_perimeter = new Lazy<double>(() => Math.PI * Radius * Radius);
-				}
-			}
+
+                if (_surface != null && _perimeter != null) return;
+
+                _surface = new Lazy<double>(() => 2 * Math.PI * Radius);
+                _perimeter = new Lazy<double>(() => Math.PI * Radius * Radius);
+            }
 		}
 
 		/// <summary>
-		/// Описание фигуры
+		/// Возвращает текстовое описание фигуры
 		/// </summary>
-		/// TODO: RSDN
-		public string Description {
+		public string FigureDescription {
 			get
 			{
 				const int valueAlignment = 4;
@@ -73,21 +68,11 @@ namespace Model
 
 		}
 
-		//TODO: XML <see cref...
-		/// <summary>
-		/// Конструктор по-умолчанию для работы XML сериализации
-		/// </summary>
-		public Circle()
+        /// <summary>
+        /// Конструктор для класса <see cref="Circle"/>
+        /// необходим для работы XML сериализации
+        /// </summary>
+        public Circle()
 		{}
-
-		//TODO: А этот конструктор нужен вообще, если есть возможность сразу инициализировать свойства?
-		/// <summary>
-		/// Конструктор класса <see cref="Circle"/>
-		/// </summary>
-		/// <param name="radius">Радиус круга</param>
-		public Circle(double radius)
-		{
-			Radius = radius;
-		}
 	}
 }

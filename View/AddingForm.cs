@@ -73,7 +73,6 @@ namespace View
 		/// <param name="e"></param>
 		private void AddButton_Click(object sender, EventArgs e)
 		{
-			//TODO: invert done 
 			if (!objectControl.IsAddingEnable) return;
 
 			AddFigure?.Invoke(this, new AddingEventArg(objectControl.Object));
@@ -87,7 +86,6 @@ namespace View
 		/// <param name="e"></param>
 		private void ModifyButton_Click(object sender, EventArgs e)
 		{
-			//TODO: invert done
 			if (!objectControl.IsAddingEnable) return;
 
 			ModifyFigure?.Invoke(this, new AddingEventArg(objectControl.Object));

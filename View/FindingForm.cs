@@ -44,9 +44,8 @@ namespace View
 			};
 		}
 
-		//TODO: Зачем свойство? done
 		/// <summary>
-		/// Все поля прошли валидацию
+		/// Возвращает true если все поля прошли валидацию
 		/// </summary>
 		private bool _isValidated;
 
@@ -79,7 +78,6 @@ namespace View
 		/// <param name="figure">Фигура</param>
 		private void AddToGrid(IFigure figure)
 		{
-			//TODO: Возможна генерация исключения при конвертации done
 			if (!double.TryParse(SurfaceFirstTextBox.Text, out var surfaceFirst) ||
 			    !double.TryParse(SurfaceSecondTextBox.Text, out var surfaceSecond) ||
 			    !double.TryParse(PerimeterFirstTextBox.Text, out var perimeterFirst) ||
@@ -111,19 +109,7 @@ namespace View
 		/// <param name="e"></param>
 		private void SurfaceFirstTextBox_Validating(object sender, CancelEventArgs e)
 		{
-			//TODO: Дубль, решается следующим образом:
-			//На уровне класса создаёшь словарь
-			//readonly Dictionary<TextBox, Tuple<TextBox, TextBox>> _textBoxesDictionary =
-			//	new Dictionary<TextBox, Tuple<TextBox, TextBox>>
-			//	{
-			//		[PerimeterFirstTextBox] =
-			//			new Tuple<TextBox, TextBox>(PerimeterFirstTextBox, PerimeterSecondTextBox),
-			//		[SurfaceFirstTextBox] = new Tuple<TextBox, TextBox>(SurfaceFirstTextBox, SurfaceSecondTextBox),
-			//	};
-			//TODO: Дальше подписываешь оба текстбокса на один обработчик, а в обработчике
-			//TODO: дёргаешь текстбоксы из словаря по sender-y done
-
-			// TODO: RSDN
+			
 			if (sender is TextBox selectedTextBox)
 			{
 				e.Cancel = IsCanceled(_textBoxesDictionary[selectedTextBox].Item1, 
@@ -221,7 +207,6 @@ namespace View
 		/// <param name="errorMessage">Текст ошибки</param>
 		/// <returns>true если значение первой строки меньше
 		/// или равно значению второй строки</returns>
-		/// TODO: RSDN
 		private static bool IsValueGapValid(string firstStr, string secondStr, out string errorMessage)
 		{
 			if (double.TryParse(firstStr, out var firstResult)

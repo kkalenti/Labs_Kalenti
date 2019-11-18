@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
-//TODO: using done 
 using Model.Interfaces;
 using Model;
 
@@ -42,7 +40,6 @@ namespace ConsoleLoader
 			figures.Add(rectangle);
 		}
 
-		//TODO: XML done
 		/// <summary>
 		/// Метод для ввода double
 		/// </summary>
@@ -64,7 +61,6 @@ namespace ConsoleLoader
 
 					return value;
 				}
-				//TODO: Почему в одном случае сообщение формируешь в исключении, а во втором тут?
 				catch (ArgumentException)
 				{
 					Console.WriteLine("Введенное значение меньше или равно 0");
@@ -82,10 +78,9 @@ namespace ConsoleLoader
 		/// <param name="figures"> Список фигур </param>
 		private static void ShowList(List<IFigure> figures)
 		{
-			//TODO: var done
 			foreach (var i in figures)
 			{
-				Console.WriteLine(i.Description);
+				Console.WriteLine(i.FigureDescription);
 			}
 			Console.ReadKey();
 		}

@@ -16,7 +16,6 @@ namespace View
 		/// <summary>
 		/// Список фигур
 		/// </summary>
-		/// //TODO: зачем свойство? done
 		private BindingList<IFigure> _figures = new BindingList<IFigure>();
 
 		/// <summary>
@@ -60,7 +59,6 @@ namespace View
 		/// <param name="e"></param>
 		private void ModifyButton_Click(object sender, EventArgs e)
 		{
-			//TODO: invert done
 			if (FigureGrid.SelectedRows.Count <= 0) return;
 
 			var figure = _figures[FigureGrid.SelectedRows[0].Index];
@@ -145,7 +143,6 @@ namespace View
 		private void SaveButton_Click(object sender, EventArgs e)
 		{
 			// TODO: Дубль
-			//TODO: Нахрен тебе на уровне формы всё время его хранить? done
 
 			var saveFile = new SaveFileDialog {Filter = "Xml file|*.kk"};
 			if (saveFile.ShowDialog() == DialogResult.Cancel)
@@ -192,7 +189,6 @@ namespace View
 		{
 			//TODO: Дубль
 			var openFile = new OpenFileDialog {Filter = "Xml file|*.*"};
-			//TODO: Нахрен тебе на уровне формы всё время его хранить? done
 			//TODO: При открытии файла в имени написан openFileDialog1 - это не правильно.
 			if (openFile.ShowDialog() == DialogResult.Cancel)
 				return;
@@ -215,7 +211,6 @@ namespace View
 			{
 				using (var fs = XmlReader.Create(filename))
 				{
-					//TODO:Не отработана десериализация сломанного файла done
 					_figures = (BindingList<IFigure>) reader.ReadObject(fs);
 				}
 			}
@@ -228,7 +223,6 @@ namespace View
 			FigureGrid.DataSource = _figures;
 		}
 
-		//TODO: XML done
 		/// <summary>
 		/// Обработчик для добавления файла в список
 		/// </summary>

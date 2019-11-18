@@ -1,5 +1,4 @@
 ﻿using System;
-//TODO: using done 
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
@@ -7,7 +6,6 @@ using Model.Interfaces;
 
 namespace View
 {
-	//TODO: XML done 
 	/// <summary>
 	/// Контролл для отображения данных об объектах
 	/// </summary>
@@ -197,7 +195,6 @@ namespace View
 		/// <param name="e"></param>
 		private void RadiusTextBox_Validating(object sender, CancelEventArgs e)
 		{
-			//TODO:Можно упростить done
 			IsAddingEnable = string.IsNullOrEmpty(SetError(RadiusTextBox));
 		}
 
@@ -206,7 +203,6 @@ namespace View
 		/// </summary>
 		/// <param name="field">Введенная строка</param>
 		/// <returns>Сообщение ошиби</returns>
-		/// TODO: Лучше сделать статическим done 
 		private static string EmptyFieldValidation(string field)
 		{
 			double.TryParse(field, out var doubleValue);
@@ -224,7 +220,6 @@ namespace View
 		/// <param name="e"></param>
 		private void WidthTextBox_Validating(object sender, CancelEventArgs e)
 		{
-			//TODO:Можно упростить done
 			IsAddingEnable = string.IsNullOrEmpty(SetError(WidthTextBox)) &&
 			                 string.IsNullOrEmpty(SetError(LengthTextBox));
 		}
